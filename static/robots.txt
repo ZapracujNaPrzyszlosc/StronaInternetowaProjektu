@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zapracujnaprzyszlosc.netlify.app/sitemap.xml

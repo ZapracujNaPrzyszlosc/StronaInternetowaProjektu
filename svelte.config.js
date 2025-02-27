@@ -1,16 +1,16 @@
+import adapter from '@sveltejs/adapter-netlify';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-export default {
-  // Preprocess Svelte files for better Vite compatibility
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
   preprocess: vitePreprocess(),
-  
-  // Use Svelte 5 runes
-  compilerOptions: {
-    runes: true
-  },
-
-  // Extra options
   kit: {
-    // Add any SvelteKit-specific options here if needed in the future
+    adapter: adapter({
+      // opcje dla adapter-netlify
+      edge: false,
+      split: false
+    })
   }
 };
+
+export default config;
