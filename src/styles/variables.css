@@ -1,0 +1,91 @@
+:root {
+    /* Podstawowa paleta z logo */
+    --color-primary: #FFBCBC; /* Różowy/łososiowy */
+    --color-secondary: #98D8C8; /* Miętowa zieleń */
+    --color-tertiary: #2A4F4F; /* Ciemna zieleń */
+    --color-text: #000000; /* Czarny tekst */
+    --color-background: #FFFFFF; /* Białe tło */
+    
+    /* Kolory akcentujące ze znaków zapytania */
+    --color-accent-blue: #3E95E8;
+    --color-accent-orange: #FFB347;
+    --color-accent-pink: #FF66B2;
+    
+    /* Gradienty */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-pink) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent-blue) 100%);
+    
+    /* Zmienne dla trybu jasnego */
+    --light-background: #FFFFFF;
+    --light-surface: #F8F9FA;
+    --light-surface-variant: #EAECEF;
+    --light-text-primary: #1F2937;
+    --light-text-secondary: #4B5563;
+    --light-border: #E5E7EB;
+    
+    /* Zmienne dla trybu ciemnego */
+    --dark-background: #121212;
+    --dark-surface: #1E1E1E;
+    --dark-surface-variant: #2A2A2A;
+    --dark-text-primary: #F9FAFB;
+    --dark-text-secondary: #D1D5DB;
+    --dark-border: #374151;
+    
+    /* Efekty rozmycia */
+    --blur-sm: 8px;
+    --blur-md: 16px;
+    --blur-lg: 24px;
+    
+    /* Cienie */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.05);
+    
+    /* Zaokrąglenia */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+    
+    /* Odstępy */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 5rem;
+    
+    /* Czcionki */
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    
+    /* Rozmiary czcionek */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    
+    /* Grubości czcionek */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* Czasy animacji */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 350ms;
+    
+    /* Krzywe animacji */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  }
