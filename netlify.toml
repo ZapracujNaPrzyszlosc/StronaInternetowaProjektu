@@ -1,6 +1,5 @@
-// Konfiguracja dla Netlify
 [build]
-  command = "npm run build"
+  command = "pnpm run build"
   publish = "build"
 
 [[redirects]]
