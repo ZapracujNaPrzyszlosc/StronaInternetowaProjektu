@@ -10,43 +10,37 @@ function TikTok() {
       id: 1,
       title: "Wywiad z międzynarodową planerką ślubów",
       description: "Poznaj kulisy pracy międzynarodowej planerki ślubów! Jakie umiejętności są niezbędne w tym zawodzie? Jak wygląda organizacja ceremonii w różnych krajach? Dowiedz się, jak rozpocząć karierę w tej branży.",
-      embedUrl: "https://www.tiktok.com/embed/v2/7455328205524831510",
-      views: "22.8K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7455328205524831510"
     },
     {
       id: 2,
       title: "Wywiad z pilotem samolotu",
       description: "Jak wygląda praca pilota na co dzień? Dowiedz się o wymaganiach, szkoleniach i wyzwaniach w tej profesji. Poznaj specyfikę latania różnymi maszynami, procedury bezpieczeństwa oraz jak zaplanować karierę w lotnictwie od pierwszych kroków do stanowiska kapitana.",
-      embedUrl: "https://www.tiktok.com/embed/v2/7456826488516644118",
-      views: "8.3K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7456826488516644118"
     },
     {
       id: 3,
       title: "Wywiad z dyrektorką sprzedaży czasu reklamowego",
       description: "Jak wygląda praca w sprzedaży czasu reklamowego? Jakie są wyzwania na stanowisku dyrektora i jak efektywnie zarządzać zespołem sprzedażowym? Poznaj tajniki marketingu i reklamy od strony biznesowej.",
-      embedUrl: "https://www.tiktok.com/embed/v2/7440874750055828758",
-      views: "11.5K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7440874750055828758"
     },
     {
       id: 4,
       title: "Wywiad z grafikiem komputerowym",
       description: "Jak zostać grafikiem komputerowym? Jakimi programami warto się posługiwać i jak rozwijać swoje portfolio? Dowiedz się, jakie umiejętności są najbardziej poszukiwane na rynku i jak wygląda typowy dzień pracy grafika.",
-      embedUrl: "https://www.tiktok.com/embed/v2/7453490391128526102",
-      views: "15.2K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7453490391128526102"
     },
     {
       id: 5,
       title: "Wywiad z koordynatorką sprzedaży mebli",
       description: "Na czym polega praca koordynatora sprzedaży w branży meblarskiej? Jak zarządzać procesem sprzedaży i logistyką? Poznaj wymagania i codzienne zadania osoby na tym stanowisku oraz ścieżki rozwoju kariery.",
-      embedUrl: "https://www.tiktok.com/embed/v2/7449853144714005793",
-      views: "19.7K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7449853144714005793"
     },
     {
       id: 6,
       title: "Kim jesteśmy",
       description: "Poznaj nasz zespół i dowiedz się więcej o projekcie 'Zapracuj na przyszłość'. Jaki jest nasz cel i dlaczego zdecydowaliśmy się na realizację tego projektu? Jakie zawody chcemy jeszcze przedstawić w przyszłości?",
-      embedUrl: "https://www.tiktok.com/embed/v2/7437882349603310870",
-      views: "13.4K"
+      embedUrl: "https://www.tiktok.com/embed/v2/7437882349603310870"
     }
   ];
   
@@ -111,7 +105,6 @@ function TikTok() {
                     </div>
                     <div className="tiktok-info">
                       <h3 className="tiktok-title">{tiktok.title}</h3>
-                      <span className="tiktok-views">{tiktok.views} wyświetleń</span>
                       <p className="tiktok-description">{tiktok.description}</p>
                       <a 
                         href={`https://www.tiktok.com/@zapracuj.na.przyszlosc`} 
