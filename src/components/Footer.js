@@ -56,7 +56,7 @@ function Footer() {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Zapracuj na przyszłość. Projekt na olimpiadę "Zwolnieni z Teorii".</p>
+          <p>&copy; {new Date().getFullYear()} Zapracuj na przyszłość. Projekt w ramach olimpiady Zwolnionych z Teorii.</p>
         </div>
       </div>
     </footer>

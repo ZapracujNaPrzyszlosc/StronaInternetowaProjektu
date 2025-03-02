@@ -4,10 +4,56 @@ import { motion } from 'framer-motion';
 function TikTok() {
   const [isLoading, setIsLoading] = useState(true);
   
+  // Dane TikToków z bezpośrednimi linkami do wideo
+  const tiktokData = [
+    {
+      id: 1,
+      title: "Wywiad z międzynarodową planerką ślubów",
+      description: "Poznaj kulisy pracy międzynarodowej planerki ślubów! Jakie umiejętności są niezbędne w tym zawodzie? Jak wygląda organizacja ceremonii w różnych krajach? Dowiedz się, jak rozpocząć karierę w tej branży.",
+      embedUrl: "https://www.tiktok.com/embed/v2/7455328205524831510",
+      views: "22.8K"
+    },
+    {
+      id: 2,
+      title: "Wywiad z pilotem samolotu",
+      description: "Czym zajmuje się pośrednik nieruchomości na co dzień? Jak wygląda praca z klientami i jakie wyzwania się z nią wiążą? Poznaj realia pracy w branży nieruchomości i dowiedz się, co jest kluczem do sukcesu w tym zawodzie.",
+      embedUrl: "https://www.tiktok.com/embed/v2/7456826488516644118",
+      views: "8.3K"
+    },
+    {
+      id: 3,
+      title: "Wywiad z dyrektorką sprzedaży czasu reklamowego",
+      description: "Jak wygląda praca w sprzedaży czasu reklamowego? Jakie są wyzwania na stanowisku dyrektora i jak efektywnie zarządzać zespołem sprzedażowym? Poznaj tajniki marketingu i reklamy od strony biznesowej.",
+      embedUrl: "https://www.tiktok.com/embed/v2/7440874750055828758",
+      views: "11.5K"
+    },
+    {
+      id: 4,
+      title: "Wywiad z grafikiem komputerowym",
+      description: "Jak zostać grafikiem komputerowym? Jakimi programami warto się posługiwać i jak rozwijać swoje portfolio? Dowiedz się, jakie umiejętności są najbardziej poszukiwane na rynku i jak wygląda typowy dzień pracy grafika.",
+      embedUrl: "https://www.tiktok.com/embed/v2/7453490391128526102",
+      views: "15.2K"
+    },
+    {
+      id: 5,
+      title: "Wywiad z koordynatorką sprzedaży mebli",
+      description: "Na czym polega praca koordynatora sprzedaży w branży meblarskiej? Jak zarządzać procesem sprzedaży i logistyką? Poznaj wymagania i codzienne zadania osoby na tym stanowisku oraz ścieżki rozwoju kariery.",
+      embedUrl: "https://www.tiktok.com/embed/v2/7449853144714005793",
+      views: "19.7K"
+    },
+    {
+      id: 6,
+      title: "Kim jesteśmy",
+      description: "Poznaj nasz zespół i dowiedz się więcej o projekcie 'Zapracuj na przyszłość'. Jaki jest nasz cel i dlaczego zdecydowaliśmy się na realizację tego projektu? Jakie zawody chcemy jeszcze przedstawić w przyszłości?",
+      embedUrl: "https://www.tiktok.com/embed/v2/7437882349603310870",
+      views: "13.4K"
+    }
+  ];
+  
   useEffect(() => {
     document.title = 'Zapracuj na przyszłość | Nasze TikToki';
     
-    // Simulate loading
+    // Symulacja ładowania
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
@@ -43,90 +89,41 @@ function TikTok() {
             </div>
           ) : (
             <>
-              <div className="tiktok-grid">
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
-                
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
-                
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
-                
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
-                
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
-                
-                <motion.div
-                  className="tiktok-embed-container"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                >
-                  <iframe 
-                    src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
-                  ></iframe>
-                </motion.div>
+              <div className="tiktok-list">
+                {tiktokData.map((tiktok, index) => (
+                  <motion.div
+                    key={tiktok.id}
+                    className={`tiktok-item ${index % 2 === 0 ? 'left-video' : 'right-video'}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
+                  >
+                    <div className="tiktok-video">
+                      <iframe 
+                        src={tiktok.embedUrl}
+                        height="600" 
+                        frameBorder="0"
+                        allowFullScreen 
+                        scrolling="no" 
+                        allow="encrypted-media;"
+                        title={`TikTok ${tiktok.title}`}
+                      ></iframe>
+                    </div>
+                    <div className="tiktok-info">
+                      <h3 className="tiktok-title">{tiktok.title}</h3>
+                      <span className="tiktok-views">{tiktok.views} wyświetleń</span>
+                      <p className="tiktok-description">{tiktok.description}</p>
+                      <a 
+                        href={`https://www.tiktok.com/@zapracuj.na.przyszlosc`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn btn-secondary btn-sm"
+                      >
+                        Zobacz na TikToku
+                      </a>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
               
               <div className="tiktok-follow">
