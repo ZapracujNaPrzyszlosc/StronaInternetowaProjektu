@@ -138,20 +138,45 @@
     line-height: 1.6;
   }
   
-  /* Sekcja follow */
+  /* Sekcja follow - ZAKTUALIZOWANE STYLE */
   .tiktok-follow {
     margin-top: 5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
   
   .follow-card {
     background: linear-gradient(135deg, rgba(126, 34, 206, 0.08) 0%, rgba(225, 29, 72, 0.08) 100%);
-    padding: 3rem;
+    padding: 4rem 3rem;
     border-radius: var(--radius-lg);
     text-align: center;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
+  }
+  
+  .follow-card h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .follow-card p {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .follow-card .btn {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    min-width: 240px;
   }
   
   /* Responsywność */
@@ -183,6 +208,21 @@
     }
   }
   
+  @media (max-width: 768px) {
+    .follow-card {
+      padding: 3rem 2rem;
+    }
+    
+    .follow-card h2 {
+      font-size: 1.75rem;
+    }
+    
+    .follow-card p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+    }
+  }
+  
   @media (max-width: 576px) {
     .tiktok-list {
       gap: 3rem;
@@ -201,6 +241,11 @@
     }
     
     .follow-card {
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
+    }
+    
+    .follow-card .btn {
+      width: 100%;
+      min-width: auto;
     }
   }
