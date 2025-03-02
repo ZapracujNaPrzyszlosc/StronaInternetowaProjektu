@@ -15,7 +15,7 @@ function TikTok() {
     },
     {
       id: 2,
-      title: "Wywiad z pilotem samolotu",
+      title: "Wywiad z pośredniczką nieruchomości",
       description: "Czym zajmuje się pośrednik nieruchomości na co dzień? Jak wygląda praca z klientami i jakie wyzwania się z nią wiążą? Poznaj realia pracy w branży nieruchomości i dowiedz się, co jest kluczem do sukcesu w tym zawodzie.",
       embedUrl: "https://www.tiktok.com/embed/v2/7456826488516644118",
       views: "8.3K"
