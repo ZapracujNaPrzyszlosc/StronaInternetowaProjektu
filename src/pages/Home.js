@@ -159,7 +159,7 @@ function Home() {
         </div>
         <div className="gradient-bg"></div>
       </section>
-      
+
       <section className="cta-section">
         <div className="container">
           <motion.div
@@ -169,8 +169,8 @@ function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2>Zostań częścią naszego projektu</h2>
-            <p>Obserwuj nas na TikToku i Instagramie, aby być na bieżąco z nowymi filmami i treściami</p>
+            <h2>Wspieraj nasz projekt</h2>
+            <p>Obserwuj nas w mediach społecznościowych, aby odkrywać nowe zawody i inspirować się do świadomego planowania kariery. Regularnie publikujemy nowe wywiady i treści!</p>
             <div className="cta-buttons">
               <a href="https://www.tiktok.com/@zapracuj.na.przyszlosc" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" fill="currentColor" style={{marginRight: '8px'}}>
