@@ -41,9 +41,10 @@ function Home() {
                 <div className="tiktok-placeholder">
                   <iframe 
                     src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                    allowFullScreen 
-                    scrolling="no" 
-                    allow="encrypted-media;"
+                    allowFullScreen={true}
+                    allow="encrypted-media; fullscreen"
+                    title="TikTok Zapracuj na przyszłość - osadzony profil"
+                    style={{ overflow: 'hidden' }}
                   ></iframe>
                 </div>
               </div>
@@ -146,9 +147,10 @@ function Home() {
             <div className="tiktok-embed-container">
               <iframe 
                 src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                allowFullScreen 
-                scrolling="no" 
-                allow="encrypted-media;"
+                allowFullScreen={true}
+                allow="encrypted-media; fullscreen"
+                title="TikTok Zapracuj na przyszłość - podgląd treści"
+                style={{ overflow: 'hidden' }}
               ></iframe>
             </div>
           </div>
