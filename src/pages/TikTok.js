@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 function TikTok() {
   const [isLoading, setIsLoading] = useState(true);
+  
   
   // Dane TikToków z bezpośrednimi linkami do wideo
   const tiktokData = [
@@ -57,6 +59,17 @@ function TikTok() {
 
   return (
     <div className="tiktok-page">
+      <Helmet>
+        <title>Zapracuj na przyszłość | Nasze TikToki</title>
+        <meta name="description" content="Zobacz nasze wywiady z profesjonalistami z różnych branż na TikToku. Dowiedz się, jak wygląda praca na co dzień w zawodach, które Cię interesują." />
+        <meta name="keywords" content="tiktok, wywiady zawodowe, kariera, branże, zawody, profesjonaliści, wybór zawodu" />
+        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/tiktok" />
+        <meta property="og:title" content="Zapracuj na przyszłość | Nasze TikToki" />
+        <meta property="og:description" content="Zobacz nasze wywiady z profesjonalistami z różnych branż na TikToku." />
+        <meta property="og:url" content="https://zapracujnaprzyszlosc.pl/tiktok" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <section className="tiktok-hero">
         <div className="container">
           <motion.div

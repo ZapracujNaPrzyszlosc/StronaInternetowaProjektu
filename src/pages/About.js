@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 function About() {
   useEffect(() => {
@@ -8,6 +9,17 @@ function About() {
 
   return (
     <div className="about-page">
+      <Helmet>
+        <title>Zapracuj na przyszłość | O nas</title>
+        <meta name="description" content="Poznaj projekt Zapracuj na przyszłość stworzony w ramach olimpiady Zwolnieni z Teorii. Dowiedz się więcej o naszej misji i celach." />
+        <meta name="keywords" content="o projekcie, zwolnieni z teorii, projekt społeczny, misja, wywiady zawodowe, projekt edukacyjny" />
+        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/o-nas" />
+        <meta property="og:title" content="Zapracuj na przyszłość | O nas" />
+        <meta property="og:description" content="Poznaj projekt Zapracuj na przyszłość stworzony w ramach olimpiady Zwolnieni z Teorii." />
+        <meta property="og:url" content="https://zapracujnaprzyszlosc.pl/o-nas" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+  
       {/* Hero Section with enhanced gradient background */}
       <section className="about-hero">
         <div className="container">
