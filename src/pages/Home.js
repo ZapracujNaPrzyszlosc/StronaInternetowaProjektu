@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 function Home() {
   useEffect(() => {
@@ -9,6 +10,17 @@ function Home() {
 
   return (
     <div className="home-page">
+      <Helmet>
+        <title>Zapracuj na przyszłość | Strona główna</title>
+        <meta name="description" content="Zapracuj na przyszłość to projekt społeczny pomagający młodym ludziom w wyborze ścieżki kariery poprzez wywiady z profesjonalistami z różnych branż na TikToku." />
+        <meta name="keywords" content="kariera, wybór zawodu, ścieżka kariery, wywiady zawodowe, tiktok, zawody, profesjonaliści, zwolnieni z teorii" />
+        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/" />
+        <meta property="og:title" content="Zapracuj na przyszłość | Strona główna" />
+        <meta property="og:description" content="Poznaj różne ścieżki kariery poprzez rozmowy z profesjonalistami na naszym TikToku." />
+        <meta property="og:url" content="https://zapracujnaprzyszlosc.pl/" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+  
       <section className="hero-section">
         <div className="container">
           <div className="hero-content">

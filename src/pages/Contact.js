@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 function Contact() {
   useEffect(() => {
@@ -8,6 +9,17 @@ function Contact() {
 
   return (
     <div className="contact-page">
+      <Helmet>
+        <title>Zapracuj na przyszłość | Kontakt</title>
+        <meta name="description" content="Skontaktuj się z zespołem projektu Zapracuj na przyszłość. Masz pytania? Chcesz współpracować? Napisz do nas lub odwiedź nasze social media." />
+        <meta name="keywords" content="kontakt, współpraca, zapytanie, social media, tiktok, instagram" />
+        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/kontakt" />
+        <meta property="og:title" content="Zapracuj na przyszłość | Kontakt" />
+        <meta property="og:description" content="Skontaktuj się z zespołem projektu Zapracuj na przyszłość." />
+        <meta property="og:url" content="https://zapracujnaprzyszlosc.pl/kontakt" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+  
       <section className="contact-hero">
         <div className="container">
           <motion.div
