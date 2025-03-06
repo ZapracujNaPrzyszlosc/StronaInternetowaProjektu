@@ -145,12 +145,12 @@ function Home() {
           
           <div className="tiktok-grid">
             <div className="tiktok-embed-container">
-              <iframe 
-                src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
-                allowFullScreen 
-                scrolling="no" 
-                allow="encrypted-media;"
-              ></iframe>
+            <iframe 
+              src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc" 
+              allowFullScreen 
+              allow="encrypted-media;"
+              title="Najnowsze materiały z TikToka - Zapracuj na przyszłość"
+            ></iframe>
             </div>
           </div>
           
