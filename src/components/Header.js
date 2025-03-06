@@ -50,14 +50,14 @@ function Header() {
             <li className={location.pathname === '/' ? 'active' : ''}>
               <Link to="/" onClick={() => setMenuOpen(false)}>Strona główna</Link>
             </li>
-            <li className={location.pathname === '/about' ? 'active' : ''}>
-              <Link to="/about" onClick={() => setMenuOpen(false)}>O nas</Link>
+            <li className={location.pathname === '/o-nas' || location.pathname === '/about' ? 'active' : ''}>
+              <Link to="/o-nas" onClick={() => setMenuOpen(false)}>O nas</Link>
             </li>
             <li className={location.pathname === '/tiktok' ? 'active' : ''}>
               <Link to="/tiktok" onClick={() => setMenuOpen(false)}>Nasze TikToki</Link>
             </li>
-            <li className={location.pathname === '/contact' ? 'active' : ''}>
-              <Link to="/contact" onClick={() => setMenuOpen(false)}>Kontakt</Link>
+            <li className={location.pathname === '/kontakt' ? 'active' : ''}>
+              <Link to="/kontakt" onClick={() => setMenuOpen(false)}>Kontakt</Link>
             </li>
             <li className="social-link">
               <a href="https://www.tiktok.com/@zapracuj.na.przyszlosc" target="_blank" rel="noopener noreferrer">
