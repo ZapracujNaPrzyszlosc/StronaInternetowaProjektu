@@ -171,7 +171,7 @@ function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="stat-number">20+</h3>
+              <h3 className="stat-number">15+</h3>
               <p>Przeprowadzonych wywiadów</p>
             </motion.div>
             
@@ -182,7 +182,7 @@ function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h3 className="stat-number">15+</h3>
+              <h3 className="stat-number">10+</h3>
               <p>Zaprezentowanych branż</p>
             </motion.div>
             
@@ -193,7 +193,7 @@ function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <h3 className="stat-number">5000+</h3>
+              <h3 className="stat-number">5500+</h3>
               <p>Obserwujących na TikToku</p>
             </motion.div>
             
@@ -204,7 +204,7 @@ function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h3 className="stat-number">100k+</h3>
+              <h3 className="stat-number">1,5M+</h3>
               <p>Łącznych wyświetleń</p>
             </motion.div>
           </div>
