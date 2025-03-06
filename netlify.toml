@@ -6,3 +6,25 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Dodatkowe przekierowania dla SEO
+[[redirects]]
+  from = "/about"
+  to = "/o-nas"
+  status = 301
+
+# Przekierowanie dla ścieżek bez końcowego slasha
+[[redirects]]
+  from = "/o-nas/"
+  to = "/o-nas"
+  status = 301
+
+[[redirects]]
+  from = "/tiktok/"
+  to = "/tiktok"
+  status = 301
+
+[[redirects]]
+  from = "/kontakt/"
+  to = "/kontakt"
+  status = 301

@@ -35,9 +35,9 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/o-nas" element={<About />} />
             <Route path="/tiktok" element={<TikTok />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/kontakt" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

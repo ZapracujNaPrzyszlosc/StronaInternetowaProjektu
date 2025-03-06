@@ -25,9 +25,9 @@ function Footer() {
               <h4>Nawigacja</h4>
               <ul>
                 <li><Link to="/">Strona główna</Link></li>
-                <li><Link to="/about">O nas</Link></li>
+                <li><Link to="/o-nas">O nas</Link></li>
                 <li><Link to="/tiktok">Nasze TikToki</Link></li>
-                <li><Link to="/contact">Kontakt</Link></li>
+                <li><Link to="/kontakt">Kontakt</Link></li>
               </ul>
             </div>
             
