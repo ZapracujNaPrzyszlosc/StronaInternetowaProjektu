@@ -17,6 +17,7 @@ function Contact() {
             transition={{ duration: 0.6 }}
           >
             <h1>Kontakt</h1>
+            <div className="title-underline"></div>
             <p className="contact-subtitle">Masz pytania lub chcesz współpracować? Skontaktuj się z nami!</p>
           </motion.div>
         </div>
@@ -36,6 +37,7 @@ function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h2>Informacje kontaktowe</h2>
+            <div className="title-underline"></div>
             <p>Jesteśmy otwarci na wszelkie pytania, sugestie i propozycje współpracy. Skontaktuj się z nami za pomocą poniższych metod lub poprzez nasze profile w mediach społecznościowych.</p>
             
             <div className="contact-methods-row">
