@@ -78,6 +78,8 @@
 .social-link a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(126, 34, 206, 0.3);
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+  color: white;
 }
 
 .mobile-menu-button {
