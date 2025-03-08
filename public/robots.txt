@@ -1,4 +1,7 @@
 User-agent: *
+Allow: /favicon.ico
+Allow: /favicon-16x16.png
+Allow: /favicon-32x32.png
 Allow: /
 
 Sitemap: https://zapracujnaprzyszlosc.pl/sitemap.xml
