@@ -14,6 +14,9 @@ function PageTracker() {
   const location = useLocation();
   
   useEffect(() => {
+    // Przewijanie do góry strony przy zmianie ścieżki
+    window.scrollTo(0, 0);
+    
     // Wysyłanie informacji o zmianie strony do dataLayer (GTM)
     if (window.dataLayer) {
       window.dataLayer.push({
