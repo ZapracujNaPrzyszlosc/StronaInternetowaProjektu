@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 function Footer() {
+  const [hasMoved, setHasMoved] = useState(false);
+  const constraintsRef = useRef(null);
+  
+  // Funkcja do obsługi przekierowania na GitHub po kliknięciu :)
+  const handleEasterEggClick = () => {
+    window.location.href = 'https://github.com/philornot';
+  };
+  
+  // Funkcja wywoływana podczas przeciągania
+  const handleDrag = (event, info) => {
+    if (Math.abs(info.offset.x) > 5 || Math.abs(info.offset.y) > 5) {
+      setHasMoved(true);
+    }
+  };
+
   return (
-    <footer className="footer">
+    <footer className="footer" ref={constraintsRef}>
       <div className="container footer-container">
         <div className="footer-content">
           <div className="footer-logo">
@@ -55,10 +70,60 @@ function Footer() {
           </div>
         </div>
         
-        <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Zapracuj na przyszłość. Projekt w ramach olimpiady Zwolnionych z Teorii.</p>
+        <div className="footer-bottom" style={{ position: 'relative', minHeight: '40px' }}>
+          {/* Text footer z możliwością przeciągania - zawsze widoczny */}
+          <motion.p
+            drag
+            dragConstraints={constraintsRef}
+            onDrag={handleDrag}
+            whileDrag={{ scale: 1.05 }}
+            style={{ 
+              cursor: 'grab',
+              display: 'inline-block',
+              position: 'absolute',
+              zIndex: 2,
+              background: hasMoved ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
+              padding: hasMoved ? '6px 12px' : '0',
+              borderRadius: 'var(--radius-sm)',
+              boxShadow: hasMoved ? 'var(--shadow-sm)' : 'none'
+            }}
+          >
+            &copy; {new Date().getFullYear()} Zapracuj na przyszłość. Projekt w ramach olimpiady Zwolnionych z Teorii.
+          </motion.p>
+          
+          {/* Element Easter Egg :) widoczny tylko gdy tekst został przesunięty */}
+          {hasMoved && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              onClick={handleEasterEggClick}
+              style={{ 
+                cursor: 'pointer', 
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                WebkitTextFillColor: 'transparent',
+                position: 'relative',
+                zIndex: 1
+              }}
+            >
+              :)
+            </motion.div>
+          )}
         </div>
       </div>
+      
+      {/* Dodanie nieco CSS dla Easter Egga */}
+      <style jsx="true">{`
+        .footer-bottom {
+          position: relative;
+          min-height: 1.6em;
+        }
+      `}</style>
     </footer>
   );
 }

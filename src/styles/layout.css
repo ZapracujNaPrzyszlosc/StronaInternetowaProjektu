@@ -199,3 +199,49 @@
   animation: spin 1s linear infinite;
   margin-bottom: 1rem;
 }
+
+/* Easter Egg Styles */
+.footer-bottom {
+  position: relative;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.footer-bottom p {
+  transition: all 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  transform-origin: center center;
+}
+
+.footer-bottom p:active {
+  cursor: grabbing !important;
+}
+
+/* Dodanie efektu "szkła" dla przeciągniętego tekstu */
+.footer-bottom p[style*="background: rgba(255, 255, 255, 0.8)"] {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style dla emoji uśmiechniętej buźki */
+.footer-bottom div {
+  -webkit-user-select: none;
+  user-select: none;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+.footer-bottom div:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Zapewnienie, że footer ma odpowiednią przestrzeń na przesunięty tekst */
+.footer {
+  padding-bottom: 60px;
+  overflow: visible;
+}
