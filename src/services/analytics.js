@@ -4,7 +4,7 @@
 import * as hotjar from './hotjar';
 
 // Funkcja sprawdzająca zgodę użytkownika
-const hasConsent = (type = 'analytics') => {
+const hasConsent = () => {
   const cookieConsent = localStorage.getItem('cookieConsent');
   
   // Jeśli brak zgody w ogóle
@@ -17,10 +17,10 @@ const hasConsent = (type = 'analytics') => {
     return true;
   }
   
-  // Jeśli dostosowano - sprawdź konkretny typ
+  // Jeśli dostosowano - sprawdź analytics
   if (cookieConsent === 'customized') {
     const options = JSON.parse(localStorage.getItem('cookieOptions')) || {};
-    return !!options[type]; // !! konwertuje na boolean
+    return !!options.analytics;
   }
   
   return false;
@@ -28,7 +28,7 @@ const hasConsent = (type = 'analytics') => {
 
 // Śledzenie odsłony strony
 export const trackPageView = (path, title) => {
-  if (!hasConsent('analytics')) return;
+  if (!hasConsent()) return;
   
   // Google Analytics
   if (window.gtag) {
@@ -55,7 +55,7 @@ export const trackPageView = (path, title) => {
 
 // Śledzenie kliknięć w linki do TikToka
 export const trackTikTokClick = (tiktokTitle, tiktokUrl) => {
-  if (!hasConsent('analytics')) return;
+  if (!hasConsent()) return;
 
   if (window.gtag) {
     window.gtag('event', 'tiktok_click', {
@@ -81,7 +81,7 @@ export const trackTikTokClick = (tiktokTitle, tiktokUrl) => {
 
 // Śledzenie czasu spędzonego na stronie
 export const trackTimeOnPage = () => {
-  if (!hasConsent('analytics')) return;
+  if (!hasConsent()) return;
   
   let startTime = Date.now();
   let intervalId;
@@ -114,7 +114,7 @@ export const trackTimeOnPage = () => {
 
 // Śledzenie przewijania strony
 export const trackScrollDepth = () => {
-  if (!hasConsent('analytics')) return;
+  if (!hasConsent()) return;
   
   let maxScrollPercent = 0;
   const checkpoints = [25, 50, 75, 90, 100];
@@ -159,29 +159,6 @@ export const trackScrollDepth = () => {
   return () => window.removeEventListener('scroll', handleScroll);
 };
 
-// Śledzenie formularzy (gdyby zostały dodane w przyszłości)
-export const trackFormSubmission = (formName, formData) => {
-  if (!hasConsent('marketing')) return; // Zakładam, że śledzenie formularzy to część marketingu
-  
-  if (window.gtag) {
-    window.gtag('event', 'form_submission', {
-      event_category: 'Forms',
-      event_label: formName
-    });
-  }
-  
-  if (window.dataLayer) {
-    window.dataLayer.push({
-      event: 'form_submission',
-      form: {
-        name: formName,
-        // Możesz dodać inne dane formularza, które nie są wrażliwe
-        fields: Object.keys(formData).length
-      }
-    });
-  }
-};
-
 // Śledzenie błędów
 export const trackError = (errorMessage, errorSource) => {
   // Błędy śledzić powinniśmy zawsze, niezależnie od zgody na pliki cookie
@@ -204,45 +181,22 @@ export const trackError = (errorMessage, errorSource) => {
   }
 };
 
-// Śledzenie preferencji - używane tylko jeśli zgoda na preferences
-export const trackPreference = (preferenceType, preferenceValue) => {
-  if (!hasConsent('preferences')) return;
-  
-  if (window.gtag) {
-    window.gtag('event', 'preference_set', {
-      event_category: 'Preferences',
-      event_label: preferenceType,
-      value: preferenceValue
-    });
-  }
-  
-  if (window.dataLayer) {
-    window.dataLayer.push({
-      event: 'preference_set',
-      preference: {
-        type: preferenceType,
-        value: preferenceValue
-      }
-    });
-  }
-};
-
 // Inicjalizacja wszystkich mechanizmów śledzenia
 export const initAnalytics = () => {
   // Inicjalizacja Hotjar
-  if (hasConsent('analytics')) {
+  if (hasConsent()) {
     hotjar.initHotjar();
   }
   
   // Śledzenie czasu na stronie tylko, jeśli zgoda na analytics
   let clearTimeTracking;
-  if (hasConsent('analytics')) {
+  if (hasConsent()) {
     clearTimeTracking = trackTimeOnPage();
   }
   
   // Śledzenie scrollowania tylko, jeśli zgoda na analytics
   let clearScrollTracking;
-  if (hasConsent('analytics')) {
+  if (hasConsent()) {
     clearScrollTracking = trackScrollDepth();
   }
   
