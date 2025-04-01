@@ -134,7 +134,7 @@ function TikTok() {
                     <div className="tiktok-video">
                       <iframe 
                         src={tiktok.embedUrl}
-                        height="600" 
+                        height="730" // Zwiększone z 600px na 730px
                         frameBorder="0"
                         allowFullScreen 
                         scrolling="no" 
