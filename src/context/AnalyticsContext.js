@@ -37,7 +37,6 @@ export const AnalyticsProvider = ({ children }) => {
   // Udostępniane wartości i funkcje
   const value = {
     trackTikTokClick: analytics.trackTikTokClick,
-    trackFormSubmission: analytics.trackFormSubmission,
     trackError: analytics.trackError
   };
   

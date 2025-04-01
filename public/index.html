@@ -27,6 +27,12 @@
       // Definiujemy zmienne tylko raz, aby uniknąć błędów redefinicji
       var cookieConsent = localStorage.getItem('cookieConsent');
       var cookieOptions = JSON.parse(localStorage.getItem('cookieOptions') || '{}');
+      
+      // Funkcja sprawdzająca zgodę na analytics
+      function hasAnalyticsConsent() {
+        return cookieConsent === 'accepted' || 
+               (cookieConsent === 'customized' && cookieOptions.analytics);
+      }
     </script>
 
     <!-- Google Tag Manager -->
@@ -36,25 +42,13 @@
       
       // Początkowe ustawienie zgody - domyślnie brak zgody
       window.dataLayer.push({
-        'consent_mode': 'denied',
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied'
+        'analytics_storage': 'denied'
       });
       
       // Sprawdź, czy mamy już zapisaną zgodę
-      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+      if (hasAnalyticsConsent()) {
         window.dataLayer.push({
           'analytics_storage': 'granted'
-        });
-      }
-      
-      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.marketing)) {
-        window.dataLayer.push({
-          'ad_storage': 'granted',
-          'ad_user_data': 'granted',
-          'ad_personalization': 'granted'
         });
       }
     </script>
@@ -75,24 +69,13 @@
 
       // Początkowe ustawienie zgody - domyślnie brak zgody
       gtag('consent', 'default', {
-        'analytics_storage': 'denied',
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied'
+        'analytics_storage': 'denied'
       });
       
       // Sprawdź, czy mamy już zapisaną zgodę
-      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+      if (hasAnalyticsConsent()) {
         gtag('consent', 'update', {
           'analytics_storage': 'granted'
-        });
-      }
-      
-      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.marketing)) {
-        gtag('consent', 'update', {
-          'ad_storage': 'granted',
-          'ad_user_data': 'granted',
-          'ad_personalization': 'granted'
         });
       }
 
@@ -116,7 +99,7 @@
       window.hjSiteSettings.privacy_policy_date = "2025-04-01";
       
       // Ustaw zgodę tylko jeśli użytkownik wyraźnie zaakceptował cookies analityczne
-      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+      if (hasAnalyticsConsent()) {
         window.hj && window.hj('consent', true);
       } else {
         window.hj && window.hj('consent', false);

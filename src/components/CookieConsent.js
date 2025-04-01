@@ -7,9 +7,7 @@ const CookieConsent = () => {
   const [showCustomize, setShowCustomize] = useState(false);
   const [consentOptions, setConsentOptions] = useState({
     necessary: true, // Zawsze wymagane i włączone
-    analytics: true,
-    marketing: true,
-    preferences: true
+    analytics: true
   });
   
   useEffect(() => {
@@ -41,9 +39,7 @@ const CookieConsent = () => {
   const acceptAllCookies = () => {
     const options = {
       necessary: true,
-      analytics: true,
-      marketing: true,
-      preferences: true
+      analytics: true
     };
     
     localStorage.setItem('cookieConsent', 'accepted');
@@ -64,9 +60,7 @@ const CookieConsent = () => {
   const declineAllCookies = () => {
     const options = {
       necessary: true, // Zawsze wymagane
-      analytics: false,
-      marketing: false,
-      preferences: false
+      analytics: false
     };
     
     localStorage.setItem('cookieConsent', 'declined');
@@ -79,9 +73,7 @@ const CookieConsent = () => {
   const disableNonEssential = () => {
     const options = {
       necessary: true, // Zawsze wymagane
-      analytics: false,
-      marketing: false,
-      preferences: false
+      analytics: false
     };
     
     setConsentOptions(options);
@@ -113,9 +105,7 @@ const CookieConsent = () => {
       window.dataLayer.push({
         'event': 'cookie_consent_update',
         'cookie_consent': {
-          'analytics': options.analytics,
-          'marketing': options.marketing,
-          'preferences': options.preferences
+          'analytics': options.analytics
         }
       });
     }
@@ -165,7 +155,7 @@ const CookieConsent = () => {
               <p>Ta strona używa cookies dla lepszego doświadczenia użytkownika.</p>
               <div className="cookie-actions">
                 <button className="cookie-btn secondary" onClick={declineAllCookies}>
-                  Odrzuć wszystkie
+                  Odrzuć
                 </button>
                 <button className="cookie-btn secondary" onClick={() => setShowCustomize(true)}>
                   Dostosuj wybór
@@ -220,43 +210,11 @@ const CookieConsent = () => {
                     co pomaga nam ją ulepszać (Google Analytics, Hotjar).
                   </p>
                 </div>
-                
-                <div className="cookie-option">
-                  <div className="cookie-option-header">
-                    <label className="cookie-option-label">
-                      <input 
-                        type="checkbox" 
-                        checked={consentOptions.marketing}
-                        onChange={() => handleOptionChange('marketing')}
-                      />
-                      <span className="cookie-option-title">Marketingowe</span>
-                    </label>
-                  </div>
-                  <p className="cookie-option-description">
-                    Umożliwiają wyświetlanie treści dostosowanych do Twoich zainteresowań i preferencji.
-                  </p>
-                </div>
-                
-                <div className="cookie-option">
-                  <div className="cookie-option-header">
-                    <label className="cookie-option-label">
-                      <input 
-                        type="checkbox" 
-                        checked={consentOptions.preferences}
-                        onChange={() => handleOptionChange('preferences')}
-                      />
-                      <span className="cookie-option-title">Preferencje</span>
-                    </label>
-                  </div>
-                  <p className="cookie-option-description">
-                    Umożliwiają zapamiętanie Twoich preferencji i ustawień, takich jak język, rozmiar tekstu i inne opcje wyświetlania.
-                  </p>
-                </div>
               </div>
               
               <div className="cookie-customize-footer">
                 <button className="cookie-btn secondary" onClick={disableNonEssential}>
-                  Wyłącz wszystkie niewymagane
+                  Wyłącz analityczne
                 </button>
                 <button className="cookie-btn primary" onClick={acceptCustomized}>
                   Zapisz wybór
