@@ -11,9 +11,11 @@ const CookieConsent = () => {
   });
   
   useEffect(() => {
-    // Sprawdź, czy użytkownik już zaakceptował pliki cookie
+    // Sprawdź, czy użytkownik już zaakceptował lub odrzucił pliki cookie
     const cookieConsent = localStorage.getItem('cookieConsent');
-    if (!cookieConsent) {
+    
+    // Pokazuj banner tylko jeśli nie ma żadnej decyzji (null lub pusty string)
+    if (!cookieConsent || cookieConsent === '') {
       // Pokaż baner po krótkim opóźnieniu
       const timer = setTimeout(() => {
         setShowConsent(true);
@@ -21,8 +23,8 @@ const CookieConsent = () => {
       return () => clearTimeout(timer);
     } else {
       // Ustaw odpowiednie opcje zgody na podstawie zapisanych preferencji
-      const savedOptions = JSON.parse(localStorage.getItem('cookieOptions')) || {};
-      if (savedOptions) {
+      const savedOptions = JSON.parse(localStorage.getItem('cookieOptions') || '{}');
+      if (Object.keys(savedOptions).length > 0) {
         setConsentOptions({
           ...consentOptions,
           ...savedOptions
