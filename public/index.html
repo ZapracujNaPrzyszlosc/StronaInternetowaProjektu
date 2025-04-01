@@ -22,6 +22,50 @@
     
     <title>Zapracuj na przyszłość | Wywiady z profesjonalistami</title>
 
+    <!-- Wspólne ustawienia cookie -->
+    <script>
+      // Definiujemy zmienne tylko raz, aby uniknąć błędów redefinicji
+      var cookieConsent = localStorage.getItem('cookieConsent');
+      var cookieOptions = JSON.parse(localStorage.getItem('cookieOptions') || '{}');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      // Wstępne ustawienia GTM
+      window.dataLayer = window.dataLayer || [];
+      
+      // Początkowe ustawienie zgody - domyślnie brak zgody
+      window.dataLayer.push({
+        'consent_mode': 'denied',
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+      
+      // Sprawdź, czy mamy już zapisaną zgodę
+      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+        window.dataLayer.push({
+          'analytics_storage': 'granted'
+        });
+      }
+      
+      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.marketing)) {
+        window.dataLayer.push({
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
+    </script>
+    
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TKT29P3M');</script>
+    <!-- End Google Tag Manager -->
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DPRX336JZL"></script>
     <script>
@@ -29,14 +73,55 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
+      // Początkowe ustawienie zgody - domyślnie brak zgody
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
+      
+      // Sprawdź, czy mamy już zapisaną zgodę
+      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+      
+      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.marketing)) {
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
+
       gtag('config', 'G-DPRX336JZL');
     </script>
 
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TKT29P3M');</script>
+    <!-- Hotjar Tracking Code for Site 5357630 -->
+    <script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:5357630,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      
+      // Domyślnie wstrzymaj śledzenie do czasu uzyskania zgody
+      window.hjSiteSettings = window.hjSiteSettings || {};
+      window.hjSiteSettings.site_id = 5357630;
+      window.hjSiteSettings.privacy_policy_date = "2025-04-01";
+      
+      // Ustaw zgodę tylko jeśli użytkownik wyraźnie zaakceptował cookies analityczne
+      if (cookieConsent === 'accepted' || (cookieConsent === 'customized' && cookieOptions.analytics)) {
+        window.hj && window.hj('consent', true);
+      } else {
+        window.hj && window.hj('consent', false);
+      }
+    </script>
 
     <meta name="google-site-verification" content="ODgcsxUKfuyhoGz2v092NN-gX03Zp6vc0ZE5Vr9C-Gw" />
   </head>
