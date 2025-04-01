@@ -84,7 +84,7 @@ function About() {
               transition={{ duration: 0.6 }}
             >
               <h2>Nasza misja</h2>
-              <p>Projekt "Zapracuj na przyszłość" powstał w ramach olimpiady "Zwolnieni z Teorii" z myślą o młodych ludziach, którzy stoją przed wyborem ścieżki kariery. Naszym celem jest pokazanie, jak wygląda praca w różnych branżach, bezpośrednio od osób, które wykonują te zawody na co dzień.</p>
+              <p>Projekt Zapracuj na przyszłość powstał w ramach olimpiady Zwolnieni z Teorii z myślą o młodych ludziach, którzy stoją przed wyborem ścieżki kariery. Naszym celem jest pokazanie, jak wygląda praca w różnych branżach, bezpośrednio od osób, które wykonują te zawody na co dzień.</p>
               <p>Wierzymy, że najlepszym sposobem na poznanie danego zawodu jest rozmowa z osobą, która już go wykonuje. Dlatego przeprowadzamy wywiady z profesjonalistami z różnych dziedzin i publikujemy je w formie krótkich, angażujących filmów na TikToku.</p>
               <p>Chcemy, aby młodzi ludzie mogli podejmować świadome decyzje dotyczące swojej przyszłości zawodowej, bazując na realnych informacjach, a nie tylko na wyobrażeniach o danym zawodzie.</p>
               
