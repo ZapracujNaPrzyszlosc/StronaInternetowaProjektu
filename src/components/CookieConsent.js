@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/cookie-consent.css';
+import { isStorageAvailable, saveToStorage, getFromStorage, setCookie, getCookie } from '../utils/storageUtils';
 
 const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(false);
@@ -10,33 +11,69 @@ const CookieConsent = () => {
     analytics: true
   });
   
-  useEffect(() => {
-    // Sprawdź, czy użytkownik już zaakceptował lub odrzucił pliki cookie
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    
-    // Pokazuj banner tylko jeśli nie ma żadnej decyzji (null lub pusty string)
-    if (!cookieConsent || cookieConsent === '') {
-      // Pokaż baner po krótkim opóźnieniu
-      const timer = setTimeout(() => {
-        setShowConsent(true);
-      }, 1500);
-      return () => clearTimeout(timer);
+  // Określ czy używać localStorage czy cookies
+  const useLocalStorage = isStorageAvailable();
+  
+  // Funkcja do zapisu preferencji
+  const savePreference = (key, value) => {
+    if (useLocalStorage) {
+      return saveToStorage(key, value);
     } else {
-      // Ustaw odpowiednie opcje zgody na podstawie zapisanych preferencji
-      const savedOptions = JSON.parse(localStorage.getItem('cookieOptions') || '{}');
-      if (Object.keys(savedOptions).length > 0) {
-        setConsentOptions({
-          ...consentOptions,
-          ...savedOptions
-        });
-      }
-      
-      // Jeśli użytkownik zaakceptował, włącz odpowiednie narzędzia analityczne
-      if (cookieConsent === 'accepted' || cookieConsent === 'customized') {
-        enableAnalytics(savedOptions || consentOptions);
-      }
+      return setCookie(key, value);
     }
-  }, [consentOptions]);
+  };
+  
+  // Funkcja do pobierania preferencji
+  const getPreference = React.useCallback((key, defaultValue = null) => {
+    if (useLocalStorage) {
+      return getFromStorage(key, defaultValue);
+    } else {
+      return getCookie(key, defaultValue);
+    }
+  }, [useLocalStorage]);
+  
+  useEffect(() => {
+    const fetchPreferences = () => {
+      // Sprawdź, czy użytkownik już podjął decyzję
+      const cookieConsent = getPreference('cookieConsent');
+      console.log('Stored consent:', cookieConsent);
+      
+      // Wyświetl baner tylko jeśli nie ma zapisanej decyzji
+      if (!cookieConsent) {
+        const timer = setTimeout(() => {
+          setShowConsent(true);
+        }, 1500);
+        return () => clearTimeout(timer);
+      } else {
+        try {
+          // Pobierz zapisane opcje
+          const savedOptionsStr = getPreference('cookieOptions', '{}');
+          const savedOptions = JSON.parse(savedOptionsStr);
+          console.log('Saved options:', savedOptions);
+          
+          // Aktualizuj stan komponentu
+          if (savedOptions && Object.keys(savedOptions).length > 0) {
+            setConsentOptions({
+              necessary: true, // Zawsze włączone
+              analytics: savedOptions.analytics === true
+            });
+          }
+          
+          // Aktywuj narzędzia analityczne jeśli zgoda została udzielona
+          if (cookieConsent === 'accepted' || 
+              (cookieConsent === 'customized' && savedOptions.analytics === true)) {
+            enableAnalytics({ analytics: true });
+          } else {
+            disableAnalytics();
+          }
+        } catch (error) {
+          console.error('Error processing saved preferences:', error);
+        }
+      }
+    };
+
+    fetchPreferences();
+  }, [getPreference]);
   
   const acceptAllCookies = () => {
     const options = {
@@ -44,65 +81,65 @@ const CookieConsent = () => {
       analytics: true
     };
     
-    localStorage.setItem('cookieConsent', 'accepted');
-    localStorage.setItem('cookieOptions', JSON.stringify(options));
+    savePreference('cookieConsent', 'accepted');
+    savePreference('cookieOptions', JSON.stringify(options));
+    
     setConsentOptions(options);
     setShowConsent(false);
     enableAnalytics(options);
   };
   
   const acceptCustomized = () => {
-    localStorage.setItem('cookieConsent', 'customized');
-    localStorage.setItem('cookieOptions', JSON.stringify(consentOptions));
+    savePreference('cookieConsent', 'customized');
+    savePreference('cookieOptions', JSON.stringify(consentOptions));
+    
     setShowConsent(false);
     setShowCustomize(false);
-    enableAnalytics(consentOptions);
+    
+    if (consentOptions.analytics) {
+      enableAnalytics(consentOptions);
+    } else {
+      disableAnalytics();
+    }
   };
   
   const declineAllCookies = () => {
     const options = {
-      necessary: true, // Zawsze wymagane
+      necessary: true,
       analytics: false
     };
     
-    localStorage.setItem('cookieConsent', 'declined');
-    localStorage.setItem('cookieOptions', JSON.stringify(options));
+    savePreference('cookieConsent', 'declined');
+    savePreference('cookieOptions', JSON.stringify(options));
+    
     setConsentOptions(options);
     setShowConsent(false);
     disableAnalytics();
   };
   
   const disableNonEssential = () => {
-    const options = {
-      necessary: true, // Zawsze wymagane
-      analytics: false
-    };
-    
-    setConsentOptions(options);
-  };
-  
-  const handleOptionChange = (option) => {
     setConsentOptions({
-      ...consentOptions,
-      [option]: !consentOptions[option]
+      necessary: true,
+      analytics: false
     });
   };
   
+  const handleOptionChange = (option) => {
+    setConsentOptions(prev => ({
+      ...prev,
+      [option]: !prev[option]
+    }));
+  };
+  
   const enableAnalytics = (options) => {
-    // Włącz narzędzia zależnie od opcji zgody
-    
-    // Włącz Google Analytics, jeśli zgoda na analytics
+    // Włącz Google Analytics
     if (window.gtag && options.analytics) {
       window.gtag('consent', 'update', {
         'analytics_storage': 'granted'
       });
-    } else if (window.gtag) {
-      window.gtag('consent', 'update', {
-        'analytics_storage': 'denied'
-      });
     }
     
-    // Włącz Google Tag Manager
+    // Poinformuj Google Tag Manager
     if (window.dataLayer) {
       window.dataLayer.push({
         'event': 'cookie_consent_update',
@@ -112,11 +149,9 @@ const CookieConsent = () => {
       });
     }
     
-    // Włącz Hotjar, jeśli zgoda na analytics
+    // Włącz Hotjar
     if (window.hj && options.analytics) {
       window.hj('consent', true);
-    } else if (window.hj) {
-      window.hj('consent', false);
     }
   };
   
@@ -156,13 +191,22 @@ const CookieConsent = () => {
             <>
               <p>Ta strona używa cookies dla lepszego doświadczenia użytkownika.</p>
               <div className="cookie-actions">
-                <button className="cookie-btn secondary" onClick={declineAllCookies}>
+                <button 
+                  className="cookie-btn secondary" 
+                  onClick={declineAllCookies}
+                >
                   Odrzuć
                 </button>
-                <button className="cookie-btn secondary" onClick={() => setShowCustomize(true)}>
+                <button 
+                  className="cookie-btn secondary" 
+                  onClick={() => setShowCustomize(true)}
+                >
                   Dostosuj wybór
                 </button>
-                <button className="cookie-btn primary" onClick={acceptAllCookies}>
+                <button 
+                  className="cookie-btn primary" 
+                  onClick={acceptAllCookies}
+                >
                   Akceptuję wszystkie
                 </button>
               </div>
@@ -215,10 +259,16 @@ const CookieConsent = () => {
               </div>
               
               <div className="cookie-customize-footer">
-                <button className="cookie-btn secondary" onClick={disableNonEssential}>
+                <button 
+                  className="cookie-btn secondary" 
+                  onClick={disableNonEssential}
+                >
                   Wyłącz analityczne
                 </button>
-                <button className="cookie-btn primary" onClick={acceptCustomized}>
+                <button 
+                  className="cookie-btn primary" 
+                  onClick={acceptCustomized}
+                >
                   Zapisz wybór
                 </button>
               </div>
