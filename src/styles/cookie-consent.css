@@ -1,0 +1,87 @@
+/* Minimalistyczne style dla banera zgody na pliki cookie */
+.cookie-banner {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    max-width: 340px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+  }
+  
+  .cookie-banner p {
+    margin: 0 0 10px 0;
+    color: var(--text-color);
+    line-height: 1.4;
+  }
+  
+  .cookie-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .cookie-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .cookie-btn.accept {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+  }
+  
+  .cookie-btn.accept:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(126, 34, 206, 0.3);
+  }
+  
+  .cookie-btn.decline {
+    background: transparent;
+    color: var(--text-light);
+  }
+  
+  .cookie-btn.decline:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Wersja dla ciemnego motywu (jeśli został zaimplementowany) */
+  .dark .cookie-banner {
+    background-color: rgba(30, 41, 59, 0.95);
+    border-color: rgba(55, 65, 81, 0.5);
+  }
+  
+  .dark .cookie-banner p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .dark .cookie-btn.decline {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .dark .cookie-btn.decline:hover {
+    color: var(--primary-light);
+  }
+  
+  /* Responsywność na małe ekrany */
+  @media (max-width: 576px) {
+    .cookie-banner {
+      right: 10px;
+      bottom: 10px;
+      left: 10px;
+      max-width: none;
+    }
+  }
