@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import AnimatedStats from '../components/AnimatedCounter'; // Dodany import
 
 function About() {
   useEffect(() => {
@@ -151,77 +152,8 @@ function About() {
         </div>
       </section>
 
-      {/* Stats Section with improved styling */}
-      <section className="project-stats" style={{ background: 'var(--background-light)' }}>
-        <div className="container">
-          <motion.div
-            className="section-header text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ marginBottom: '3rem' }}
-          >
-            <h2 style={{
-              fontSize: '2.5rem',
-              background: 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
-              WebkitTextFillColor: 'transparent',
-            }}>Nasze osiągnięcia</h2>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-light)', maxWidth: '800px', margin: '0 auto' }}>
-              Rezultaty naszej pracy i zasięg projektu
-            </p>
-          </motion.div>
-          
-          <div className="stats-grid">
-            <motion.div
-              className="stat-card"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <h3 className="stat-number">15+</h3>
-              <p>Przeprowadzonych wywiadów</p>
-            </motion.div>
-            
-            <motion.div
-              className="stat-card"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h3 className="stat-number">10+</h3>
-              <p>Zaprezentowanych branż</p>
-            </motion.div>
-            
-            <motion.div
-              className="stat-card"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h3 className="stat-number">5500+</h3>
-              <p>Obserwujących na TikToku</p>
-            </motion.div>
-            
-            <motion.div
-              className="stat-card"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h3 className="stat-number">1,5M+</h3>
-              <p>Łącznych wyświetleń</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Tutaj zastąpiłem oryginalną sekcję stats komponentem AnimatedStats */}
+      <AnimatedStats />
 
       {/* Goals Section with enhanced design */}
       <section className="project-goals">
