@@ -99,15 +99,16 @@
   align-items: center;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   padding: 1rem;
-  min-height: 730px; /* Zwiększone z 600px na 730px */
-  max-width: 340px;
+  min-height: 730px;
+  max-width: 420px; /* Zwiększone z 340px */
+  width: 100%; /* Dodane dla lepszego wypełnienia przestrzeni */
   margin: 0 auto;
 }
 
 .tiktok-video iframe {
   width: 100%;
   height: 100%;
-  min-height: 730px; /* Zwiększone z 600px na 730px */
+  min-height: 730px;
   border: none;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -145,14 +146,33 @@
 }
 
 .follow-card {
-  background: linear-gradient(135deg, rgba(126, 34, 206, 0.08) 0%, rgba(225, 29, 72, 0.08) 100%);
+  background-color: white; /* Zmieniono na biały dla lepszego kontrastu */
   padding: 4rem 3rem;
   border-radius: var(--radius-lg);
   text-align: center;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dodajemy subtelny akcent gradientowy na krawędziach karty */
+.follow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(126, 34, 206, 0.1) 0%, rgba(225, 29, 72, 0.1) 100%);
+  border-radius: var(--radius-lg);
+  z-index: 0;
+}
+
+/* Zawartość karty zachowuje pozycję nad gradientem */
+.follow-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .follow-card h2 {
@@ -181,6 +201,12 @@
 }
 
 /* Responsywność */
+@media (max-width: 1200px) {
+  .tiktok-video {
+    max-width: 400px;
+  }
+}
+
 @media (max-width: 992px) {
   .tiktok-item {
     grid-template-columns: 1fr;
@@ -196,8 +222,9 @@
   
   .tiktok-video {
     padding: 1.5rem 1.5rem 0;
-    max-width: 360px;
+    max-width: 450px; /* Zwiększone dla widoku mobilnego */
     min-height: 600px; /* Dostosowane dla widoku mobilnego */
+    width: 100%;
   }
   
   .tiktok-video iframe {
@@ -222,6 +249,10 @@
     font-size: 1.125rem;
     margin-bottom: 2rem;
   }
+  
+  .tiktok-video {
+    max-width: 380px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -229,8 +260,13 @@
     gap: 3rem;
   }
   
+  .tiktok-video {
+    max-width: 100%;
+    min-height: 600px;
+  }
+  
   .tiktok-video iframe {
-    min-height: 650px; /* Zwiększone z 500px na 650px */
+    min-height: 650px;
   }
   
   .tiktok-title {
