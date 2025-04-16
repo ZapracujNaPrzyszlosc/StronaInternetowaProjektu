@@ -196,6 +196,51 @@ function Home() {
           <div className="glass-effect"></div>
         </div>
       </section>
+      <section className="youtube-section">
+        <div className="container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2>Podsumowanie projektu</h2>
+            <p>Zobacz film prezentujący efekty naszej pracy i wpływ projektu na wybory zawodowe młodych ludzi</p>
+          </motion.div>
+          
+          <motion.div 
+            className="youtube-container"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="youtube-embed">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/QcLgLaB0hoc?si=dN2aTsxDuQM5GRud" 
+                title="Zapracuj na przyszłość - Podsumowanie projektu" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowFullScreen
+              ></iframe>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            className="project-completion-message"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <p>Dziękujemy wszystkim, którzy wspierali nasz projekt i przyczynili się do jego sukcesu!</p>
+          </motion.div>
+        </div>
+        <div className="gradient-bg"></div>
+      </section>
     </div>
   );
 }
