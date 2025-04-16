@@ -131,7 +131,6 @@ function About() {
             >
               <div className="blob-animation">
                 <div className="image-placeholder">
-                  {/* Replaced gradient with logo */}
                   <motion.img 
                     src="/logo512.png" 
                     alt="Zapracuj na przyszłość logo" 
@@ -152,10 +151,8 @@ function About() {
         </div>
       </section>
 
-      {/* Tutaj zastąpiłem oryginalną sekcję stats komponentem AnimatedStats */}
       <AnimatedStats />
 
-      {/* Goals Section with enhanced design */}
       <section className="project-goals">
         <div className="container">
           <motion.div
