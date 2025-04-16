@@ -298,3 +298,96 @@
     padding-top: 1rem;
   }
 }
+
+.youtube-section {
+  padding: 6rem 0 3rem 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, rgba(240, 222, 245, 0.3), rgba(255, 255, 255, 0.8));
+  margin-top: 3rem;
+}
+
+.youtube-container {
+  max-width: 900px;
+  margin: 2rem auto 3rem;
+}
+
+.youtube-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Proporcje 16:9 */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+  transition: var(--transition);
+}
+
+.youtube-embed:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.youtube-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Efekt szkła na obramowaniu */
+.youtube-embed::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 3px; /* Szerokość obramowania */
+  background: linear-gradient(135deg, rgba(126, 34, 206, 0.6), rgba(225, 29, 72, 0.6));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Stylizacja informacji o zakończeniu projektu */
+.project-completion-message {
+  text-align: center;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+.project-completion-message p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .youtube-container {
+    max-width: 100%;
+  }
+  
+  .project-completion-message p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .youtube-section {
+    padding: 4rem 0;
+  }
+  
+  .completion-badge {
+    padding: 0.5rem 1.2rem;
+  }
+}
