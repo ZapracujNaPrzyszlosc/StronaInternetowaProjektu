@@ -3,6 +3,7 @@
   position: relative;
   padding: 8rem 0 5rem;
   overflow: hidden;
+  background-color: var(--background-color);
 }
 
 .hero-content {
@@ -164,6 +165,7 @@
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(to bottom, var(--background-light) 0%, rgba(240, 222, 245, 0.3) 100%);
 }
 
 .tiktok-grid {
@@ -180,8 +182,8 @@
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  padding-top: 1.5rem; /* Dodany padding na górze */
-  background-color: white; /* Jednolity biały kolor tła */
+  padding-top: 1.5rem;
+  background-color: white;
 }
 
 .tiktok-embed-container iframe {
@@ -190,21 +192,12 @@
   border: none;
 }
 
-.gradient-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 90% 90%, rgba(126, 34, 206, 0.08) 0%, rgba(225, 29, 72, 0.08) 90%);
-  z-index: -1;
-}
-
-/* CTA Section Styles */
 .cta-section {
-  padding: 5rem 0;
+  padding: 7rem 0 7rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  background-color: rgba(240, 222, 245, 0.3);
+  z-index: 1;
 }
 
 .cta-content {
@@ -258,58 +251,19 @@
   background: linear-gradient(135deg, rgba(126, 34, 206, 0.2) 0%, rgba(225, 29, 72, 0.2) 100%);
 }
 
-/* Responsywność dla embedów TikTok */
-@media (max-width: 992px) {
-  .tiktok-embed-container {
-    height: 580px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-image {
-    min-height: 600px;
-  }
-  
-  .tiktok-placeholder {
-    height: 600px;
-  }
-  
-  .tiktok-embed-container {
-    height: 600px;
-    padding-top: 1.25rem;
-  }
-  
-  .text-center.mt-8 {
-    margin-top: 1.5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .hero-image {
-    min-height: 550px;
-  }
-  
-  .tiktok-placeholder {
-    height: 550px;
-  }
-  
-  .tiktok-embed-container {
-    height: 550px;
-    padding-top: 1rem;
-  }
-}
-
+/* YouTube Section Styles - dodany odpowiedni padding na górze */
 .youtube-section {
-  padding: 6rem 0 3rem 0;
+  padding: 5rem 0 5rem; /* Zwiększony padding z górnej strony z 0 na 5rem */
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, rgba(240, 222, 245, 0.3), rgba(255, 255, 255, 0.8));
-  margin-top: 3rem;
+  background-color: rgba(240, 222, 245, 0.3);
 }
 
 .youtube-container {
   max-width: 900px;
-  margin: 2rem auto 3rem;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 2;
 }
 
 .youtube-embed {
@@ -371,23 +325,76 @@
   margin-bottom: 0;
 }
 
-/* Responsywność */
+@media (max-width: 992px) {
+  .tiktok-embed-container {
+    height: 580px;
+  }
+  
+  .section-connector {
+    height: 100px;
+    margin-top: -3rem;
+    margin-bottom: -3rem;
+  }
+  
+  .cta-section {
+    padding: 5rem 0 5rem;
+  }
+  
+  .youtube-section {
+    padding: 4rem 0 4rem; /* Dopasowany padding dla ekranów średniej wielkości */
+  }
+}
+
 @media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+  }
+  
+  .hero-image {
+    min-height: 600px;
+  }
+  
+  .tiktok-placeholder {
+    height: 600px;
+  }
+  
+  .tiktok-embed-container {
+    height: 600px;
+    padding-top: 1.25rem;
+  }
+  
+  .text-center.mt-8 {
+    margin-top: 1.5rem;
+  }
+  
   .youtube-container {
     max-width: 100%;
   }
   
-  .project-completion-message p {
-    font-size: 1.1rem;
+  .cta-section {
+    padding: 4rem 0 4rem;
+  }
+  
+  .youtube-section {
+    padding: 3.5rem 0 4rem; /* Dopasowany padding dla mniejszych ekranów */
   }
 }
 
 @media (max-width: 576px) {
-  .youtube-section {
-    padding: 4rem 0;
+  .hero-image {
+    min-height: 550px;
   }
   
-  .completion-badge {
-    padding: 0.5rem 1.2rem;
+  .tiktok-placeholder {
+    height: 550px;
+  }
+  
+  .tiktok-embed-container {
+    height: 550px;
+    padding-top: 1rem;
+  }
+  
+  .youtube-section {
+    padding: 3rem 0 3rem; /* Zmniejszony padding dla najmniejszych ekranów */
   }
 }
