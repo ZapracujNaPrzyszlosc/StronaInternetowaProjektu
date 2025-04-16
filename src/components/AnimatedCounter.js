@@ -95,7 +95,7 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">Przeprowadzone wywiady</h3>
-            <Counter end={15} suffix="+" />
+            <Counter end={20} suffix="+" />
           </motion.div>
           
           <motion.div
