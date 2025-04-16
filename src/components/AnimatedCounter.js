@@ -111,7 +111,7 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">Zaprezentowane branże</h3>
-            <Counter end={10} suffix="+" />
+            <Counter end={15} suffix="+" />
           </motion.div>
           
           <motion.div
