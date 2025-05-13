@@ -1,14 +1,11 @@
 # Zapracuj na przyszłość
-
-Projekt stworzony na olimpiadę "Zwolnieni z Teorii", którego celem jest kręcenie filmików na TikToka z wywiadami z profesjonalistami z różnych branż, aby pokazać młodym ludziom, jak wygląda praca w różnych zawodach.
-
 ## 📋 O projekcie
 
 "Zapracuj na przyszłość" to projekt społeczny, który ma na celu pomóc młodym ludziom w wyborze ścieżki kariery poprzez pokazanie realiów pracy w różnych branżach. Przeprowadzamy wywiady z profesjonalistami i publikujemy je w formie krótkich, angażujących filmów na TikToku.
 
 ## 🚀 Technologie
 
-Projekt wykorzystuje:
+Strona wykorzystuje:
 
 - React.js
 - React Router
@@ -67,13 +64,6 @@ yarn build
 - TikTok: [@zapracuj.na.przyszlosc](https://www.tiktok.com/@zapracuj.na.przyszlosc)
 - Instagram: [@zapracuj.na.przyszlosc](https://www.instagram.com/zapracuj.na.przyszlosc/)
 
-## 🤝 Zespół
-
-- [Imię Nazwisko] - Koordynator projektu
-- [Imię Nazwisko] - Operator kamery
-- [Imię Nazwisko] - Prowadzący wywiady
-- [Imię Nazwisko] - Social media manager
-
 ## 📄 Licencja
 
-Ten projekt jest dostępny na licencji MIT. Zobacz plik [LICENSE](LICENSE) dla szczegółów.
+Kod źródłowy strony jest dostępny na licencji MIT. Zobacz plik [LICENSE](LICENSE) dla szczegółów.
