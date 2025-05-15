@@ -133,12 +133,10 @@ const Features = () => {
   );
 };
 
-// Zaktualizowany komponent TikTokPreview z telefonem i statystykami
 const TikTokPreview = () => {
   // Stan dla aktywnego TikToka (w przyszłości można rozszerzyć o więcej)
-  const [activeTikTok, setActiveTikTok] = useState(0);
+  const [activeTikTok] = useState(0);
   
-  // Przykładowe dane dla TikToków (można rozszerzyć w przyszłości)
   const tiktoks = [
     {
       id: 1,
