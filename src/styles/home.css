@@ -192,9 +192,11 @@
   overflow: hidden;
   background: linear-gradient(
     to bottom,
-    var(--background-light) 0%,
-    rgba(240, 222, 245, 0.3) 100%
+    rgba(240, 222, 245, 0.5) 0%,
+    rgba(240, 222, 245, 0.8) 100%
   );
+  border-top: 1px solid rgba(225, 29, 72, 0.1);
+  border-bottom: 1px solid rgba(225, 29, 72, 0.1);
 }
 
 .tiktok-content-wrapper {
@@ -319,12 +321,12 @@
 
 .tiktok-description {
   padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
 }
 
@@ -455,6 +457,7 @@
   background: var(--primary-light);
   top: 10%;
   left: 5%; 
+  opacity: 0.6;
 }
 
 .tiktok-bg-decoration-2 {
@@ -463,6 +466,7 @@
   background: var(--secondary-light);
   bottom: 10%;
   right: 5%;
+  opacity: 0.6;
 }
 
 /* CTA Section Styles */
