@@ -219,7 +219,7 @@ const TikTokPreview = () => {
                 </a>
               </div>
               
-              {/* Wskaźniki statystyk */}
+              {/* Zmodyfikowane statystyki z poziomym układem */}
               <div className="tiktok-stats">
                 <div className="stat-item">
                   <div className="stat-icon">
@@ -229,7 +229,7 @@ const TikTokPreview = () => {
                   </div>
                   <div className="stat-content">
                     <p className="stat-value">70K+</p>
-                    <p className="stat-label">Polubień</p>
+                    <p className="stat-label">polubień</p>
                   </div>
                 </div>
                 
@@ -244,7 +244,7 @@ const TikTokPreview = () => {
                   </div>
                   <div className="stat-content">
                     <p className="stat-value">20+</p>
-                    <p className="stat-label">Wywiadów</p>
+                    <p className="stat-label">wywiadów</p>
                   </div>
                 </div>
                 
@@ -259,7 +259,7 @@ const TikTokPreview = () => {
                   </div>
                   <div className="stat-content">
                     <p className="stat-value">5.9K+</p>
-                    <p className="stat-label">Obserwujących</p>
+                    <p className="stat-label">obserwujących</p>
                   </div>
                 </div>
               </div>

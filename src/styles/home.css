@@ -399,7 +399,7 @@
 .stat-item {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.75rem; /* Zwiększony odstęp między ikoną a treścią */
 }
 
 .stat-icon {
@@ -414,11 +414,12 @@
   flex-shrink: 0;
 }
 
+/* Nowy układ statystyk - elementy poziomo zamiast pionowo */
 .stat-content {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: -2px;
+  flex-direction: row; /* Zmienione z column na row */
+  align-items: center; /* Wyśrodkowanie w pionie */
+  gap: 8px; /* Odstęp między liczbą a tekstem */
 }
 
 .stat-value {
@@ -437,8 +438,7 @@
   font-size: 0.9rem;
   color: var(--text-light);
   margin: 0;
-  line-height: 1.2;
-  margin-top: 2px;
+  line-height: 1;
 }
 
 /* Tło i dekoracje sekcji TikTok */
@@ -769,4 +769,244 @@
   .cta-content {
     padding: 2rem 1.5rem;
   }
+}
+
+/* Nowoczesne style dla statystyk TikTok */
+
+/* Główny kontener */
+.tiktok-modern-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Sekcja przycisków */
+.tiktok-button-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .tiktok-button-section {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Nowoczesny przycisk główny */
+.btn-modern-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: white;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-modern-primary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(168, 85, 247, 0.5);
+}
+
+.btn-modern-primary svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Przycisk glassomorphic */
+.btn-modern-glass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #a855f7;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-modern-glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.btn-modern-glass svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Siatka statystyk */
+.tiktok-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .tiktok-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Karta statystyki */
+.tiktok-stat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tiktok-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Tło karty z gradientem */
+.tiktok-stat-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.tiktok-stat-card:hover .tiktok-stat-bg {
+  opacity: 0.2;
+}
+
+.tiktok-stat-bg-1 {
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+}
+
+.tiktok-stat-bg-2 {
+  background: linear-gradient(135deg, #a855f7, #8b5cf6);
+}
+
+.tiktok-stat-bg-3 {
+  background: linear-gradient(135deg, #ec4899, #f472b6);
+}
+
+/* Ikona statystyki */
+.tiktok-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.tiktok-stat-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.tiktok-stat-icon-1 {
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+}
+
+.tiktok-stat-icon-2 {
+  background: linear-gradient(135deg, #a855f7, #8b5cf6);
+}
+
+.tiktok-stat-icon-3 {
+  background: linear-gradient(135deg, #ec4899, #f472b6);
+}
+
+/* Zawartość statystyki */
+.tiktok-stat-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.tiktok-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.tiktok-stat-value-1 {
+  background-image: linear-gradient(135deg, #ec4899, #a855f7);
+}
+
+.tiktok-stat-value-2 {
+  background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+}
+
+.tiktok-stat-value-3 {
+  background-image: linear-gradient(135deg, #ec4899, #f472b6);
+}
+
+.tiktok-stat-label {
+  font-size: 1rem;
+  color: #a1a1aa;
+  margin: 0;
+}
+
+/* Efekt połysku */
+.tiktok-stat-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: left 0.8s ease, opacity 0.3s ease;
+}
+
+.tiktok-stat-card:hover .tiktok-stat-shine {
+  left: 100%;
+  opacity: 1;
 }
