@@ -36,6 +36,7 @@ Rozmawialiśmy już m.in. z:
 - Grafikiem komputerowym
 - Dyrektorką sprzedaży
 - Koordynatorką sprzedaży mebli
+- I wieloma innymi profesjonalistami
 
 ## Jak możesz nas wesprzeć?
 
