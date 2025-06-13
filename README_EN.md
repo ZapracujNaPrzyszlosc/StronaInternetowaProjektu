@@ -36,6 +36,7 @@ We have already talked with:
 - Graphic designer
 - Sales director
 - Furniture sales coordinator
+- And many other professionals
 
 ## How can you support us?
 
