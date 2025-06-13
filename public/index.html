@@ -16,8 +16,18 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%PUBLIC_URL%/favicon-16x16.png"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#7e22ce" />
     <meta
@@ -26,24 +36,31 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
+
     <!-- Preconnect dla czcionek -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Zapracuj na przyszłość | Wywiady z profesjonalistami</title>
 
     <!-- Wspólne ustawienia cookie -->
     <script>
       // Definiujemy zmienne tylko raz, aby uniknąć błędów redefinicji
-      var cookieConsent = localStorage.getItem('cookieConsent');
-      var cookieOptions = JSON.parse(localStorage.getItem('cookieOptions') || '{}');
-      
+      var cookieConsent = localStorage.getItem("cookieConsent");
+      var cookieOptions = JSON.parse(
+        localStorage.getItem("cookieOptions") || "{}"
+      );
+
       // Funkcja sprawdzająca zgodę na analytics
       function hasAnalyticsConsent() {
-        return cookieConsent === 'accepted' || 
-               (cookieConsent === 'customized' && cookieOptions.analytics);
+        return (
+          cookieConsent === "accepted" ||
+          (cookieConsent === "customized" && cookieOptions.analytics)
+        );
       }
     </script>
 
@@ -51,78 +68,207 @@
     <script>
       // Wstępne ustawienia GTM
       window.dataLayer = window.dataLayer || [];
-      
+
       // Początkowe ustawienie zgody - domyślnie brak zgody
       window.dataLayer.push({
-        'analytics_storage': 'denied'
+        analytics_storage: "denied",
       });
-      
+
       // Sprawdź, czy mamy już zapisaną zgodę
       if (hasAnalyticsConsent()) {
         window.dataLayer.push({
-          'analytics_storage': 'granted'
+          analytics_storage: "granted",
         });
       }
     </script>
-    
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TKT29P3M');</script>
+
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TKT29P3M");
+    </script>
     <!-- End Google Tag Manager -->
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DPRX336JZL"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DPRX336JZL"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
       // Początkowe ustawienie zgody - domyślnie brak zgody
-      gtag('consent', 'default', {
-        'analytics_storage': 'denied'
+      gtag("consent", "default", {
+        analytics_storage: "denied",
       });
-      
+
       // Sprawdź, czy mamy już zapisaną zgodę
       if (hasAnalyticsConsent()) {
-        gtag('consent', 'update', {
-          'analytics_storage': 'granted'
+        gtag("consent", "update", {
+          analytics_storage: "granted",
         });
       }
 
-      gtag('config', 'G-DPRX336JZL');
+      gtag("config", "G-DPRX336JZL");
     </script>
 
     <!-- Hotjar Tracking Code for Site 5357630 -->
     <script>
-      (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:5357630,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 5357630, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
         a.appendChild(r);
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-      
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+
       // Domyślnie wstrzymaj śledzenie do czasu uzyskania zgody
       window.hjSiteSettings = window.hjSiteSettings || {};
       window.hjSiteSettings.site_id = 5357630;
       window.hjSiteSettings.privacy_policy_date = "2025-04-01";
-      
+
       // Ustaw zgodę tylko jeśli użytkownik wyraźnie zaakceptował cookies analityczne
       if (hasAnalyticsConsent()) {
-        window.hj && window.hj('consent', true);
+        window.hj && window.hj("consent", true);
       } else {
-        window.hj && window.hj('consent', false);
+        window.hj && window.hj("consent", false);
       }
     </script>
 
-    <meta name="google-site-verification" content="ODgcsxUKfuyhoGz2v092NN-gX03Zp6vc0ZE5Vr9C-Gw" />
+    <script>
+      // Konsolowe powitanie ASCII
+
+      // ASCII arts
+      const asciiArt = {
+        philornot: `
+       ▄███████▄    ▄█    █▄     ▄█   ▄█        ▄██████▄     ▄████████ ███▄▄▄▄    ▄██████▄      ███    
+      ███    ███   ███    ███   ███  ███       ███    ███   ███    ███ ███▀▀▀██▄ ███    ███ ▀█████████▄
+      ███    ███   ███    ███   ███▌ ███       ███    ███   ███    ███ ███   ███ ███    ███    ▀███▀▀██
+      ███    ███  ▄███▄▄▄▄███▄▄ ███▌ ███       ███    ███  ▄███▄▄▄▄██▀ ███   ███ ███    ███     ███   ▀
+    ▀█████████▀  ▀▀███▀▀▀▀███▀  ███▌ ███       ███    ███ ▀▀███▀▀▀▀▀   ███   ███ ███    ███     ███    
+      ███          ███    ███   ███  ███       ███    ███ ▀███████████ ███   ███ ███    ███     ███    
+      ███          ███    ███   ███  ███▌    ▄ ███    ███   ███    ███ ███   ███ ███    ███     ███    
+     ▄████▀        ███    █▀    █▀   █████▄▄██  ▀██████▀    ███    ███  ▀█   █▀   ▀██████▀     ▄████▀  
+                                     ▀                      ███    ███                                       
+        `,
+        zapracujNaPrzyszlosc: `
+    ███████╗ █████╗ ██████╗ ██████╗  █████╗  ██████╗██╗   ██╗     ██╗    ███╗   ██╗ █████╗     ██████╗ ██████╗ ███████╗██╗   ██╗███████╗███████╗██╗      ██████╗ ███████╗ ██████╗
+    ╚══███╔╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██║   ██║     ██║    ████╗  ██║██╔══██╗    ██╔══██╗██╔══██╗╚══███╔╝╚██╗ ██╔╝██╔════╝╚══███╔╝██║     ██╔═══██╗██╔════╝██╔════╝
+      ███╔╝ ███████║██████╔╝██████╔╝███████║██║     ██║   ██║     ██║    ██╔██╗ ██║███████║    ██████╔╝██████╔╝  ███╔╝  ╚████╔╝ ███████╗  ███╔╝ ██║     ██║   ██║███████╗██║     
+     ███╔╝  ██╔══██║██╔═══╝ ██╔══██╗██╔══██║██║     ██║   ██║██   ██║    ██║╚██╗██║██╔══██║    ██╔═══╝ ██╔══██╗ ███╔╝    ╚██╔╝  ╚════██║ ███╔╝  ██║     ██║   ██║╚════██║██║     
+    ███████╗██║  ██║██║     ██║  ██║██║  ██║╚██████╗╚██████╔╝╚█████╔╝    ██║ ╚████║██║  ██║    ██║     ██║  ██║███████╗   ██║   ███████║███████╗███████╗╚██████╔╝███████║╚██████╗
+    ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚════╝     ╚═╝  ╚═══╝╚═╝  ╚═╝    ╚═╝     ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝
+        `,
+      };
+
+      // Style do konsoli
+      const styles = {
+        title:
+          "color: #7e22ce; font-family: monospace; font-weight: bold; font-size: 12px; line-height: 1;",
+        subtitle: "color: #e11d48; font-weight: bold; font-size: 14px;",
+        author: "color: #22c55e; font-weight: bold; font-size: 13px;",
+        tech: "color: #3b82f6; font-size: 12px;",
+        emoji: "font-size: 16px;",
+        border: "color: #8b5cf6; font-weight: bold;",
+        info: "color: #6b7280; font-size: 11px; font-style: italic;",
+      };
+
+      // Separator
+      function separator() {
+        return "═".repeat(70);
+      }
+
+      // Detekcja przeglądarki
+      function detectBrowser() {
+        const ua = navigator.userAgent;
+        if (ua.includes("Chrome") && !ua.includes("Edg")) return "chrome";
+        if (ua.includes("Firefox")) return "firefox";
+        if (ua.includes("Safari") && !ua.includes("Chrome")) return "safari";
+        if (ua.includes("Edg")) return "edge";
+        return "other";
+      }
+
+      // Główna funkcja logowania
+      function showConsoleWelcome() {
+        const browser = detectBrowser();
+        const supportsColors = browser === "chrome" || browser === "firefox";
+
+        try {
+          if (supportsColors) {
+            console.log("%c" + asciiArt.philornot, styles.title);
+            console.log("%c" + separator(), styles.border);
+            console.log(
+              "%cZAPRACUJ NA PRZYSZŁOŚĆ %c| %cBuilt by @philornot in 2025",
+              styles.subtitle,
+              styles.border,
+              styles.author
+            );
+            console.log("%c" + separator(), styles.border);
+            console.log(
+              "%c📱 Social Media:%c\n   → TikTok: @zapracuj.na.przyszlosc\n   → Instagram: @zapracuj.na.przyszlosc",
+              styles.emoji + " font-weight: bold;",
+              styles.tech
+            );
+            console.log("%c" + asciiArt.zapracujNaPrzyszlosc, styles.title);
+          } else {
+            console.log(
+              asciiArt.philornot +
+                `\n${separator()}\nZAPRACUJ NA PRZYSZŁOŚĆ | Built by @philornot in 2025\n${separator()}\nSocial Media:\n  → TikTok: @zapracuj.na.przyszlosc\n  → Instagram: @zapracuj.na.przyszlosc\n${separator()}`
+            );
+          }
+
+          if (window.location.hostname === "localhost") {
+            console.log(
+              `%c🔧 Dev Info: Browser detected as ${browser} | Colors: ${
+                supportsColors ? "Supported" : "Not supported"
+              }`,
+              styles.info
+            );
+          }
+        } catch {
+          console.log("Zapracuj na przyszłość | Built by @philornot in 2025");
+        }
+      }
+
+      // Wywołanie
+      showConsoleWelcome();
+    </script>
+
+    <!-- Dodatkowe meta tagi dla podpisu -->
+    <meta name="developer" content="philornot" />
+    <meta name="author" content="@philornot" />
+    <meta name="build-year" content="2025" />
+    <meta
+      name="google-site-verification"
+      content="ODgcsxUKfuyhoGz2v092NN-gX03Zp6vc0ZE5Vr9C-Gw"
+    />
   </head>
   <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKT29P3M"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TKT29P3M"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <noscript>Musisz włączyć JavaScript, aby uruchomić tę aplikację.</noscript>
     <div id="root"></div>
   </body>
