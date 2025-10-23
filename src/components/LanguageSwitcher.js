@@ -7,13 +7,11 @@ const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
-  // Funkcja zmiany języka
   const toggleLanguage = () => {
     const newLanguage = currentLanguage === "pl" ? "en" : "pl";
     i18n.changeLanguage(newLanguage);
   };
 
-  // Obsługa klawiatury (Enter i Space)
   const handleKeyPress = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -22,80 +20,37 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="language-switcher-container">
-      <motion.button
-        className="language-switcher"
-        onClick={toggleLanguage}
-        onKeyPress={handleKeyPress}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        aria-label={`Zmień język na ${
-          currentLanguage === "pl" ? "angielski" : "polski"
-        }`}
-        aria-pressed={currentLanguage === "en"}
-        role="switch"
-        tabIndex={0}
+    <motion.button
+      className="language-switcher"
+      onClick={toggleLanguage}
+      onKeyPress={handleKeyPress}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      aria-label={`Zmień język na ${
+        currentLanguage === "pl" ? "angielski" : "polski"
+      }`}
+      tabIndex={0}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
-        {/* Tło przełącznika z animowanym gradientem */}
-        <motion.div
-          className="switcher-background"
-          animate={{
-            background:
-              currentLanguage === "pl"
-                ? "linear-gradient(135deg, #7e22ce, #a855f7)"
-                : "linear-gradient(135deg, #e11d48, #fb7185)",
-          }}
-          transition={{ duration: 0.3 }}
-        />
-
-        {/* Animowany slider */}
-        <motion.div
-          className="switcher-slider"
-          animate={{
-            x: currentLanguage === "pl" ? 0 : 48,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 30,
-          }}
-        />
-
-        {/* Opcja PL */}
-        <motion.div
-          className={`language-option ${
-            currentLanguage === "pl" ? "active" : ""
-          }`}
-          animate={{
-            color: currentLanguage === "pl" ? "#ffffff" : "#64748b",
-            scale: currentLanguage === "pl" ? 1 : 0.9,
-          }}
-          transition={{ duration: 0.2 }}
-        >
-          <span className="flag" role="img" aria-label="Polska">
-            🇵🇱
-          </span>
-          <span className="lang-code">PL</span>
-        </motion.div>
-
-        {/* Opcja EN */}
-        <motion.div
-          className={`language-option ${
-            currentLanguage === "en" ? "active" : ""
-          }`}
-          animate={{
-            color: currentLanguage === "en" ? "#ffffff" : "#64748b",
-            scale: currentLanguage === "en" ? 1 : 0.9,
-          }}
-          transition={{ duration: 0.2 }}
-        >
-          <span className="flag" role="img" aria-label="English">
-            🇬🇧
-          </span>
-          <span className="lang-code">EN</span>
-        </motion.div>
-      </motion.button>
-    </div>
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </svg>
+      <span className="lang-text">{currentLanguage.toUpperCase()}</span>
+    </motion.button>
   );
 };
 
