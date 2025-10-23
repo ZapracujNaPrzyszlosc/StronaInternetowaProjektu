@@ -29,6 +29,11 @@
     display: flex;
   }
 
+  /* Pokazywanie overlay'a tylko na mobile */
+  .menu-overlay {
+    display: block;
+  }
+
   .nav-menu {
     position: fixed;
     top: 0;
@@ -38,25 +43,38 @@
     height: 100vh;
     background-color: white;
     box-shadow: var(--shadow-lg);
-    padding: 2rem;
+    padding: 5rem 2rem 2rem;
     z-index: 1001;
-    transition: var(--transition);
+    transition: right 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-y: auto;
   }
 
   .nav-menu.open {
     right: 0;
   }
 
+  /* Pokazywanie przycisku zamykania tylko na mobile */
+  .menu-close-button {
+    display: flex;
+  }
+
   .nav-menu ul {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .nav-menu li {
     margin-bottom: 1.5rem;
+    width: 100%;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 0.5rem 0;
     width: 100%;
   }
 
@@ -67,56 +85,40 @@
     justify-content: flex-start;
   }
 
+  /* Swipe indicator - subtelna wskazówka wizualna */
+  .nav-menu::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    width: 5px;
+    height: 60px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--primary-color),
+      transparent
+    );
+    border-radius: 0 5px 5px 0;
+    opacity: 0.3;
+    transform: translateY(-50%);
+    animation: swipeHint 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeHint {
+    0%,
+    100% {
+      opacity: 0.3;
+      left: -15px;
+    }
+    50% {
+      opacity: 0.6;
+      left: -10px;
+    }
+  }
+
   .footer-links {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-
-  .hero-text h1,
-  .about-hero-content h1,
-  .tiktok-hero-content h1,
-  .contact-hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-subtitle,
-  .about-subtitle,
-  .tiktok-subtitle,
-  .contact-subtitle,
-  .section-header p {
-    font-size: 1rem;
-  }
-
-  .section-header h2,
-  .about-text h2,
-  .contact-info h2,
-  .form-card h2,
-  .cta-content h2 {
-    font-size: 1.75rem;
-  }
-
-  .hero-buttons,
-  .cta-buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Language Switcher na małych ekranach */
-  .language-switcher-nav {
-    margin-top: 0.5rem;
   }
 }
