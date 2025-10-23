@@ -8,7 +8,7 @@ We help young people choose their career path through authentic conversations wi
 
 ## About the project
 
-**"Zapracuj na Przyszłość"** *(Work for the Future)* is a youth initiative born from the need to show young people the real aspects of different professions. Instead of theoretical descriptions, we conduct honest interviews with people who perform these jobs on a daily basis.
+**"Create the Future"** *(Zapracuj na Przyszłość)* is a youth initiative born from the need to show young people the real aspects of different professions. Instead of theoretical descriptions, we conduct honest interviews with people who perform these jobs on a daily basis.
 
 ### Our mission
 - **Education** - providing reliable information about various professions
