@@ -43,18 +43,23 @@
   position: relative;
 }
 
-.nav-menu a:hover, .nav-menu li.active a {
+.nav-menu a:hover,
+.nav-menu li.active a {
   color: var(--primary-color);
 }
 
 .nav-menu li.active a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
   border-radius: 1px;
 }
 
@@ -70,7 +75,11 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
   color: white;
   transition: var(--transition);
 }
@@ -78,8 +87,19 @@
 .social-link a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(126, 34, 206, 0.3);
-  background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark),
+    var(--secondary-color)
+  );
   color: white;
+}
+
+/* Language Switcher w nawigacji */
+.language-switcher-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
 }
 
 .mobile-menu-button {
@@ -112,7 +132,7 @@
 
 /* Main content */
 .main-content {
-  min-height: calc(100vh - 300px); /* Minimum height accounting for header and footer */
+  min-height: calc(100vh - 300px);
 }
 
 /* Footer Styles */
@@ -179,6 +199,12 @@
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-light);
+  position: relative;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
 }
 
 /* Loading Indicator */
@@ -201,15 +227,6 @@
 }
 
 /* Easter Egg Styles */
-.footer-bottom {
-  position: relative;
-  min-height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: visible;
-}
-
 .footer-bottom p {
   transition: all 0.3s ease;
   -webkit-user-select: none;
@@ -221,14 +238,12 @@
   cursor: grabbing !important;
 }
 
-/* Dodanie efektu "szkła" dla przeciągniętego tekstu */
 .footer-bottom p[style*="background: rgba(255, 255, 255, 0.8)"] {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Style dla emoji uśmiechniętej buźki */
 .footer-bottom div {
   -webkit-user-select: none;
   user-select: none;
@@ -240,7 +255,6 @@
   transform: scale(1.2) rotate(10deg);
 }
 
-/* Zapewnienie, że footer ma odpowiednią przestrzeń na przesunięty tekst */
 .footer {
   padding-bottom: 60px;
   overflow: visible;

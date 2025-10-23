@@ -1,18 +1,19 @@
 /* Index CSS - Main entry point for modular CSS files */
 
 /* Base styles & Variables */
-@import './styles/base.css';
+@import "./styles/base.css";
 
 /* Components */
-@import './styles/buttons.css';
-@import './styles/layout.css';
-@import './styles/animated-counter.css';
+@import "./styles/buttons.css";
+@import "./styles/layout.css";
+@import "./styles/animated-counter.css";
+@import "./styles/language-switcher.css";
 
 /* Pages */
-@import './styles/home.css';
-@import './styles/about.css';
-@import './styles/tiktok.css';
-@import './styles/contact.css';
+@import "./styles/home.css";
+@import "./styles/about.css";
+@import "./styles/tiktok.css";
+@import "./styles/contact.css";
 
 /* Responsive */
-@import './styles/responsive.css';
+@import "./styles/responsive.css";
