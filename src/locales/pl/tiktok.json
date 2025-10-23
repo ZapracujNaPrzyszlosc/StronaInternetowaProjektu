@@ -1,1 +1,46 @@
-{}
+{
+  "meta": {
+    "title": "Zapracuj na przyszłość | Nasze TikToki",
+    "description": "Zobacz nasze wywiady z profesjonalistami z różnych branż na TikToku. Dowiedz się, jak wygląda praca na co dzień w zawodach, które Cię interesują.",
+    "keywords": "tiktok, wywiady zawodowe, kariera, branże, zawody, profesjonaliści, wybór zawodu"
+  },
+  "hero": {
+    "title": "Nasze TikToki",
+    "subtitle": "Zobacz, jak wygląda praca w różnych branżach poprzez wywiady z profesjonalistami"
+  },
+  "loading": {
+    "text": "Ładowanie TikToków..."
+  },
+  "videos": {
+    "weddingPlanner": {
+      "title": "Wywiad z międzynarodową planerką ślubów",
+      "description": "Poznaj kulisy pracy międzynarodowej planerki ślubów! Jakie umiejętności są niezbędne w tym zawodzie? Jak wygląda organizacja ceremonii w różnych krajach? Dowiedz się, jak rozpocząć karierę w tej branży."
+    },
+    "pilot": {
+      "title": "Wywiad z pilotem samolotu",
+      "description": "Jak wygląda praca pilota na co dzień? Dowiedz się o wymaganiach, szkoleniach i wyzwaniach w tej profesji. Poznaj specyfikę latania różnymi maszynami, procedury bezpieczeństwa oraz jak zaplanować karierę w lotnictwie od pierwszych kroków do stanowiska kapitana."
+    },
+    "salesDirector": {
+      "title": "Wywiad z dyrektorką sprzedaży czasu reklamowego",
+      "description": "Jak wygląda praca w sprzedaży czasu reklamowego? Jakie są wyzwania na stanowisku dyrektora i jak efektywnie zarządzać zespołem sprzedażowym? Poznaj tajniki marketingu i reklamy od strony biznesowej."
+    },
+    "graphicDesigner": {
+      "title": "Wywiad z grafikiem komputerowym",
+      "description": "Jak zostać grafikiem komputerowym? Jakimi programami warto się posługiwać i jak rozwijać swoje portfolio? Dowiedz się, jakie umiejętności są najbardziej poszukiwane na rynku i jak wygląda typowy dzień pracy grafika."
+    },
+    "furnitureSales": {
+      "title": "Wywiad z koordynatorką sprzedaży mebli",
+      "description": "Na czym polega praca koordynatora sprzedaży w branży meblarskiej? Jak zarządzać procesem sprzedaży i logistyką? Poznaj wymagania i codzienne zadania osoby na tym stanowisku oraz ścieżki rozwoju kariery."
+    },
+    "aboutUs": {
+      "title": "Kim jesteśmy",
+      "description": "Poznaj nasz zespół i dowiedz się więcej o projekcie 'Zapracuj na przyszłość'. Jaki jest nasz cel i dlaczego zdecydowaliśmy się na realizację tego projektu? Jakie zawody chcemy jeszcze przedstawić w przyszłości?"
+    }
+  },
+  "videoButton": "Zobacz na TikToku",
+  "follow": {
+    "title": "Chcesz zobaczyć więcej?",
+    "description": "Obserwuj nas na TikToku, aby być na bieżąco z nowymi wywiadami i treściami!",
+    "button": "Obserwuj na TikToku"
+  }
+}

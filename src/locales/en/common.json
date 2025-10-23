@@ -1,1 +1,46 @@
-{}
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "tiktok": "Our TikToks",
+    "contact": "Contact"
+  },
+  "footer": {
+    "tagline": "Explore different career paths",
+    "navigation": "Navigation",
+    "socialMedia": "Social Media",
+    "copyright": "Work for the Future. Project within the Exempt from Theory competition.",
+    "tiktok": "TikTok",
+    "instagram": "Instagram"
+  },
+  "buttons": {
+    "learnMore": "Learn more",
+    "seeMore": "See more",
+    "follow": "Follow us",
+    "contact": "Contact us",
+    "sendEmail": "Send email",
+    "visitProfile": "Visit profile"
+  },
+  "cookies": {
+    "message": "This site uses cookies for a better user experience.",
+    "acceptAll": "Accept all",
+    "decline": "Decline",
+    "customize": "Customize selection",
+    "settings": {
+      "title": "Privacy settings",
+      "necessary": {
+        "title": "Necessary",
+        "description": "Necessary cookies are essential for the website to function properly. You cannot disable them.",
+        "badge": "Required"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Allow us to measure website traffic and analyze how visitors use our site, which helps us improve it (Google Analytics, Hotjar)."
+      },
+      "disableAnalytics": "Disable analytics",
+      "saveChoice": "Save choice"
+    }
+  },
+  "loading": "Loading...",
+  "error": "An error occurred"
+}

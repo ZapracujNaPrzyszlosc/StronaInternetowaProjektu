@@ -1,1 +1,56 @@
-{}
+{
+  "meta": {
+    "title": "Work for the Future | Home",
+    "description": "Work for the Future is a social project helping young people choose their career path through interviews with professionals from various industries on TikTok.",
+    "keywords": "career, career choice, career path, professional interviews, tiktok, professions, professionals, exempt from theory"
+  },
+  "hero": {
+    "title": "Work for the Future",
+    "subtitle": "Explore different career paths through conversations with professionals",
+    "aboutProject": "About the project",
+    "seeTikToks": "See our TikToks"
+  },
+  "features": {
+    "title": "Our project",
+    "subtitle": "We help young people choose their career path",
+    "interviews": {
+      "title": "Interviews with professionals",
+      "description": "We talk to people from various industries to show what their daily work looks like"
+    },
+    "inspiring": {
+      "title": "Inspiring content",
+      "description": "We create short, engaging materials that can inspire you to discover new professional opportunities"
+    },
+    "community": {
+      "title": "Community",
+      "description": "We build a community of young people who want to consciously develop their careers"
+    }
+  },
+  "tiktokPreview": {
+    "title": "Our latest TikToks",
+    "subtitle": "See what work looks like in different industries",
+    "featured": {
+      "title": "Choose your career path",
+      "description": "On our TikTok profile, we regularly publish interviews with professionals from various industries. Learn what their daily work looks like, what skills are needed, and how to start a career in your chosen field.",
+      "note": "Follow us to stay updated with new materials and discover diverse professional development opportunities!"
+    },
+    "seeMoreInterviews": "See more interviews",
+    "followOnTikTok": "Follow on TikTok",
+    "stats": {
+      "likes": "likes",
+      "interviews": "interviews",
+      "followers": "followers"
+    }
+  },
+  "cta": {
+    "title": "Support our project",
+    "description": "Follow us on social media to discover new professions and get inspired for conscious career planning. We regularly publish new interviews and content!",
+    "followTikTok": "Follow on TikTok",
+    "followInstagram": "Follow on Instagram"
+  },
+  "youtube": {
+    "title": "Project summary",
+    "subtitle": "Watch a video presenting the results of our work and the project's impact on young people's career choices",
+    "completionMessage": "Thank you to everyone who supported our project and contributed to its success!"
+  }
+}

@@ -1,1 +1,56 @@
-{}
+{
+  "meta": {
+    "title": "Zapracuj na przyszłość | Strona główna",
+    "description": "Zapracuj na przyszłość to projekt społeczny pomagający młodym ludziom w wyborze ścieżki kariery poprzez wywiady z profesjonalistami z różnych branż na TikToku.",
+    "keywords": "kariera, wybór zawodu, ścieżka kariery, wywiady zawodowe, tiktok, zawody, profesjonaliści, zwolnieni z teorii"
+  },
+  "hero": {
+    "title": "Zapracuj na przyszłość",
+    "subtitle": "Poznaj różne ścieżki kariery poprzez rozmowy z profesjonalistami",
+    "aboutProject": "O projekcie",
+    "seeTikToks": "Zobacz nasze TikToki"
+  },
+  "features": {
+    "title": "Nasz projekt",
+    "subtitle": "Pomagamy młodym ludziom w wyborze ścieżki kariery",
+    "interviews": {
+      "title": "Wywiady z profesjonalistami",
+      "description": "Rozmawiamy z ludźmi z różnych branż, aby pokazać, jak wygląda ich praca na co dzień"
+    },
+    "inspiring": {
+      "title": "Inspirujące treści",
+      "description": "Tworzymy krótkie, angażujące materiały, które mogą zainspirować do odkrywania nowych możliwości zawodowych"
+    },
+    "community": {
+      "title": "Społeczność",
+      "description": "Budujemy społeczność młodych ludzi, którzy chcą świadomie rozwijać swoją karierę"
+    }
+  },
+  "tiktokPreview": {
+    "title": "Nasze najnowsze TikToki",
+    "subtitle": "Zobacz, jak wygląda praca w różnych branżach",
+    "featured": {
+      "title": "Wybierz swoją ścieżkę kariery",
+      "description": "Na naszym profilu TikTok regularnie publikujemy wywiady z profesjonalistami z różnych branż. Dowiedz się, jak wygląda ich praca na co dzień, jakie umiejętności są potrzebne i jak rozpocząć karierę w wybranym zawodzie.",
+      "note": "Obserwuj nas, aby być na bieżąco z nowymi materiałami i odkrywać różnorodne możliwości rozwoju zawodowego!"
+    },
+    "seeMoreInterviews": "Zobacz więcej wywiadów",
+    "followOnTikTok": "Obserwuj na TikToku",
+    "stats": {
+      "likes": "polubień",
+      "interviews": "wywiadów",
+      "followers": "obserwujących"
+    }
+  },
+  "cta": {
+    "title": "Wspieraj nasz projekt",
+    "description": "Obserwuj nas w mediach społecznościowych, aby odkrywać nowe zawody i inspirować się do świadomego planowania kariery. Regularnie publikujemy nowe wywiady i treści!",
+    "followTikTok": "Obserwuj na TikToku",
+    "followInstagram": "Obserwuj na Instagramie"
+  },
+  "youtube": {
+    "title": "Podsumowanie projektu",
+    "subtitle": "Zobacz film prezentujący efekty naszej pracy i wpływ projektu na wybory zawodowe młodych ludzi",
+    "completionMessage": "Dziękujemy wszystkim, którzy wspierali nasz projekt i przyczynili się do jego sukcesu!"
+  }
+}
