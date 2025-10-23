@@ -7,6 +7,8 @@ import LanguageSwitcher from "./LanguageSwitcher";
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   const location = useLocation();
   const { t } = useTranslation("common");
 
@@ -25,8 +27,48 @@ function Header() {
     };
   }, []);
 
+  // Blokowanie scrollowania body gdy menu otwarte
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  // Minimalna odległość do rozpoznania swipe (w pikselach)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    // Jeśli swipe w prawo i menu otwarte - zamknij
+    if (isRightSwipe && menuOpen) {
+      closeMenu();
+    }
   };
 
   return (
@@ -51,10 +93,39 @@ function Header() {
           <span></span>
         </div>
 
-        <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
+        {/* Overlay do zamykania menu po kliknięciu poza nim */}
+        {menuOpen && <div className="menu-overlay" onClick={closeMenu} />}
+
+        <nav
+          className={`nav-menu ${menuOpen ? "open" : ""}`}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Przycisk zamykania w menu */}
+          <button
+            className="menu-close-button"
+            onClick={closeMenu}
+            aria-label="Zamknij menu"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
           <ul>
             <li className={location.pathname === "/" ? "active" : ""}>
-              <Link to="/" onClick={() => setMenuOpen(false)}>
+              <Link to="/" onClick={closeMenu}>
                 {t("header.home")}
               </Link>
             </li>
@@ -65,17 +136,17 @@ function Header() {
                   : ""
               }
             >
-              <Link to="/o-nas" onClick={() => setMenuOpen(false)}>
+              <Link to="/o-nas" onClick={closeMenu}>
                 {t("header.about")}
               </Link>
             </li>
             <li className={location.pathname === "/tiktok" ? "active" : ""}>
-              <Link to="/tiktok" onClick={() => setMenuOpen(false)}>
+              <Link to="/tiktok" onClick={closeMenu}>
                 {t("header.tiktok")}
               </Link>
             </li>
             <li className={location.pathname === "/kontakt" ? "active" : ""}>
-              <Link to="/kontakt" onClick={() => setMenuOpen(false)}>
+              <Link to="/kontakt" onClick={closeMenu}>
                 {t("header.contact")}
               </Link>
             </li>
@@ -84,6 +155,7 @@ function Header() {
                 href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="TikTok"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,6 +173,7 @@ function Header() {
                 href="https://www.instagram.com/zapracuj.na.przyszlosc/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram"
               >
                 <svg
                   width="24"
