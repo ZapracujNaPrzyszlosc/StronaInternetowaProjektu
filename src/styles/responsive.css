@@ -29,21 +29,37 @@
     display: flex;
   }
 
-  /* Pokazywanie overlay'a tylko na mobile */
   .menu-overlay {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .nav-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    max-width: 300px;
+    width: 85%;
+    max-width: 340px;
     height: 100vh;
     background-color: white;
     box-shadow: var(--shadow-lg);
-    padding: 5rem 2rem 2rem;
+    padding: 2rem;
     z-index: 1001;
     transition: right 0.3s ease;
     display: flex;
@@ -56,64 +72,117 @@
     right: 0;
   }
 
-  /* Pokazywanie przycisku zamykania tylko na mobile */
-  .menu-close-button {
-    display: flex;
-  }
-
   .nav-menu ul {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     width: 100%;
+    gap: 0;
+    padding-top: 3rem;
   }
 
   .nav-menu li {
-    margin-bottom: 1.5rem;
     width: 100%;
+    margin-bottom: 0;
+  }
+
+  .nav-menu
+    li:not(.menu-divider):not(.social-link):not(.language-switcher-nav) {
+    border-bottom: 1px solid var(--border-color);
   }
 
   .nav-menu a {
     display: block;
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     width: 100%;
+    font-size: 1.1rem;
+    transition: var(--transition);
+  }
+
+  .nav-menu li.active a {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  .nav-menu li.active a::after {
+    display: none;
+  }
+
+  /* Divider - separator wizualny */
+  .menu-divider {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--border-color),
+      transparent
+    );
+    margin: 1rem 0;
+  }
+
+  /* Social links w menu mobile - clean version */
+  .nav-menu .social-link {
+    margin: 0;
+  }
+
+  .nav-menu .social-link a {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    justify-content: flex-start;
+    border-radius: var(--radius-md);
+    margin-bottom: 0.75rem;
+  }
+
+  .nav-menu .social-link span {
+    display: inline-block;
+  }
+
+  .nav-menu .social-link svg {
+    width: 20px;
+    height: 20px;
   }
 
   /* Language Switcher w mobile menu */
   .language-switcher-nav {
-    margin-left: 0;
-    margin-top: 1rem;
-    justify-content: flex-start;
+    margin: 0;
+    justify-content: center;
+    padding-top: 0.5rem;
   }
 
-  /* Swipe indicator - subtelna wskazówka wizualna */
-  .nav-menu::before {
+  .language-switcher-nav .language-switcher {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1rem;
+  }
+
+  /* Swipe indicator */
+  .nav-menu.open::after {
     content: "";
     position: absolute;
     top: 50%;
-    left: -15px;
-    width: 5px;
-    height: 60px;
+    left: 12px;
+    width: 3px;
+    height: 40px;
     background: linear-gradient(
       180deg,
       transparent,
       var(--primary-color),
       transparent
     );
-    border-radius: 0 5px 5px 0;
+    border-radius: 2px;
     opacity: 0.3;
     transform: translateY(-50%);
-    animation: swipeHint 2s ease-in-out infinite;
+    animation: swipeHint 2.5s ease-in-out infinite;
   }
 
   @keyframes swipeHint {
     0%,
     100% {
       opacity: 0.3;
-      left: -15px;
     }
     50% {
       opacity: 0.6;
-      left: -10px;
     }
   }
 

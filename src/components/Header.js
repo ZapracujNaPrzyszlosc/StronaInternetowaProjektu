@@ -27,15 +27,14 @@ function Header() {
     };
   }, []);
 
-  // Blokowanie scrollowania body gdy menu otwarte
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [menuOpen]);
 
@@ -47,7 +46,6 @@ function Header() {
     setMenuOpen(false);
   };
 
-  // Minimalna odległość do rozpoznania swipe (w pikselach)
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
@@ -61,11 +59,10 @@ function Header() {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-
+    
     const distance = touchStart - touchEnd;
     const isRightSwipe = distance < -minSwipeDistance;
-
-    // Jeśli swipe w prawo i menu otwarte - zamknij
+    
     if (isRightSwipe && menuOpen) {
       closeMenu();
     }
@@ -87,42 +84,26 @@ function Header() {
         <div
           className={`mobile-menu-button ${menuOpen ? "active" : ""}`}
           onClick={toggleMenu}
+          aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
         >
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        {/* Overlay do zamykania menu po kliknięciu poza nim */}
-        {menuOpen && <div className="menu-overlay" onClick={closeMenu} />}
+        {menuOpen && (
+          <div 
+            className="menu-overlay"
+            onClick={closeMenu}
+          />
+        )}
 
-        <nav
+        <nav 
           className={`nav-menu ${menuOpen ? "open" : ""}`}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {/* Przycisk zamykania w menu */}
-          <button
-            className="menu-close-button"
-            onClick={closeMenu}
-            aria-label="Zamknij menu"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-
           <ul>
             <li className={location.pathname === "/" ? "active" : ""}>
               <Link to="/" onClick={closeMenu}>
@@ -150,6 +131,9 @@ function Header() {
                 {t("header.contact")}
               </Link>
             </li>
+            
+            <li className="menu-divider"></li>
+            
             <li className="social-link">
               <a
                 href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
@@ -160,12 +144,13 @@ function Header() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   fill="currentColor"
                 >
                   <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" />
                 </svg>
+                <span>TikTok</span>
               </a>
             </li>
             <li className="social-link">
@@ -176,8 +161,8 @@ function Header() {
                 aria-label="Instagram"
               >
                 <svg
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -187,9 +172,12 @@ function Header() {
                     fill="currentColor"
                   />
                 </svg>
+                <span>Instagram</span>
               </a>
             </li>
-            {/* Language Switcher dodany tutaj */}
+            
+            <li className="menu-divider"></li>
+            
             <li className="language-switcher-nav">
               <LanguageSwitcher />
             </li>
