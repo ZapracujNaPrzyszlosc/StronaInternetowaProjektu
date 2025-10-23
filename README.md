@@ -53,29 +53,4 @@ Chcesz współpracować lub masz pytania?
 
 ---
 
-## Informacje techniczne
-
-Ta strona została stworzona jako projekt open source w React.js.
-
-<details>
-<summary>Instrukcje dla deweloperów</summary>
-
-### Technologie
-- React.js + React Router
-- Framer Motion (animacje)
-- Netlify (hosting)
-
-### Uruchomienie lokalnie
-```bash
-npm install
-npm start
-```
-
-### Licencja
-Kod strony: MIT  
-Treści projektu: Copyright © 2025 Zapracuj na przyszłość
-</details>
-
----
-
 *Projekt realizowany w ramach olimpiady **Zwolnieni z Teorii***
