@@ -92,7 +92,28 @@ function TikTok() {
         <title>{t("meta.title")}</title>
         <meta name="description" content={t("meta.description")} />
         <meta name="keywords" content={t("meta.keywords")} />
+
+        {/* Canonical URL */}
         <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/tiktok" />
+
+        {/* Hreflang tags dla wielojęzyczności */}
+        <link
+          rel="alternate"
+          hreflang="pl"
+          href="https://zapracujnaprzyszlosc.pl/tiktok"
+        />
+        <link
+          rel="alternate"
+          hreflang="en"
+          href="https://zapracujnaprzyszlosc.pl/tiktok"
+        />
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href="https://zapracujnaprzyszlosc.pl/tiktok"
+        />
+
+        {/* Open Graph */}
         <meta property="og:title" content={t("meta.title")} />
         <meta property="og:description" content={t("meta.description")} />
         <meta
@@ -100,6 +121,16 @@ function TikTok() {
           content="https://zapracujnaprzyszlosc.pl/tiktok"
         />
         <meta property="og:type" content="website" />
+        <meta
+          property="og:locale"
+          content={i18n.language === "pl" ? "pl_PL" : "en_US"}
+        />
+        <meta
+          property="og:locale:alternate"
+          content={i18n.language === "pl" ? "en_US" : "pl_PL"}
+        />
+
+        {/* HTML lang attribute */}
         <html lang={i18n.language} />
       </Helmet>
 
