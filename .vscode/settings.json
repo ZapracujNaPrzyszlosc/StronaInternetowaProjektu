@@ -1,0 +1,4 @@
+{
+  "eslint.packageManager": "pnpm",
+  "eslint.nodePath": "${workspaceFolder}/node_modules/.pnpm/node_modules"
+}
