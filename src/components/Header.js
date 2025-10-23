@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -115,10 +116,15 @@ function Header() {
                 </svg>
               </a>
             </li>
+            {/* Language Switcher dodany tutaj */}
+            <li className="language-switcher-nav">
+              <LanguageSwitcher />
+            </li>
           </ul>
         </nav>
       </div>
     </header>
   );
 }
+
 export default Header;
