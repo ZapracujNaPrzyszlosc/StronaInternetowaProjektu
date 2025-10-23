@@ -1,1 +1,35 @@
-{}
+{
+  "meta": {
+    "title": "Zapracuj na przyszłość | Kontakt",
+    "description": "Skontaktuj się z zespołem projektu Zapracuj na przyszłość. Masz pytania? Chcesz współpracować? Napisz do nas lub odwiedź nasze social media.",
+    "keywords": "kontakt, współpraca, zapytanie, social media, tiktok, instagram"
+  },
+  "hero": {
+    "title": "Kontakt",
+    "subtitle": "Masz pytania lub chcesz współpracować? Skontaktuj się z nami!"
+  },
+  "info": {
+    "title": "Informacje kontaktowe",
+    "description": "Jesteśmy otwarci na wszelkie pytania, sugestie i propozycje współpracy. Skontaktuj się z nami za pomocą poniższych metod lub poprzez nasze profile w mediach społecznościowych.",
+    "email": {
+      "title": "Email",
+      "address": "zapracujnaprzyszlosc.zzt@gmail.com"
+    },
+    "tiktok": {
+      "title": "TikTok",
+      "handle": "@zapracuj.na.przyszlosc",
+      "link": "Odwiedź nasz profil"
+    },
+    "instagram": {
+      "title": "Instagram",
+      "handle": "@zapracuj.na.przyszlosc",
+      "link": "Odwiedź nasz profil"
+    }
+  },
+  "cta": {
+    "title": "Chcesz nawiązać współpracę?",
+    "description": "Jeśli jesteś profesjonalistą w swojej branży i chciałbyś/-abyś podzielić się swoim doświadczeniem z młodymi ludźmi, zachęcamy do kontaktu!",
+    "emailButton": "Wyślij email",
+    "followButton": "Obserwuj nas"
+  }
+}

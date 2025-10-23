@@ -1,1 +1,46 @@
-{}
+{
+  "meta": {
+    "title": "Work for the Future | Our TikToks",
+    "description": "See our interviews with professionals from various industries on TikTok. Learn what daily work looks like in professions that interest you.",
+    "keywords": "tiktok, professional interviews, career, industries, professions, professionals, career choice"
+  },
+  "hero": {
+    "title": "Our TikToks",
+    "subtitle": "See what work looks like in different industries through interviews with professionals"
+  },
+  "loading": {
+    "text": "Loading TikToks..."
+  },
+  "videos": {
+    "weddingPlanner": {
+      "title": "Interview with an international wedding planner",
+      "description": "Discover the behind-the-scenes of an international wedding planner's work! What skills are essential in this profession? What does organizing ceremonies in different countries look like? Find out how to start a career in this industry."
+    },
+    "pilot": {
+      "title": "Interview with an airplane pilot",
+      "description": "What does a pilot's daily work look like? Learn about the requirements, training, and challenges in this profession. Discover the specifics of flying different aircraft, safety procedures, and how to plan a career in aviation from the first steps to captain position."
+    },
+    "salesDirector": {
+      "title": "Interview with an advertising sales director",
+      "description": "What does work in advertising sales look like? What are the challenges at the director level and how to effectively manage a sales team? Learn the secrets of marketing and advertising from the business side."
+    },
+    "graphicDesigner": {
+      "title": "Interview with a graphic designer",
+      "description": "How to become a graphic designer? What programs are worth using and how to develop your portfolio? Find out what skills are most sought after in the market and what a typical graphic designer's workday looks like."
+    },
+    "furnitureSales": {
+      "title": "Interview with a furniture sales coordinator",
+      "description": "What does the work of a sales coordinator in the furniture industry involve? How to manage the sales process and logistics? Learn about the requirements and daily tasks of a person in this position, as well as career development paths."
+    },
+    "aboutUs": {
+      "title": "Who we are",
+      "description": "Meet our team and learn more about the 'Work for the Future' project. What is our goal and why did we decide to implement this project? What professions do we want to present in the future?"
+    }
+  },
+  "videoButton": "Watch on TikTok",
+  "follow": {
+    "title": "Want to see more?",
+    "description": "Follow us on TikTok to stay updated with new interviews and content!",
+    "button": "Follow on TikTok"
+  }
+}

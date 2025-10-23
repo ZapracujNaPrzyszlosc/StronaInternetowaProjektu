@@ -1,1 +1,47 @@
-{}
+{
+  "meta": {
+    "title": "Zapracuj na przyszłość | O nas",
+    "description": "Poznaj projekt Zapracuj na przyszłość stworzony w ramach olimpiady Zwolnieni z Teorii. Dowiedz się więcej o naszej misji i celach.",
+    "keywords": "o projekcie, zwolnieni z teorii, projekt społeczny, misja, wywiady zawodowe, projekt edukacyjny"
+  },
+  "hero": {
+    "title": "O projekcie",
+    "subtitle": "Poznaj nas i dowiedz się więcej o projekcie \"Zapracuj na przyszłość\""
+  },
+  "mission": {
+    "title": "Nasza misja",
+    "paragraph1": "Projekt Zapracuj na przyszłość powstał w ramach olimpiady Zwolnieni z Teorii z myślą o młodych ludziach, którzy stoją przed wyborem ścieżki kariery. Naszym celem jest pokazanie, jak wygląda praca w różnych branżach, bezpośrednio od osób, które wykonują te zawody na co dzień.",
+    "paragraph2": "Wierzymy, że najlepszym sposobem na poznanie danego zawodu jest rozmowa z osobą, która już go wykonuje. Dlatego przeprowadzamy wywiady z profesjonalistami z różnych dziedzin i publikujemy je w formie krótkich, angażujących filmów na TikToku.",
+    "paragraph3": "Chcemy, aby młodzi ludzie mogli podejmować świadome decyzje dotyczące swojej przyszłości zawodowej, bazując na realnych informacjach, a nie tylko na wyobrażeniach o danym zawodzie.",
+    "zztButton": "Projekt społeczny w ramach Zwolnionych z Teorii"
+  },
+  "stats": {
+    "title": "Nasze osiągnięcia",
+    "subtitle": "Rezultaty naszej pracy i zasięg projektu",
+    "interviews": "Przeprowadzone wywiady",
+    "industries": "Zaprezentowane branże",
+    "followers": "Obserwujący na TikToku",
+    "views": "Łączne wyświetlenia"
+  },
+  "goals": {
+    "title": "Nasze cele",
+    "subtitle": "Co chcemy osiągnąć przez nasz projekt",
+    "education": {
+      "title": "Edukacja",
+      "description": "Dostarczanie rzetelnych informacji o różnych zawodach i ścieżkach kariery, aby wspomóc proces podejmowania decyzji."
+    },
+    "inspiration": {
+      "title": "Inspiracja",
+      "description": "Inspirowanie młodych ludzi do odkrywania swoich pasji i zainteresowań zawodowych poprzez pokazywanie różnorodnych ścieżek kariery."
+    },
+    "support": {
+      "title": "Wsparcie",
+      "description": "Tworzenie społeczności, w której młodzi ludzie mogą znaleźć wsparcie i inspirację w planowaniu swojej przyszłości zawodowej."
+    }
+  },
+  "cta": {
+    "title": "Chcesz zobaczyć nasze wywiady?",
+    "description": "Obserwuj nas na TikToku, aby być na bieżąco z nowymi wywiadami i treściami!",
+    "button": "Odwiedź nasz TikTok"
+  }
+}

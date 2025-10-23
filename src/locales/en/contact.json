@@ -1,1 +1,35 @@
-{}
+{
+  "meta": {
+    "title": "Work for the Future | Contact",
+    "description": "Contact the Work for the Future project team. Have questions? Want to collaborate? Write to us or visit our social media.",
+    "keywords": "contact, collaboration, inquiry, social media, tiktok, instagram"
+  },
+  "hero": {
+    "title": "Contact",
+    "subtitle": "Have questions or want to collaborate? Get in touch with us!"
+  },
+  "info": {
+    "title": "Contact information",
+    "description": "We are open to all questions, suggestions, and collaboration proposals. Contact us using the methods below or through our social media profiles.",
+    "email": {
+      "title": "Email",
+      "address": "zapracujnaprzyszlosc.zzt@gmail.com"
+    },
+    "tiktok": {
+      "title": "TikTok",
+      "handle": "@zapracuj.na.przyszlosc",
+      "link": "Visit our profile"
+    },
+    "instagram": {
+      "title": "Instagram",
+      "handle": "@zapracuj.na.przyszlosc",
+      "link": "Visit our profile"
+    }
+  },
+  "cta": {
+    "title": "Want to collaborate?",
+    "description": "If you are a professional in your field and would like to share your experience with young people, we encourage you to contact us!",
+    "emailButton": "Send email",
+    "followButton": "Follow us"
+  }
+}

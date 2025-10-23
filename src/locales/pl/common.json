@@ -1,1 +1,46 @@
-{}
+{
+  "header": {
+    "home": "Strona główna",
+    "about": "O nas",
+    "tiktok": "Nasze TikToki",
+    "contact": "Kontakt"
+  },
+  "footer": {
+    "tagline": "Poznaj różne ścieżki kariery",
+    "navigation": "Nawigacja",
+    "socialMedia": "Social Media",
+    "copyright": "Zapracuj na przyszłość. Projekt w ramach olimpiady Zwolnionych z Teorii.",
+    "tiktok": "TikTok",
+    "instagram": "Instagram"
+  },
+  "buttons": {
+    "learnMore": "Dowiedz się więcej",
+    "seeMore": "Zobacz więcej",
+    "follow": "Obserwuj nas",
+    "contact": "Skontaktuj się",
+    "sendEmail": "Wyślij email",
+    "visitProfile": "Odwiedź profil"
+  },
+  "cookies": {
+    "message": "Ta strona używa cookies dla lepszego doświadczenia użytkownika.",
+    "acceptAll": "Akceptuję wszystkie",
+    "decline": "Odrzuć",
+    "customize": "Dostosuj wybór",
+    "settings": {
+      "title": "Ustawienia prywatności",
+      "necessary": {
+        "title": "Niezbędne",
+        "description": "Niezbędne pliki cookie są konieczne do prawidłowego działania strony. Nie możesz ich wyłączyć.",
+        "badge": "Wymagane"
+      },
+      "analytics": {
+        "title": "Analityczne",
+        "description": "Pozwalają nam mierzyć ruch na stronie i analizować, w jaki sposób odwiedzający korzystają z naszej witryny, co pomaga nam ją ulepszać (Google Analytics, Hotjar)."
+      },
+      "disableAnalytics": "Wyłącz analityczne",
+      "saveChoice": "Zapisz wybór"
+    }
+  },
+  "loading": "Ładowanie...",
+  "error": "Wystąpił błąd"
+}
