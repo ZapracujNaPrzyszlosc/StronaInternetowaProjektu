@@ -31,7 +31,7 @@ function Footer() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                Zapracuj na przyszłość
+                {t("header.logo")}
               </motion.div>
             </Link>
             <p className="footer-tagline">{t("footer.tagline")}</p>
