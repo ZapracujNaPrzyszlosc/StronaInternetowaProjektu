@@ -29,12 +29,12 @@ function Header() {
 
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [menuOpen]);
 
@@ -59,10 +59,10 @@ function Header() {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (isRightSwipe && menuOpen) {
       closeMenu();
     }
@@ -91,19 +91,26 @@ function Header() {
           <span></span>
         </div>
 
-        {menuOpen && (
-          <div 
-            className="menu-overlay"
-            onClick={closeMenu}
-          />
-        )}
+        {menuOpen && <div className="menu-overlay" onClick={closeMenu} />}
 
-        <nav 
+        <nav
           className={`nav-menu ${menuOpen ? "open" : ""}`}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
+          <div className="sidebar-header">
+            <h2 className="sidebar-title">{t("header.logo")}</h2>
+            <div
+              className="mobile-menu-button sidebar-close"
+              onClick={closeMenu}
+              aria-label="Zamknij menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
           <ul>
             <li className={location.pathname === "/" ? "active" : ""}>
               <Link to="/" onClick={closeMenu}>
@@ -131,9 +138,9 @@ function Header() {
                 {t("header.contact")}
               </Link>
             </li>
-            
+
             <li className="menu-divider"></li>
-            
+
             <li className="social-link">
               <a
                 href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
@@ -175,9 +182,9 @@ function Header() {
                 <span>Instagram</span>
               </a>
             </li>
-            
+
             <li className="menu-divider"></li>
-            
+
             <li className="language-switcher-nav">
               <LanguageSwitcher />
             </li>
