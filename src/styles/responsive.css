@@ -72,12 +72,32 @@
     right: 0;
   }
 
+  .nav-menu .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-menu .sidebar-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+  }
+
+  .nav-menu .sidebar-close {
+    display: flex;
+  }
+
   .nav-menu ul {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     gap: 0;
-    padding-top: 3rem;
+    padding-top: 0;
   }
 
   .nav-menu li {
@@ -132,6 +152,9 @@
     justify-content: flex-start;
     border-radius: var(--radius-md);
     margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Zwiększony gap */
   }
 
   .nav-menu .social-link span {
@@ -139,10 +162,55 @@
   }
 
   .nav-menu .social-link svg {
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Zwiększona szerokość */
+    height: 24px; /* Zwiększona wysokość */
+    flex-shrink: 0;
+    margin-right: 0; /* Usunięcie marginesu - gap zajmie się spacingiem */
   }
 
+  /* TikTok button - czarne tło */
+  .nav-menu .social-link a[href*="tiktok"] {
+    background: #000000;
+    color: white;
+  }
+
+  .nav-menu .social-link a[href*="tiktok"]:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Instagram button - gradient */
+  .nav-menu .social-link a[href*="instagram"] {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    color: white;
+  }
+
+  .nav-menu .social-link a[href*="instagram"]:hover {
+    background: linear-gradient(
+      135deg,
+      var(--primary-dark),
+      var(--secondary-color)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(126, 34, 206, 0.3);
+  }
+
+  /* TikTok button - czarne tło */
+  .nav-menu .social-link:first-of-type a {
+    background: #000000;
+    color: white;
+  }
+
+  .nav-menu .social-link:first-of-type a:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
   /* Language Switcher w mobile menu */
   .language-switcher-nav {
     margin: 0;
