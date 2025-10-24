@@ -71,7 +71,7 @@ function Header() {
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-container">
-        <Link to="/" className="logo">
+        <Link to="/" className={`logo ${menuOpen ? "logo-hidden" : ""}`}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,9 +99,6 @@ function Header() {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          <div className="sidebar-header">
-            <h2 className="sidebar-title">{t("header.logo")}</h2>
-          </div>
           <ul>
             <li className={location.pathname === "/" ? "active" : ""}>
               <Link to="/" onClick={closeMenu}>
