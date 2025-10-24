@@ -101,15 +101,6 @@ function Header() {
         >
           <div className="sidebar-header">
             <h2 className="sidebar-title">{t("header.logo")}</h2>
-            <div
-              className="mobile-menu-button sidebar-close"
-              onClick={closeMenu}
-              aria-label="Zamknij menu"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
           </div>
           <ul>
             <li className={location.pathname === "/" ? "active" : ""}>
