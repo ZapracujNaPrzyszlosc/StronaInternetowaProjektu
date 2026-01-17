@@ -3,55 +3,58 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../context/AnalyticsContext";
+import { SITE_INFO, SOCIAL_LINKS, TIKTOK_VIDEOS } from "../config/constants";
 
 function TikTok() {
   const [isLoading, setIsLoading] = useState(true);
   const { t, i18n } = useTranslation("tiktok");
   const analytics = useAnalytics();
 
-  // Dane TikToków z bezpośrednimi linkami do wideo
+  /**
+   * TikTok videos data with embed URLs.
+   */
   const tiktokData = [
     {
       id: 1,
       title: t("videos.weddingPlanner.title"),
       description: t("videos.weddingPlanner.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7455328205524831510",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.weddingPlanner,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
     {
       id: 2,
       title: t("videos.pilot.title"),
       description: t("videos.pilot.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7456826488516644118",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.pilot,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
     {
       id: 3,
       title: t("videos.salesDirector.title"),
       description: t("videos.salesDirector.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7440874750055828758",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.salesDirector,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
     {
       id: 4,
       title: t("videos.graphicDesigner.title"),
       description: t("videos.graphicDesigner.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7453490391128526102",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.graphicDesigner,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
     {
       id: 5,
       title: t("videos.furnitureSales.title"),
       description: t("videos.furnitureSales.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7449853144714005793",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.furnitureSales,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
     {
       id: 6,
       title: t("videos.aboutUs.title"),
       description: t("videos.aboutUs.description"),
-      embedUrl: "https://www.tiktok.com/embed/v2/7437882349603310870",
-      profileUrl: "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.aboutUs,
+      profileUrl: SOCIAL_LINKS.tiktok,
     },
   ];
 
@@ -60,7 +63,6 @@ function TikTok() {
   }, [t, i18n.language]);
 
   useEffect(() => {
-    // Symulacja ładowania
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
@@ -68,7 +70,11 @@ function TikTok() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Funkcja śledząca widoczność filmów TikTok
+  /**
+   * Track TikTok video view in analytics.
+   *
+   * @param {Object} tiktok - TikTok video data
+   */
   const handleTikTokInView = (tiktok) => {
     if (window.dataLayer) {
       window.dataLayer.push({
@@ -81,7 +87,11 @@ function TikTok() {
     }
   };
 
-  // Funkcja śledząca kliknięcia w link do TikToka
+  /**
+   * Track TikTok link clicks.
+   *
+   * @param {Object} tiktok - TikTok video data
+   */
   const handleTikTokClick = (tiktok) => {
     analytics.trackTikTokClick(tiktok.title, tiktok.profileUrl);
   };
@@ -94,23 +104,23 @@ function TikTok() {
         <meta name="keywords" content={t("meta.keywords")} />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/tiktok" />
+        <link rel="canonical" href={`${SITE_INFO.domain}/tiktok`} />
 
-        {/* Hreflang tags dla wielojęzyczności */}
+        {/* Hreflang tags */}
         <link
           rel="alternate"
-          hreflang="pl"
-          href="https://zapracujnaprzyszlosc.pl/tiktok"
+          hrefLang="pl"
+          href={`${SITE_INFO.domain}/tiktok`}
         />
         <link
           rel="alternate"
-          hreflang="en"
-          href="https://zapracujnaprzyszlosc.pl/tiktok"
+          hrefLang="en"
+          href={`${SITE_INFO.domain}/tiktok`}
         />
         <link
           rel="alternate"
-          hreflang="x-default"
-          href="https://zapracujnaprzyszlosc.pl/tiktok"
+          hrefLang="x-default"
+          href={`${SITE_INFO.domain}/tiktok`}
         />
 
         {/* Open Graph */}
@@ -118,7 +128,7 @@ function TikTok() {
         <meta property="og:description" content={t("meta.description")} />
         <meta
           property="og:url"
-          content="https://zapracujnaprzyszlosc.pl/tiktok"
+          content={`${SITE_INFO.domain}/tiktok`}
         />
         <meta property="og:type" content="website" />
         <meta
@@ -220,15 +230,14 @@ function TikTok() {
                   <h2>{t("follow.title")}</h2>
                   <p>{t("follow.description")}</p>
                   <a
-                    href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                    href={SOCIAL_LINKS.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary"
                     onClick={() =>
                       handleTikTokClick({
                         title: "Profil TikTok",
-                        profileUrl:
-                          "https://www.tiktok.com/@zapracuj.na.przyszlosc",
+                        profileUrl: SOCIAL_LINKS.tiktok,
                       })
                     }
                   >

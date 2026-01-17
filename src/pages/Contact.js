@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { SITE_INFO, SOCIAL_LINKS } from "../config/constants";
 
 function Contact() {
   const { t, i18n } = useTranslation("contact");
@@ -18,23 +19,23 @@ function Contact() {
         <meta name="keywords" content={t("meta.keywords")} />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/kontakt" />
+        <link rel="canonical" href={`${SITE_INFO.domain}/kontakt`} />
 
-        {/* Hreflang tags dla wielojęzyczności */}
+        {/* Hreflang tags */}
         <link
           rel="alternate"
-          hreflang="pl"
-          href="https://zapracujnaprzyszlosc.pl/kontakt"
+          hrefLang="pl"
+          href={`${SITE_INFO.domain}/kontakt`}
         />
         <link
           rel="alternate"
-          hreflang="en"
-          href="https://zapracujnaprzyszlosc.pl/kontakt"
+          hrefLang="en"
+          href={`${SITE_INFO.domain}/kontakt`}
         />
         <link
           rel="alternate"
-          hreflang="x-default"
-          href="https://zapracujnaprzyszlosc.pl/kontakt"
+          hrefLang="x-default"
+          href={`${SITE_INFO.domain}/kontakt`}
         />
 
         {/* Open Graph */}
@@ -42,7 +43,7 @@ function Contact() {
         <meta property="og:description" content={t("meta.description")} />
         <meta
           property="og:url"
-          content="https://zapracujnaprzyszlosc.pl/kontakt"
+          content={`${SITE_INFO.domain}/kontakt`}
         />
         <meta property="og:type" content="website" />
         <meta
@@ -148,7 +149,7 @@ function Contact() {
                   <h3>{t("info.tiktok.title")}</h3>
                   <p>{t("info.tiktok.handle")}</p>
                   <a
-                    href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                    href={SOCIAL_LINKS.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-social-link"
@@ -182,7 +183,7 @@ function Contact() {
                   <h3>{t("info.instagram.title")}</h3>
                   <p>{t("info.instagram.handle")}</p>
                   <a
-                    href="https://www.instagram.com/zapracuj.na.przyszlosc/"
+                    href={SOCIAL_LINKS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-social-link"
@@ -203,13 +204,13 @@ function Contact() {
               <p>{t("cta.description")}</p>
               <div className="contact-buttons">
                 <a
-                  href="mailto:zapracujnaprzyszlosc.zzt@gmail.com"
+                  href={`mailto:${SOCIAL_LINKS.email}`}
                   className="btn btn-primary"
                 >
                   {t("cta.emailButton")}
                 </a>
                 <a
-                  href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                  href={SOCIAL_LINKS.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
