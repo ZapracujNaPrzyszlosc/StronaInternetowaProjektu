@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg" alt="License">
   </a>
   <a href="https://reactjs.org/">
-    <img src="https://img.shields.io/badge/React-18.x-61dafb?logo=react&logoColor=white" alt="React">
+    <img src="https://img.shields.io/badge/React-18.3.1-61dafb?logo=react&logoColor=white" alt="React">
   </a>
 </p>
 
