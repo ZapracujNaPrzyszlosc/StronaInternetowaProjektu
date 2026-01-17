@@ -1,5 +1,44 @@
 # Zapracuj na Przyszłość
 
+<p align="center">
+  <a href="https://app.netlify.com/projects/zapracujnaprzyszlosc/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/e051f163-94ab-4c9d-beb8-74a03d44018d/deploy-status" alt="Netlify Status">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg" alt="License">
+  </a>
+  <a href="https://reactjs.org/">
+    <img src="https://img.shields.io/badge/React-18.x-61dafb?logo=react&logoColor=white" alt="React">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://www.tiktok.com/@create_the_future_">
+    <img src="https://img.shields.io/badge/TikTok-@create.the.future__-000000?logo=tiktok&logoColor=white" alt="TikTok">
+  </a>
+  <a href="https://www.instagram.com/create.the.future_/">
+    <img src="https://img.shields.io/badge/Instagram-@create.the.future__-E4405F?logo=instagram&logoColor=white" alt="Instagram">
+  </a>
+  <a href="https://zapracujnaprzyszlosc.pl">
+    <img src="https://img.shields.io/badge/website-zapracujnaprzyszlosc.pl-7e22ce" alt="Website">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://zwolnienizteorii.pl/">
+    <img src="https://img.shields.io/badge/project-Zwolnieni%20z%20Teorii-d4017d" alt="Zwolnieni z Teorii">
+  </a>
+  <a href="https://www.tiktok.com/@create_the_future_">
+    <img src="https://img.shields.io/badge/Followers-5.9K+-000000?logo=tiktok&logoColor=white" alt="Followers">
+  </a>
+  <a href="https://www.tiktok.com/@create_the_future_">
+    <img src="https://img.shields.io/badge/Views-1.5M+-a855f7" alt="Views">
+  </a>
+  <a href="mailto:zapracujnaprzyszlosc.zzt@gmail.com">
+    <img src="https://img.shields.io/badge/Email-zapracujnaprzyszlosc.zzt%40gmail.com-ea4335?logo=gmail&logoColor=white" alt="Email">
+  </a>
+</p>
+
 **[Wersja polska](README.md)**
 
 > **Social project within the "Zwolnieni z Teorii" (Exempt from Theory) competition**
