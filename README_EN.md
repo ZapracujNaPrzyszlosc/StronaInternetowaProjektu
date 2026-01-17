@@ -17,8 +17,8 @@ We help young people choose their career path through authentic conversations wi
 
 ## Our social media
 
-- **TikTok**: [@zapracuj.na.przyszlosc](https://www.tiktok.com/@zapracuj.na.przyszlosc) - main platform with interviews
-- **Instagram**: [@zapracuj.na.przyszlosc](https://www.instagram.com/zapracuj.na.przyszlosc/) - additional content
+- **TikTok**: [@create.the.future_](https://www.tiktok.com/@create.the.future_) - main platform with interviews
+- **Instagram**: [@create.the.future_](https://www.instagram.com/create.the.future_/) - additional content
 - **Website**: [zapracujnaprzyszlosc.pl](https://zapracujnaprzyszlosc.pl)
 
 ## Our achievements
@@ -40,7 +40,7 @@ We have already talked with:
 
 ## How can you support us?
 
-1. **Follow us** on [TikTok](https://www.tiktok.com/@zapracuj.na.przyszlosc)
+1. **Follow us** on [TikTok](https://www.tiktok.com/@create.the.future_)
 2. **Share** our content with friends
 3. **Contact us** if you want to share your professional experience
 4. **Write to us** if you have questions about a specific profession
@@ -49,7 +49,7 @@ We have already talked with:
 
 Want to collaborate or have questions?
 - **Email**: zapracujnaprzyszlosc.zzt@gmail.com
-- **TikTok**: [@zapracuj.na.przyszlosc](https://www.tiktok.com/@zapracuj.na.przyszlosc)
+- **TikTok**: [@create.the.future_](https://www.tiktok.com/@create.the.future_)
 
 ---
 

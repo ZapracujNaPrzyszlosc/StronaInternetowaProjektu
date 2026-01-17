@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { SITE_INFO, SOCIAL_LINKS, TIKTOK_VIDEOS, YOUTUBE, ROUTES } from "../config/constants";
 
-// Komponent Hero dla pierwszej sekcji
+/**
+ * Hero component - landing section.
+ */
 const Hero = () => {
   const { t } = useTranslation("home");
 
@@ -21,11 +24,11 @@ const Hero = () => {
             <h1>{t("hero.title")}</h1>
             <p className="hero-subtitle">{t("hero.subtitle")}</p>
             <div className="hero-buttons">
-              <Link to="/o-nas" className="btn btn-primary">
+              <Link to={ROUTES.about} className="btn btn-primary">
                 {t("hero.aboutProject")}
               </Link>
               <a
-                href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                href={SOCIAL_LINKS.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -54,7 +57,7 @@ const Hero = () => {
             <div className="blob-animation">
               <div className="tiktok-placeholder">
                 <iframe
-                  src="https://www.tiktok.com/embed/@zapracuj.na.przyszlosc"
+                  src={TIKTOK_VIDEOS.profileEmbed}
                   allowFullScreen={true}
                   allow="encrypted-media; fullscreen"
                   title="TikTok Zapracuj na przyszłość - osadzony profil"
@@ -72,7 +75,9 @@ const Hero = () => {
   );
 };
 
-// Komponent Features z kartami
+/**
+ * Features component - project highlights.
+ */
 const Features = () => {
   const { t } = useTranslation("home");
 
@@ -182,6 +187,9 @@ const Features = () => {
   );
 };
 
+/**
+ * TikTok preview component.
+ */
 const TikTokPreview = () => {
   const { t } = useTranslation("home");
   const [activeTikTok] = useState(0);
@@ -191,7 +199,7 @@ const TikTokPreview = () => {
       id: 1,
       title: t("tiktokPreview.featured.title"),
       description: t("tiktokPreview.featured.description"),
-      embedUrl: "https://www.tiktok.com/embed/@zapracuj.na.przyszlosc",
+      embedUrl: TIKTOK_VIDEOS.profileEmbed,
     },
   ];
 
@@ -217,7 +225,6 @@ const TikTokPreview = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Telefon z embedem TikToka */}
             <div className="tiktok-phone-container">
               <div className="tiktok-phone-frame">
                 <div className="tiktok-phone-notch"></div>
@@ -249,7 +256,7 @@ const TikTokPreview = () => {
               <p>{t("tiktokPreview.featured.note")}</p>
 
               <div className="tiktok-buttons">
-                <Link to="/tiktok" className="btn btn-primary">
+                <Link to={ROUTES.tiktok} className="btn btn-primary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="22"
@@ -267,7 +274,7 @@ const TikTokPreview = () => {
                   {t("tiktokPreview.seeMoreInterviews")}
                 </Link>
                 <a
-                  href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                  href={SOCIAL_LINKS.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline"
@@ -286,7 +293,7 @@ const TikTokPreview = () => {
                 </a>
               </div>
 
-              {/* Statystyki z poziomym układem */}
+              {/* Statistics */}
               <div className="tiktok-stats">
                 <div className="stat-item">
                   <div className="stat-icon">
@@ -371,7 +378,6 @@ const TikTokPreview = () => {
         </div>
       </div>
 
-      {/* Dodatkowe elementy tła */}
       <div className="tiktok-bg-decoration-1"></div>
       <div className="tiktok-bg-decoration-2"></div>
       <div className="gradient-bg"></div>
@@ -379,7 +385,9 @@ const TikTokPreview = () => {
   );
 };
 
-// Komponent CallToAction
+/**
+ * Call to Action component.
+ */
 const CallToAction = () => {
   const { t } = useTranslation("home");
 
@@ -397,7 +405,7 @@ const CallToAction = () => {
           <p>{t("cta.description")}</p>
           <div className="cta-buttons">
             <a
-              href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+              href={SOCIAL_LINKS.tiktok}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline"
@@ -415,7 +423,7 @@ const CallToAction = () => {
               {t("cta.followTikTok")}
             </a>
             <a
-              href="https://www.instagram.com/zapracuj.na.przyszlosc/"
+              href={SOCIAL_LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
@@ -442,7 +450,9 @@ const CallToAction = () => {
   );
 };
 
-// Komponent YouTubeSection
+/**
+ * YouTube section component.
+ */
 const YouTubeSection = () => {
   const { t } = useTranslation("home");
   return (
@@ -470,7 +480,7 @@ const YouTubeSection = () => {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/QcLgLaB0hoc?si=dN2aTsxDuQM5GRud"
+              src={YOUTUBE.projectSummary}
               title={t("youtube.title")}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -494,14 +504,18 @@ const YouTubeSection = () => {
   );
 };
 
-// Główny komponent Home
+/**
+ * Main Home component.
+ */
 function Home() {
   const { t, i18n } = useTranslation("home");
   const { scrollYProgress } = useScroll();
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
   useEffect(() => {
     document.title = t("meta.title");
   }, [t, i18n.language]);
+
   return (
     <div className="home-page">
       <Helmet>
@@ -510,29 +524,29 @@ function Home() {
         <meta name="keywords" content={t("meta.keywords")} />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/" />
+        <link rel="canonical" href={SITE_INFO.domain} />
 
-        {/* Hreflang tags dla wielojęzyczności */}
+        {/* Hreflang tags */}
         <link
           rel="alternate"
-          hreflang="pl"
-          href="https://zapracujnaprzyszlosc.pl/"
+          hrefLang="pl"
+          href={SITE_INFO.domain}
         />
         <link
           rel="alternate"
-          hreflang="en"
-          href="https://zapracujnaprzyszlosc.pl/"
+          hrefLang="en"
+          href={SITE_INFO.domain}
         />
         <link
           rel="alternate"
-          hreflang="x-default"
-          href="https://zapracujnaprzyszlosc.pl/"
+          hrefLang="x-default"
+          href={SITE_INFO.domain}
         />
 
         {/* Open Graph */}
         <meta property="og:title" content={t("meta.title")} />
         <meta property="og:description" content={t("meta.description")} />
-        <meta property="og:url" content="https://zapracujnaprzyszlosc.pl/" />
+        <meta property="og:url" content={SITE_INFO.domain} />
         <meta property="og:type" content="website" />
         <meta
           property="og:locale"
@@ -547,17 +561,17 @@ function Home() {
         <html lang={i18n.language} />
       </Helmet>
 
-      {/* Parallax tło dla całej strony */}
+      {/* Parallax background */}
       <motion.div className="page-background" style={{ y: bgY }}></motion.div>
 
-      {/* Sekcje strony */}
+      {/* Page sections */}
       <Hero />
       <Features />
       <TikTokPreview />
       <CallToAction />
       <YouTubeSection />
 
-      {/* Dekoracyjne elementy tła */}
+      {/* Decorative background shapes */}
       <div className="bg-shape bg-shape-1"></div>
       <div className="bg-shape bg-shape-2"></div>
       <div className="bg-shape bg-shape-3"></div>

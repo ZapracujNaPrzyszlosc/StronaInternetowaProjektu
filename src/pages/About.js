@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import AnimatedStats from "../components/AnimatedCounter";
+import { SITE_INFO, SOCIAL_LINKS, EXTERNAL_LINKS } from "../config/constants";
 
 function About() {
   const { t, i18n } = useTranslation("about");
@@ -19,23 +20,23 @@ function About() {
         <meta name="keywords" content={t("meta.keywords")} />
 
         {/* Canonical URL */}
-        <link rel="canonical" href="https://zapracujnaprzyszlosc.pl/o-nas" />
+        <link rel="canonical" href={`${SITE_INFO.domain}/o-nas`} />
 
-        {/* Hreflang tags dla wielojęzyczności */}
+        {/* Hreflang tags */}
         <link
           rel="alternate"
-          hreflang="pl"
-          href="https://zapracujnaprzyszlosc.pl/o-nas"
+          hrefLang="pl"
+          href={`${SITE_INFO.domain}/o-nas`}
         />
         <link
           rel="alternate"
-          hreflang="en"
-          href="https://zapracujnaprzyszlosc.pl/o-nas"
+          hrefLang="en"
+          href={`${SITE_INFO.domain}/o-nas`}
         />
         <link
           rel="alternate"
-          hreflang="x-default"
-          href="https://zapracujnaprzyszlosc.pl/o-nas"
+          hrefLang="x-default"
+          href={`${SITE_INFO.domain}/o-nas`}
         />
 
         {/* Open Graph */}
@@ -43,7 +44,7 @@ function About() {
         <meta property="og:description" content={t("meta.description")} />
         <meta
           property="og:url"
-          content="https://zapracujnaprzyszlosc.pl/o-nas"
+          content={`${SITE_INFO.domain}/o-nas`}
         />
         <meta property="og:type" content="website" />
         <meta
@@ -59,7 +60,7 @@ function About() {
         <html lang={i18n.language} />
       </Helmet>
 
-      {/* Hero Section with enhanced gradient background */}
+      {/* Hero Section */}
       <section className="about-hero">
         <div className="container">
           <motion.div
@@ -74,7 +75,6 @@ function About() {
         </div>
         <div className="about-hero-bg">
           <div className="gradient-overlay"></div>
-          {/* Added decorative shapes for visual interest */}
           <motion.div
             className="hero-shape-1"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -121,7 +121,7 @@ function About() {
         </div>
       </section>
 
-      {/* Mission Section with Logo */}
+      {/* Mission Section */}
       <section className="about-content">
         <div className="container">
           <div className="about-grid">
@@ -137,9 +137,9 @@ function About() {
               <p>{t("mission.paragraph2")}</p>
               <p>{t("mission.paragraph3")}</p>
 
-              {/* ZwolnieniZTeorii button with their brand colors */}
+              {/* Zwolnieni z Teorii button */}
               <motion.a
-                href="https://zwolnienizteorii.pl/"
+                href={EXTERNAL_LINKS.zwolnieniZTeorii}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="zzt-button"
@@ -203,8 +203,8 @@ function About() {
               <div className="blob-animation">
                 <div className="image-placeholder">
                   <motion.img
-                    src="/logo512.png"
-                    alt="Zapracuj na przyszłość logo"
+                    src={SITE_INFO.logo}
+                    alt={`${SITE_INFO.name} logo`}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
@@ -224,6 +224,7 @@ function About() {
 
       <AnimatedStats />
 
+      {/* Goals Section */}
       <section className="project-goals">
         <div className="container">
           <motion.div
@@ -369,6 +370,7 @@ function About() {
           </div>
         </div>
       </section>
+
       {/* Call to Action Section */}
       <section
         style={{ padding: "6rem 0", position: "relative", overflow: "hidden" }}
@@ -418,7 +420,7 @@ function About() {
               {t("cta.description")}
             </p>
             <motion.a
-              href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+              href={SOCIAL_LINKS.tiktok}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"

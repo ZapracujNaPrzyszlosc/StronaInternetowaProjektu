@@ -9,8 +9,8 @@
  */
 
 export const SOCIAL_LINKS = {
-  tiktok: 'https://www.tiktok.com/@zapracuj.na.przyszlosc',
-  instagram: 'https://www.instagram.com/zapracuj.na.przyszlosc/',
+  tiktok: 'https://www.tiktok.com/@create_the_future_',
+  instagram: 'https://www.instagram.com/create.the.future_',
   email: 'zapracujnaprzyszlosc.zzt@gmail.com',
   github: 'https://github.com/philornot',
 };
@@ -33,7 +33,7 @@ export const TIKTOK_VIDEOS = {
   graphicDesigner: 'https://www.tiktok.com/embed/v2/7453490391128526102',
   furnitureSales: 'https://www.tiktok.com/embed/v2/7449853144714005793',
   aboutUs: 'https://www.tiktok.com/embed/v2/7437882349603310870',
-  profileEmbed: 'https://www.tiktok.com/embed/@zapracuj.na.przyszlosc',
+  profileEmbed: 'https://www.tiktok.com/embed/@create_the_future_',
 };
 
 export const ANALYTICS = {

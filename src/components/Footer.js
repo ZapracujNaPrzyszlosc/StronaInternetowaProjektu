@@ -2,18 +2,26 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { SOCIAL_LINKS, ROUTES } from "../config/constants";
 
 function Footer() {
   const [hasMoved, setHasMoved] = useState(false);
   const constraintsRef = useRef(null);
   const { t } = useTranslation("common");
 
-  // Funkcja do obsługi przekierowania na GitHub po kliknięciu :)
+  /**
+   * Handle Easter egg click - redirect to GitHub.
+   */
   const handleEasterEggClick = () => {
-    window.location.href = "https://github.com/philornot";
+    window.location.href = SOCIAL_LINKS.github;
   };
 
-  // Funkcja wywoływana podczas przeciągania
+  /**
+   * Track drag movement to reveal Easter egg.
+   *
+   * @param {Object} event - Drag event
+   * @param {Object} info - Drag info with offset
+   */
   const handleDrag = (event, info) => {
     if (Math.abs(info.offset.x) > 5 || Math.abs(info.offset.y) > 5) {
       setHasMoved(true);
@@ -25,7 +33,7 @@ function Footer() {
       <div className="container footer-container">
         <div className="footer-content">
           <div className="footer-logo">
-            <Link to="/">
+            <Link to={ROUTES.home}>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -42,16 +50,16 @@ function Footer() {
               <h4>{t("footer.navigation")}</h4>
               <ul>
                 <li>
-                  <Link to="/">{t("header.home")}</Link>
+                  <Link to={ROUTES.home}>{t("header.home")}</Link>
                 </li>
                 <li>
-                  <Link to="/o-nas">{t("header.about")}</Link>
+                  <Link to={ROUTES.about}>{t("header.about")}</Link>
                 </li>
                 <li>
-                  <Link to="/tiktok">{t("header.tiktok")}</Link>
+                  <Link to={ROUTES.tiktok}>{t("header.tiktok")}</Link>
                 </li>
                 <li>
-                  <Link to="/kontakt">{t("header.contact")}</Link>
+                  <Link to={ROUTES.contact}>{t("header.contact")}</Link>
                 </li>
               </ul>
             </div>
@@ -61,7 +69,7 @@ function Footer() {
               <ul>
                 <li>
                   <a
-                    href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                    href={SOCIAL_LINKS.tiktok}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -79,7 +87,7 @@ function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/zapracuj.na.przyszlosc/"
+                    href={SOCIAL_LINKS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -107,7 +115,7 @@ function Footer() {
           className="footer-bottom"
           style={{ position: "relative", minHeight: "40px" }}
         >
-          {/* Text footer z możliwością przeciągania - zawsze widoczny */}
+          {/* Draggable footer text - always visible */}
           <motion.p
             drag
             dragConstraints={constraintsRef}
@@ -127,7 +135,7 @@ function Footer() {
             &copy; {new Date().getFullYear()} {t("footer.copyright")}
           </motion.p>
 
-          {/* Element Easter Egg :) widoczny tylko gdy tekst został przesunięty */}
+          {/* Easter Egg - visible only when text has been moved */}
           {hasMoved && (
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
@@ -154,7 +162,7 @@ function Footer() {
         </div>
       </div>
 
-      {/* Dodanie nieco CSS dla Easter Egga */}
+     {/* Easter Egg styling */}
       <style jsx="true">{`
         .footer-bottom {
           position: relative;

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { SOCIAL_LINKS, ROUTES } from "../config/constants";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,7 +72,7 @@ function Header() {
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-container">
-        <Link to="/" className={`logo ${menuOpen ? "logo-hidden" : ""}`}>
+        <Link to={ROUTES.home} className={`logo ${menuOpen ? "logo-hidden" : ""}`}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,29 +101,29 @@ function Header() {
           onTouchEnd={onTouchEnd}
         >
           <ul>
-            <li className={location.pathname === "/" ? "active" : ""}>
-              <Link to="/" onClick={closeMenu}>
+            <li className={location.pathname === ROUTES.home ? "active" : ""}>
+              <Link to={ROUTES.home} onClick={closeMenu}>
                 {t("header.home")}
               </Link>
             </li>
             <li
               className={
-                location.pathname === "/o-nas" || location.pathname === "/about"
+                location.pathname === ROUTES.about || location.pathname === "/about"
                   ? "active"
                   : ""
               }
             >
-              <Link to="/o-nas" onClick={closeMenu}>
+              <Link to={ROUTES.about} onClick={closeMenu}>
                 {t("header.about")}
               </Link>
             </li>
-            <li className={location.pathname === "/tiktok" ? "active" : ""}>
-              <Link to="/tiktok" onClick={closeMenu}>
+            <li className={location.pathname === ROUTES.tiktok ? "active" : ""}>
+              <Link to={ROUTES.tiktok} onClick={closeMenu}>
                 {t("header.tiktok")}
               </Link>
             </li>
-            <li className={location.pathname === "/kontakt" ? "active" : ""}>
-              <Link to="/kontakt" onClick={closeMenu}>
+            <li className={location.pathname === ROUTES.contact ? "active" : ""}>
+              <Link to={ROUTES.contact} onClick={closeMenu}>
                 {t("header.contact")}
               </Link>
             </li>
@@ -131,7 +132,7 @@ function Header() {
 
             <li className="social-link">
               <a
-                href="https://www.tiktok.com/@zapracuj.na.przyszlosc"
+                href={SOCIAL_LINKS.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
@@ -150,7 +151,7 @@ function Header() {
             </li>
             <li className="social-link">
               <a
-                href="https://www.instagram.com/zapracuj.na.przyszlosc/"
+                href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
