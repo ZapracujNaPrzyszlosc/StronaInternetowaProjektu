@@ -4,93 +4,124 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "../context/AnalyticsContext";
 import { SITE_INFO, SOCIAL_LINKS, TIKTOK_VIDEOS } from "../config/constants";
+import { useCmsContent } from "../hooks/useCmsContent";
+
+/**
+ * Builds the hardcoded fallback video list from i18n translations + constants.
+ * Used when the CMS has no videos configured yet.
+ *
+ * @param {Function} t - i18next translation function for the "tiktok" namespace.
+ * @returns {Array<Object>} Array of video descriptor objects.
+ */
+const buildFallbackVideos = (t) => [
+  {
+    id: 1,
+    title: t("videos.weddingPlanner.title"),
+    description: t("videos.weddingPlanner.description"),
+    embedUrl: TIKTOK_VIDEOS.weddingPlanner,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+  {
+    id: 2,
+    title: t("videos.pilot.title"),
+    description: t("videos.pilot.description"),
+    embedUrl: TIKTOK_VIDEOS.pilot,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+  {
+    id: 3,
+    title: t("videos.salesDirector.title"),
+    description: t("videos.salesDirector.description"),
+    embedUrl: TIKTOK_VIDEOS.salesDirector,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+  {
+    id: 4,
+    title: t("videos.graphicDesigner.title"),
+    description: t("videos.graphicDesigner.description"),
+    embedUrl: TIKTOK_VIDEOS.graphicDesigner,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+  {
+    id: 5,
+    title: t("videos.furnitureSales.title"),
+    description: t("videos.furnitureSales.description"),
+    embedUrl: TIKTOK_VIDEOS.furnitureSales,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+  {
+    id: 6,
+    title: t("videos.aboutUs.title"),
+    description: t("videos.aboutUs.description"),
+    embedUrl: TIKTOK_VIDEOS.aboutUs,
+    profileUrl: SOCIAL_LINKS.tiktok,
+  },
+];
+
+/**
+ * Maps a CMS video record to the shape expected by the render loop.
+ * Picks PL or EN fields based on the active i18n language.
+ *
+ * @param {Object} cmsVideo  - Raw CMS video object.
+ * @param {string} language  - Active i18n language code ('pl' | 'en').
+ * @returns {Object} Normalised video descriptor.
+ */
+const normaliseCmsVideo = (cmsVideo, language) => ({
+  id: cmsVideo.id,
+  title:
+    language === "pl"
+      ? cmsVideo.titlePl || cmsVideo.title
+      : cmsVideo.title || cmsVideo.titlePl,
+  description:
+    language === "pl"
+      ? cmsVideo.descriptionPl || cmsVideo.description
+      : cmsVideo.description || cmsVideo.descriptionPl,
+  embedUrl: cmsVideo.embedUrl,
+  profileUrl: cmsVideo.profileUrl || SOCIAL_LINKS.tiktok,
+});
 
 function TikTok() {
   const [isLoading, setIsLoading] = useState(true);
   const { t, i18n } = useTranslation("tiktok");
   const analytics = useAnalytics();
+  const { content } = useCmsContent();
 
   /**
-   * TikTok videos data with embed URLs.
+   * Active video list — CMS data takes precedence over hardcoded fallback.
+   * When the CMS returns videos, they are normalised for the current language.
    */
-  const tiktokData = [
-    {
-      id: 1,
-      title: t("videos.weddingPlanner.title"),
-      description: t("videos.weddingPlanner.description"),
-      embedUrl: TIKTOK_VIDEOS.weddingPlanner,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-    {
-      id: 2,
-      title: t("videos.pilot.title"),
-      description: t("videos.pilot.description"),
-      embedUrl: TIKTOK_VIDEOS.pilot,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-    {
-      id: 3,
-      title: t("videos.salesDirector.title"),
-      description: t("videos.salesDirector.description"),
-      embedUrl: TIKTOK_VIDEOS.salesDirector,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-    {
-      id: 4,
-      title: t("videos.graphicDesigner.title"),
-      description: t("videos.graphicDesigner.description"),
-      embedUrl: TIKTOK_VIDEOS.graphicDesigner,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-    {
-      id: 5,
-      title: t("videos.furnitureSales.title"),
-      description: t("videos.furnitureSales.description"),
-      embedUrl: TIKTOK_VIDEOS.furnitureSales,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-    {
-      id: 6,
-      title: t("videos.aboutUs.title"),
-      description: t("videos.aboutUs.description"),
-      embedUrl: TIKTOK_VIDEOS.aboutUs,
-      profileUrl: SOCIAL_LINKS.tiktok,
-    },
-  ];
+  const tiktokData =
+    content.tiktoks.length > 0
+      ? content.tiktoks.map((v) => normaliseCmsVideo(v, i18n.language))
+      : buildFallbackVideos(t);
 
   useEffect(() => {
     document.title = t("meta.title");
   }, [t, i18n.language]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-
+    const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
   /**
-   * Track TikTok video view in analytics.
+   * Pushes a TikTok view event to the data layer.
    *
-   * @param {Object} tiktok - TikTok video data
+   * @param {Object} tiktok - Video descriptor object.
    */
   const handleTikTokInView = (tiktok) => {
     if (window.dataLayer) {
       window.dataLayer.push({
         event: "tiktok_video_viewed",
-        tiktok_data: {
-          title: tiktok.title,
-          id: tiktok.id,
-        },
+        tiktok_data: { title: tiktok.title, id: tiktok.id },
       });
     }
   };
 
   /**
-   * Track TikTok link clicks.
+   * Tracks a click on a TikTok link.
    *
-   * @param {Object} tiktok - TikTok video data
+   * @param {Object} tiktok - Video descriptor object.
    */
   const handleTikTokClick = (tiktok) => {
     analytics.trackTikTokClick(tiktok.title, tiktok.profileUrl);
@@ -103,10 +134,7 @@ function TikTok() {
         <meta name="description" content={t("meta.description")} />
         <meta name="keywords" content={t("meta.keywords")} />
 
-        {/* Canonical URL */}
         <link rel="canonical" href={`${SITE_INFO.domain}/tiktok`} />
-
-        {/* Hreflang tags */}
         <link
           rel="alternate"
           hrefLang="pl"
@@ -123,13 +151,9 @@ function TikTok() {
           href={`${SITE_INFO.domain}/tiktok`}
         />
 
-        {/* Open Graph */}
         <meta property="og:title" content={t("meta.title")} />
         <meta property="og:description" content={t("meta.description")} />
-        <meta
-          property="og:url"
-          content={`${SITE_INFO.domain}/tiktok`}
-        />
+        <meta property="og:url" content={`${SITE_INFO.domain}/tiktok`} />
         <meta property="og:type" content="website" />
         <meta
           property="og:locale"
@@ -139,8 +163,6 @@ function TikTok() {
           property="og:locale:alternate"
           content={i18n.language === "pl" ? "en_US" : "pl_PL"}
         />
-
-        {/* HTML lang attribute */}
         <html lang={i18n.language} />
       </Helmet>
 
@@ -174,9 +196,7 @@ function TikTok() {
                 {tiktokData.map((tiktok, index) => (
                   <motion.div
                     key={tiktok.id}
-                    className={`tiktok-item ${
-                      index % 2 === 0 ? "left-video" : "right-video"
-                    }`}
+                    className={`tiktok-item ${index % 2 === 0 ? "left-video" : "right-video"}`}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}

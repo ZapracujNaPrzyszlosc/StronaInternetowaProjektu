@@ -2,9 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { formatNumber } from "../utils/numberFormatter";
+import { useCmsContent } from "../hooks/useCmsContent";
 import "../styles/animated-counter.css";
 
-// Pojedynczy komponent licznika
+/**
+ * Animates a number from 0 to `end` over `duration` ms.
+ * Animation starts only when the element enters the viewport.
+ *
+ * @param {Object}  props
+ * @param {number}  props.end             - Target value.
+ * @param {number}  [props.duration=2000] - Animation duration in ms.
+ * @param {string}  [props.prefix='']     - Text prepended to the number.
+ * @param {string}  [props.suffix='']     - Text appended to the number.
+ * @param {boolean} [props.useShortFormat=true] - Use K / M abbreviations.
+ */
 const Counter = ({
   end,
   duration = 2000,
@@ -17,23 +28,17 @@ const Counter = ({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Utworzenie Intersection Observer do detekcji widoczności komponentu
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (countRef.current) {
-      const currentRef = countRef.current;
-      observer.observe(currentRef);
-
-      return () => {
-        observer.unobserve(currentRef);
-      };
+      const el = countRef.current;
+      observer.observe(el);
+      return () => observer.unobserve(el);
     }
   }, []);
 
@@ -56,10 +61,7 @@ const Counter = ({
     };
 
     animationFrame = requestAnimationFrame(updateCount);
-
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
+    return () => cancelAnimationFrame(animationFrame);
   }, [end, duration, isVisible]);
 
   return (
@@ -71,9 +73,16 @@ const Counter = ({
   );
 };
 
-// Główny komponent statystyk z animowanymi licznikami
+/**
+ * Stats section with four animated counters.
+ * Numbers are driven by CMS content; hardcoded values act as the fallback
+ * when the CMS is unavailable.
+ */
 const AnimatedStats = () => {
   const { t } = useTranslation("about");
+  const { content } = useCmsContent();
+  const { statsFollowers, statsViews, statsInterviews, statsIndustries } =
+    content.texts;
 
   return (
     <section className="animated-stats-section">
@@ -91,6 +100,7 @@ const AnimatedStats = () => {
         </motion.div>
 
         <div className="stats-grid">
+          {/* Interviews */}
           <motion.div
             className="stat-card"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -115,9 +125,10 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">{t("stats.interviews")}</h3>
-            <Counter end={20} suffix="+" />
+            <Counter end={statsInterviews} suffix="+" />
           </motion.div>
 
+          {/* Industries */}
           <motion.div
             className="stat-card"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -142,9 +153,10 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">{t("stats.industries")}</h3>
-            <Counter end={15} suffix="+" />
+            <Counter end={statsIndustries} suffix="+" />
           </motion.div>
 
+          {/* Followers */}
           <motion.div
             className="stat-card"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -169,9 +181,10 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">{t("stats.followers")}</h3>
-            <Counter end={5500} suffix="+" useShortFormat={true} />
+            <Counter end={statsFollowers} suffix="+" useShortFormat={true} />
           </motion.div>
 
+          {/* Views */}
           <motion.div
             className="stat-card"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -202,7 +215,7 @@ const AnimatedStats = () => {
               </svg>
             </div>
             <h3 className="stat-title">{t("stats.views")}</h3>
-            <Counter end={1500000} useShortFormat={true} />
+            <Counter end={statsViews} useShortFormat={true} />
           </motion.div>
         </div>
       </div>

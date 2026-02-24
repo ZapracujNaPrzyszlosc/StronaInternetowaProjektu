@@ -9,10 +9,12 @@ import TikTok from "./pages/TikTok";
 import Contact from "./pages/Contact";
 import SchemaOrg from "./components/SEO/SchemaOrg";
 import CookieConsent from "./components/CookieConsent";
+import DynamicTheme from "./components/DynamicTheme";
 import { AnalyticsProvider } from "./context/AnalyticsContext";
+import { useCmsContent } from "./hooks/useCmsContent";
 import reportWebVitals from "./utils/webVitalsTracking";
 import { sendToGoogleAnalytics } from "./utils/webVitalsTracking";
-import "./i18n"; // Import konfiguracji i18n
+import "./i18n";
 
 // Inicjalizacja śledzenia wskaźników Web Vitals
 reportWebVitals(sendToGoogleAnalytics);
@@ -31,13 +33,20 @@ const LoadingFallback = () => (
   </div>
 );
 
+/**
+ * Root application component.
+ *
+ * Fetches CMS content once on mount and applies the dynamic theme.
+ * All routing and global providers are set up here.
+ */
 function App() {
-  // Rejestracja globalnego handlera do śledzenia błędów
+  const { content } = useCmsContent();
+
+  // Track JS errors in Google Analytics / GTM.
   useEffect(() => {
     const originalOnError = window.onerror;
 
     window.onerror = (message, source, lineno, colno, error) => {
-      // Śledzenie błędu w Google Analytics
       if (window.gtag) {
         window.gtag("event", "exception", {
           description: message,
@@ -45,13 +54,12 @@ function App() {
         });
       }
 
-      // Śledzenie błędu w Google Tag Manager
       if (window.dataLayer) {
         window.dataLayer.push({
           event: "javascript_error",
           error: {
-            message: message,
-            source: source,
+            message,
+            source,
             line: lineno,
             column: colno,
             stack: error ? error.stack : "N/A",
@@ -59,7 +67,6 @@ function App() {
         });
       }
 
-      // Wywołanie oryginalnego handlera, jeśli istnieje
       if (originalOnError) {
         return originalOnError(message, source, lineno, colno, error);
       }
@@ -74,6 +81,9 @@ function App() {
 
   return (
     <Suspense fallback={<LoadingFallback />}>
+      {/* Applies CMS theme colors as CSS custom properties — renders nothing. */}
+      <DynamicTheme theme={content.theme} />
+
       <HelmetProvider>
         <Router>
           <AnalyticsProvider>

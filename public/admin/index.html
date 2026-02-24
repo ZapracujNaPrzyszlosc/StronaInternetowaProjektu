@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create the Future — Admin</title>
+  <style>
+    /* -----------------------------------------------------------------------
+       Reset & base
+    ----------------------------------------------------------------------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #7e22ce;
+      --primary-light: #a855f7;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --radius: 10px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -1px rgba(0,0,0,.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* -----------------------------------------------------------------------
+       Login screen
+    ----------------------------------------------------------------------- */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #7e22ce15, #e11d4815);
+    }
+
+    .login-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+
+    .login-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #7e22ce, #e11d48);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-subtitle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    /* -----------------------------------------------------------------------
+       Main layout
+    ----------------------------------------------------------------------- */
+    #app { display: none; }
+
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .header-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #7e22ce, #e11d48);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: calc(100vh - 60px);
+    }
+
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      border-radius: 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-item:hover { background: #f1f5f9; color: var(--text); }
+    .nav-item.active {
+      background: #f5f3ff;
+      color: var(--primary);
+      border-left-color: var(--primary);
+    }
+
+    .nav-icon { font-size: 1.1rem; }
+
+    .content {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* -----------------------------------------------------------------------
+       Panels (tabs)
+    ----------------------------------------------------------------------- */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .panel-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* -----------------------------------------------------------------------
+       Cards
+    ----------------------------------------------------------------------- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* -----------------------------------------------------------------------
+       Form elements
+    ----------------------------------------------------------------------- */
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      padding: 0.6rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .form-row {
+      margin-bottom: 1rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .form-grid-2 { grid-template-columns: 1fr 1fr; }
+
+    /* -----------------------------------------------------------------------
+       Color inputs
+    ----------------------------------------------------------------------- */
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .color-row label { margin: 0; white-space: nowrap; min-width: 160px; }
+
+    input[type="color"] {
+      width: 48px;
+      height: 36px;
+      padding: 2px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .color-hex {
+      width: 100px;
+      font-family: monospace;
+    }
+
+    /* -----------------------------------------------------------------------
+       Buttons
+    ----------------------------------------------------------------------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #6b21a8);
+      color: white;
+      box-shadow: 0 2px 8px rgba(126,34,206,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(126,34,206,0.35); }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #f1f5f9; }
+
+    .btn-danger {
+      background: #fef2f2;
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+    .btn-danger:hover { background: #fee2e2; }
+
+    .btn-success {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+    }
+
+    .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+    .btn-full { width: 100%; justify-content: center; }
+
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+
+    /* -----------------------------------------------------------------------
+       TikTok list
+    ----------------------------------------------------------------------- */
+    .tiktok-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .tiktok-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.15s;
+    }
+
+    .tiktok-card:hover { box-shadow: var(--shadow-lg); }
+
+    .tiktok-card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .tiktok-card-url {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 400px;
+    }
+
+    .tiktok-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .tiktok-card-actions { display: flex; gap: 0.5rem; align-items: center; }
+
+    .drag-handle {
+      cursor: grab;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      padding: 0 0.5rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
+    /* -----------------------------------------------------------------------
+       Gradient builder
+    ----------------------------------------------------------------------- */
+    .gradient-preview {
+      height: 80px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      transition: background 0.3s;
+    }
+
+    .gradient-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .gradient-row label { margin: 0; min-width: 110px; }
+
+    select {
+      padding: 0.55rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus { border-color: var(--primary-light); }
+
+    /* -----------------------------------------------------------------------
+       Toast notifications
+    ----------------------------------------------------------------------- */
+    #toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      animation: slideIn 0.25s ease;
+      max-width: 320px;
+    }
+
+    .toast-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    .toast-error   { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* -----------------------------------------------------------------------
+       Misc
+    ----------------------------------------------------------------------- */
+    .section-sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      background: #f3e8ff;
+      color: var(--primary);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .link-ext {
+      color: var(--primary);
+      font-size: 0.82rem;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =========================================================================
+     LOGIN SCREEN
+========================================================================== -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Create the Future</div>
+    <div class="login-subtitle">Admin Panel</div>
+
+    <div class="form-row">
+      <label for="pwd-input">Password</label>
+      <input type="password" id="pwd-input" placeholder="Enter admin password" autocomplete="current-password" />
+    </div>
+
+    <div id="login-error" style="color:#dc2626;font-size:.82rem;margin-bottom:.75rem;display:none;"></div>
+
+    <button class="btn btn-primary btn-full" id="login-btn" onclick="doLogin()">
+      Sign in
+    </button>
+  </div>
+</div>
+
+<!-- =========================================================================
+     MAIN APP
+========================================================================== -->
+<div id="app">
+  <div id="toast-container"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">✦ Create the Future — Admin</div>
+    <div class="header-actions">
+      <a href="https://create-the-future.org" target="_blank" class="btn btn-secondary btn-sm">
+        🌐 View Site
+      </a>
+      <button class="btn btn-secondary btn-sm" onclick="logout()">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="nav-item active" data-panel="tiktoks" onclick="showPanel('tiktoks', this)">
+        <span class="nav-icon">🎬</span> TikTok Videos
+      </div>
+      <div class="nav-item" data-panel="theme" onclick="showPanel('theme', this)">
+        <span class="nav-icon">🎨</span> Colors & Theme
+      </div>
+      <div class="nav-item" data-panel="texts" onclick="showPanel('texts', this)">
+        <span class="nav-icon">✏️</span> Texts & Stats
+      </div>
+      <div class="nav-item" data-panel="settings" onclick="showPanel('settings', this)">
+        <span class="nav-icon">⚙️</span> Settings
+      </div>
+    </nav>
+
+    <!-- Content area -->
+    <main class="content">
+
+      <!-- ===== TIKTOKS PANEL ===== -->
+      <div class="panel active" id="panel-tiktoks">
+        <div class="panel-title">🎬 TikTok Videos</div>
+        <div class="panel-desc">Add, remove or reorder the interview videos shown on the site.</div>
+
+        <!-- Add new TikTok -->
+        <div class="card">
+          <div class="card-title">➕ Add New Video</div>
+          <div class="form-grid form-grid-2">
+            <div class="form-row">
+              <label>Title (English)</label>
+              <input type="text" id="new-title" placeholder="Interview with a…" />
+            </div>
+            <div class="form-row">
+              <label>Title (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+              <input type="text" id="new-title-pl" placeholder="Wywiad z…" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>TikTok Embed URL</label>
+            <input type="url" id="new-embed" placeholder="https://www.tiktok.com/embed/v2/…" />
+            <div style="font-size:.75rem;color:var(--text-muted);margin-top:.35rem;">
+              💡 On TikTok.com → share → embed → copy the URL from the iframe src attribute
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Short description (English)</label>
+            <textarea id="new-desc" placeholder="What the interview is about…" rows="2"></textarea>
+          </div>
+
+          <div class="form-row">
+            <label>Short description (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+            <textarea id="new-desc-pl" placeholder="O czym jest wywiad…" rows="2"></textarea>
+          </div>
+
+          <button class="btn btn-primary" onclick="addTikTok()">➕ Add Video</button>
+        </div>
+
+        <!-- Existing TikToks -->
+        <div class="card">
+          <div class="card-title">📋 Current Videos <span class="badge" id="tiktok-count">0</span></div>
+          <div class="tiktok-list" id="tiktok-list">
+            <div class="empty-state">Loading…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== THEME PANEL ===== -->
+      <div class="panel" id="panel-theme">
+        <div class="panel-title">🎨 Colors & Theme</div>
+        <div class="panel-desc">Change the main brand colors. The site updates automatically after saving.</div>
+
+        <!-- Main colors -->
+        <div class="card">
+          <div class="card-title">🖌️ Brand Colors</div>
+
+          <div class="color-row">
+            <label>Primary (purple)</label>
+            <input type="color" id="c-primary" value="#7e22ce" oninput="syncHex(this,'h-primary')" />
+            <input type="text" class="color-hex" id="h-primary" value="#7e22ce" oninput="syncColor(this,'c-primary')" maxlength="7" />
+          </div>
+
+          <div class="color-row">
+            <label>Primary Light</label>
+            <input type="color" id="c-primary-light" value="#a855f7" oninput="syncHex(this,'h-primary-light')" />
+            <input type="text" class="color-hex" id="h-primary-light" value="#a855f7" oninput="syncColor(this,'c-primary-light')" maxlength="7" />
+          </div>
+
+          <div class="color-row">
+            <label>Primary Dark</label>
+            <input type="color" id="c-primary-dark" value="#6b21a8" oninput="syncHex(this,'h-primary-dark')" />
+            <input type="text" class="color-hex" id="h-primary-dark" value="#6b21a8" oninput="syncColor(this,'c-primary-dark')" maxlength="7" />
+          </div>
+
+          <hr class="section-sep" />
+
+          <div class="color-row">
+            <label>Secondary (red/pink)</label>
+            <input type="color" id="c-secondary" value="#e11d48" oninput="syncHex(this,'h-secondary')" />
+            <input type="text" class="color-hex" id="h-secondary" value="#e11d48" oninput="syncColor(this,'c-secondary')" maxlength="7" />
+          </div>
+
+          <div class="color-row">
+            <label>Secondary Light</label>
+            <input type="color" id="c-secondary-light" value="#fb7185" oninput="syncHex(this,'h-secondary-light')" />
+            <input type="text" class="color-hex" id="h-secondary-light" value="#fb7185" oninput="syncColor(this,'c-secondary-light')" maxlength="7" />
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <button class="btn btn-primary" onclick="saveTheme()">💾 Save Colors</button>
+            <button class="btn btn-secondary" style="margin-left:.5rem;" onclick="resetThemeDefaults()">↺ Reset to defaults</button>
+          </div>
+        </div>
+
+        <!-- Background gradient builder -->
+        <div class="card">
+          <div class="card-title">🌈 Hero Background Gradient</div>
+          <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:1rem;">
+            This gradient appears behind the main hero section.
+          </p>
+
+          <div class="gradient-preview" id="grad-preview"></div>
+
+          <div class="gradient-row">
+            <label>Direction</label>
+            <select id="grad-dir" onchange="updateGradientPreview()">
+              <option value="135deg">Diagonal ↘</option>
+              <option value="90deg">Horizontal →</option>
+              <option value="180deg">Vertical ↓</option>
+              <option value="45deg">Diagonal ↗</option>
+            </select>
+          </div>
+
+          <div class="gradient-row">
+            <label>Color 1</label>
+            <input type="color" id="grad-c1" value="#7e22ce" oninput="updateGradientPreview()" />
+            <input type="range" id="grad-op1" min="0" max="100" value="20" style="flex:1;" oninput="updateGradientPreview()" />
+            <span id="grad-op1-val" style="min-width:35px;font-size:.8rem;color:var(--text-muted);">20%</span>
+          </div>
+
+          <div class="gradient-row">
+            <label>Color 2</label>
+            <input type="color" id="grad-c2" value="#e11d48" oninput="updateGradientPreview()" />
+            <input type="range" id="grad-op2" min="0" max="100" value="20" style="flex:1;" oninput="updateGradientPreview()" />
+            <span id="grad-op2-val" style="min-width:35px;font-size:.8rem;color:var(--text-muted);">20%</span>
+          </div>
+
+          <div style="margin-top:1rem;">
+            <label>Generated CSS</label>
+            <input type="text" id="grad-css" readonly style="font-family:monospace;font-size:.8rem;background:#f8fafc;" />
+          </div>
+
+          <div style="margin-top:1rem;">
+            <button class="btn btn-primary" onclick="saveGradient()">💾 Save Gradient</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TEXTS & STATS PANEL ===== -->
+      <div class="panel" id="panel-texts">
+        <div class="panel-title">✏️ Texts & Stats</div>
+        <div class="panel-desc">Edit key texts and the statistics shown on the About page.</div>
+
+        <div class="card">
+          <div class="card-title">🏠 Hero Section</div>
+          <div class="form-grid form-grid-2">
+            <div class="form-row">
+              <label>Main Title (EN)</label>
+              <input type="text" id="t-hero-title" placeholder="Create the Future" />
+            </div>
+            <div class="form-row">
+              <label>Main Title (PL)</label>
+              <input type="text" id="t-hero-title-pl" placeholder="Zapracuj na przyszłość" />
+            </div>
+            <div class="form-row">
+              <label>Subtitle (EN)</label>
+              <input type="text" id="t-hero-subtitle" />
+            </div>
+            <div class="form-row">
+              <label>Subtitle (PL)</label>
+              <input type="text" id="t-hero-subtitle-pl" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📊 Stats (About page)</div>
+          <div class="form-grid form-grid-2">
+            <div class="form-row">
+              <label>Interviews conducted</label>
+              <input type="text" id="t-stat-interviews" placeholder="20" />
+            </div>
+            <div class="form-row">
+              <label>Industries shown</label>
+              <input type="text" id="t-stat-industries" placeholder="15" />
+            </div>
+            <div class="form-row">
+              <label>TikTok followers</label>
+              <input type="text" id="t-stat-followers" placeholder="5500" />
+            </div>
+            <div class="form-row">
+              <label>Total views</label>
+              <input type="text" id="t-stat-views" placeholder="1500000" />
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveTexts()">💾 Save All Texts & Stats</button>
+      </div>
+
+      <!-- ===== SETTINGS PANEL ===== -->
+      <div class="panel" id="panel-settings">
+        <div class="panel-title">⚙️ Settings</div>
+        <div class="panel-desc">Admin account and server settings.</div>
+
+        <div class="card">
+          <div class="card-title">🔐 Change Password</div>
+          <div class="form-row">
+            <label>New Password</label>
+            <input type="password" id="new-pwd" placeholder="Min. 8 characters" />
+          </div>
+          <div class="form-row">
+            <label>Confirm New Password</label>
+            <input type="password" id="new-pwd-confirm" placeholder="Repeat password" />
+          </div>
+          <button class="btn btn-primary" onclick="changePassword()">🔐 Change Password</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">ℹ️ About This Admin Panel</div>
+          <p style="font-size:.85rem;color:var(--text-muted);line-height:1.6;">
+            Changes made here are saved to the server and reflected on the live site immediately.<br><br>
+            <strong>TikTok Embed URL format:</strong><br>
+            <code style="background:#f1f5f9;padding:.2rem .4rem;border-radius:4px;font-size:.8rem;">
+              https://www.tiktok.com/embed/v2/VIDEO_ID_HERE
+            </code><br><br>
+            To find the Video ID: open TikTok → share → copy link → the long number at the end is the ID.
+          </p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- =========================================================================
+     JAVASCRIPT
+========================================================================== -->
+<script>
+'use strict';
+
+// ---------------------------------------------------------------------------
+// Config — change this to your server URL in production
+// ---------------------------------------------------------------------------
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : ''; // same-origin when served by the Express server
+
+let TOKEN = localStorage.getItem('ctf_admin_token');
+
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+
+/**
+ * Attempts login with the password from the input field.
+ * On success stores the JWT and shows the main app.
+ */
+async function doLogin() {
+  const btn  = document.getElementById('login-btn');
+  const pwd  = document.getElementById('pwd-input').value;
+  const err  = document.getElementById('login-error');
+
+  if (!pwd) return;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Signing in…';
+  err.style.display = 'none';
+
+  try {
+    const res  = await fetch(`${API}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pwd }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Login failed');
+
+    TOKEN = data.token;
+    localStorage.setItem('ctf_admin_token', TOKEN);
+    showApp();
+  } catch (e) {
+    err.textContent = e.message;
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sign in';
+  }
+}
+
+// Allow Enter key on the password field
+document.getElementById('pwd-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') doLogin();
+});
+
+/**
+ * Clears the stored token and returns to the login screen.
+ */
+function logout() {
+  TOKEN = null;
+  localStorage.removeItem('ctf_admin_token');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+// ---------------------------------------------------------------------------
+// App bootstrap
+// ---------------------------------------------------------------------------
+
+/**
+ * Shows the main admin app and loads all content from the API.
+ */
+async function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  await loadContent();
+  updateGradientPreview();
+}
+
+// On page load: if we have a stored token, try to go straight to the app.
+if (TOKEN) {
+  showApp().catch(() => logout());
+}
+
+// ---------------------------------------------------------------------------
+// API helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetches site content from the API and populates all form fields.
+ */
+async function loadContent() {
+  try {
+    const res  = await fetch(`${API}/api/content`);
+    const data = await res.json();
+    populateForms(data);
+  } catch (e) {
+    toast('Could not load content from server', 'error');
+  }
+}
+
+/**
+ * Sends an authenticated request to the API.
+ *
+ * @param {string} url - Endpoint path.
+ * @param {string} method - HTTP method.
+ * @param {Object} [body] - Request body.
+ * @returns {Promise<Object>} Parsed response JSON.
+ */
+async function api(url, method = 'GET', body = null) {
+  const opts = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+
+  const res  = await fetch(`${API}${url}`, opts);
+  const data = await res.json();
+
+  if (res.status === 401) { logout(); return; }
+  if (!res.ok) throw new Error(data.error || 'API error');
+
+  return data;
+}
+
+// ---------------------------------------------------------------------------
+// Populate forms with loaded data
+// ---------------------------------------------------------------------------
+
+/**
+ * Fills all form fields from the content object returned by the API.
+ *
+ * @param {Object} content - Full content config from API.
+ */
+function populateForms(content) {
+  // TikToks
+  renderTikTokList(content.tiktoks || []);
+
+  // Theme colors
+  const t = content.theme || {};
+  setColorField('c-primary',        'h-primary',        t.primaryColor       || '#7e22ce');
+  setColorField('c-primary-light',  'h-primary-light',  t.primaryLight       || '#a855f7');
+  setColorField('c-primary-dark',   'h-primary-dark',   t.primaryDark        || '#6b21a8');
+  setColorField('c-secondary',      'h-secondary',      t.secondaryColor     || '#e11d48');
+  setColorField('c-secondary-light','h-secondary-light',t.secondaryLight     || '#fb7185');
+
+  // Texts
+  const tx = content.texts || {};
+  setVal('t-hero-title',      tx.heroTitle      || '');
+  setVal('t-hero-subtitle',   tx.heroSubtitle   || '');
+  setVal('t-hero-title-pl',   tx.heroTitlePl    || '');
+  setVal('t-hero-subtitle-pl',tx.heroSubtitlePl || '');
+  setVal('t-stat-interviews', tx.statsInterviews || '');
+  setVal('t-stat-industries', tx.statsIndustries || '');
+  setVal('t-stat-followers',  tx.statsFollowers  || '');
+  setVal('t-stat-views',      tx.statsViews      || '');
+}
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val;
+}
+
+function setColorField(colorId, hexId, value) {
+  const c = document.getElementById(colorId);
+  const h = document.getElementById(hexId);
+  if (c) c.value = value;
+  if (h) h.value = value;
+}
+
+// ---------------------------------------------------------------------------
+// TikTok management
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders the list of TikTok cards.
+ *
+ * @param {Array<Object>} tiktoks - Array of TikTok objects from the API.
+ */
+function renderTikTokList(tiktoks) {
+  const list  = document.getElementById('tiktok-list');
+  const count = document.getElementById('tiktok-count');
+  count.textContent = tiktoks.length;
+
+  if (!tiktoks.length) {
+    list.innerHTML = '<div class="empty-state">No videos yet. Add one above ⬆️</div>';
+    return;
+  }
+
+  list.innerHTML = tiktoks.map((t) => `
+    <div class="tiktok-card" data-id="${t.id}">
+      <div>
+        <div class="tiktok-card-title">${escHtml(t.title)}</div>
+        <div class="tiktok-card-url">${escHtml(t.embedUrl)}</div>
+        ${t.description ? `<div class="tiktok-card-desc">${escHtml(t.description)}</div>` : ''}
+      </div>
+      <div class="tiktok-card-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteTikTok(${t.id}, this)">🗑 Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/**
+ * Reads the "add TikTok" form fields and sends a POST to the API.
+ */
+async function addTikTok() {
+  const title   = document.getElementById('new-title').value.trim();
+  const titlePl = document.getElementById('new-title-pl').value.trim();
+  const embed   = document.getElementById('new-embed').value.trim();
+  const desc    = document.getElementById('new-desc').value.trim();
+  const descPl  = document.getElementById('new-desc-pl').value.trim();
+
+  if (!title || !embed) {
+    toast('Title and Embed URL are required', 'error');
+    return;
+  }
+
+  if (!embed.includes('tiktok.com/embed')) {
+    toast('That doesn\'t look like a TikTok embed URL', 'error');
+    return;
+  }
+
+  try {
+    await api('/api/content/tiktoks', 'POST', {
+      title, titlePl, embedUrl: embed, description: desc, descriptionPl: descPl,
+      profileUrl: 'https://www.tiktok.com/@create_the_future_',
+    });
+
+    // Clear form
+    ['new-title','new-title-pl','new-embed','new-desc','new-desc-pl']
+      .forEach((id) => { document.getElementById(id).value = ''; });
+
+    await loadContent();
+    toast('Video added! ✅');
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+/**
+ * Deletes a TikTok entry by id after confirmation.
+ *
+ * @param {number} id - TikTok entry id.
+ * @param {HTMLElement} btn - The clicked button (disabled during request).
+ */
+async function deleteTikTok(id, btn) {
+  if (!confirm('Remove this video from the site?')) return;
+
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try {
+    await api(`/api/content/tiktoks/${id}`, 'DELETE');
+    await loadContent();
+    toast('Video removed');
+  } catch (e) {
+    toast(e.message, 'error');
+    btn.disabled = false;
+    btn.textContent = '🗑 Remove';
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Theme / colors
+// ---------------------------------------------------------------------------
+
+function syncHex(colorInput, hexId) {
+  document.getElementById(hexId).value = colorInput.value;
+}
+
+function syncColor(hexInput, colorId) {
+  const v = hexInput.value;
+  if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+    document.getElementById(colorId).value = v;
+  }
+}
+
+/**
+ * Collects color field values and saves to the API.
+ */
+async function saveTheme() {
+  const theme = {
+    primaryColor:    document.getElementById('h-primary').value,
+    primaryLight:    document.getElementById('h-primary-light').value,
+    primaryDark:     document.getElementById('h-primary-dark').value,
+    secondaryColor:  document.getElementById('h-secondary').value,
+    secondaryLight:  document.getElementById('h-secondary-light').value,
+  };
+
+  try {
+    await api('/api/content', 'PUT', { theme });
+    toast('Colors saved! ✅ The site will reflect changes after refresh.');
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+/**
+ * Resets color fields to the default brand palette.
+ */
+function resetThemeDefaults() {
+  setColorField('c-primary',        'h-primary',        '#7e22ce');
+  setColorField('c-primary-light',  'h-primary-light',  '#a855f7');
+  setColorField('c-primary-dark',   'h-primary-dark',   '#6b21a8');
+  setColorField('c-secondary',      'h-secondary',      '#e11d48');
+  setColorField('c-secondary-light','h-secondary-light','#fb7185');
+}
+
+// ---------------------------------------------------------------------------
+// Gradient builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Builds the gradient CSS string from the builder inputs and updates the
+ * preview box and the generated-CSS field.
+ */
+function updateGradientPreview() {
+  const dir  = document.getElementById('grad-dir').value;
+  const c1   = document.getElementById('grad-c1').value;
+  const c2   = document.getElementById('grad-c2').value;
+  const op1  = document.getElementById('grad-op1').value;
+  const op2  = document.getElementById('grad-op2').value;
+
+  document.getElementById('grad-op1-val').textContent = `${op1}%`;
+  document.getElementById('grad-op2-val').textContent = `${op2}%`;
+
+  const rgba1 = hexToRgba(c1, op1 / 100);
+  const rgba2 = hexToRgba(c2, op2 / 100);
+  const css   = `linear-gradient(${dir}, ${rgba1} 0%, ${rgba2} 100%)`;
+
+  document.getElementById('grad-preview').style.background  = css;
+  document.getElementById('grad-css').value = css;
+}
+
+/**
+ * Saves the current gradient to the hero background.
+ */
+async function saveGradient() {
+  const css = document.getElementById('grad-css').value;
+  try {
+    await api('/api/content', 'PUT', {
+      theme: { backgroundHeroGradient: css },
+    });
+    toast('Gradient saved! ✅');
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+/**
+ * Converts a hex color string to an rgba() CSS function string.
+ *
+ * @param {string} hex - 6-digit hex color (e.g. "#7e22ce").
+ * @param {number} alpha - Opacity value 0–1.
+ * @returns {string} rgba() string.
+ */
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
+}
+
+// ---------------------------------------------------------------------------
+// Texts & stats
+// ---------------------------------------------------------------------------
+
+/**
+ * Reads all text/stats fields and saves to the API.
+ */
+async function saveTexts() {
+  const texts = {
+    heroTitle:       document.getElementById('t-hero-title').value.trim(),
+    heroSubtitle:    document.getElementById('t-hero-subtitle').value.trim(),
+    heroTitlePl:     document.getElementById('t-hero-title-pl').value.trim(),
+    heroSubtitlePl:  document.getElementById('t-hero-subtitle-pl').value.trim(),
+    statsInterviews: Number(document.getElementById('t-stat-interviews').value),
+    statsIndustries: Number(document.getElementById('t-stat-industries').value),
+    statsFollowers:  Number(document.getElementById('t-stat-followers').value),
+    statsViews:      Number(document.getElementById('t-stat-views').value),
+  };
+
+  try {
+    await api('/api/content', 'PUT', { texts });
+    toast('Texts & stats saved! ✅');
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Settings — change password
+// ---------------------------------------------------------------------------
+
+/**
+ * Validates and sends a password-change request to the API.
+ */
+async function changePassword() {
+  const p1 = document.getElementById('new-pwd').value;
+  const p2 = document.getElementById('new-pwd-confirm').value;
+
+  if (!p1 || p1.length < 8) { toast('Password must be at least 8 characters', 'error'); return; }
+  if (p1 !== p2) { toast('Passwords do not match', 'error'); return; }
+
+  try {
+    await api('/api/auth/change-password', 'POST', { newPassword: p1 });
+    document.getElementById('new-pwd').value = '';
+    document.getElementById('new-pwd-confirm').value = '';
+    toast('Password changed! You will be signed out now.');
+    setTimeout(logout, 2000);
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Navigation
+// ---------------------------------------------------------------------------
+
+/**
+ * Shows the panel matching the given id and marks the nav item as active.
+ *
+ * @param {string} id - Panel identifier (e.g. 'tiktoks').
+ * @param {HTMLElement} navEl - The clicked nav item element.
+ */
+function showPanel(id, navEl) {
+  document.querySelectorAll('.panel').forEach((p) => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach((n) => n.classList.remove('active'));
+  document.getElementById(`panel-${id}`).classList.add('active');
+  navEl.classList.add('active');
+}
+
+// ---------------------------------------------------------------------------
+// Toast notifications
+// ---------------------------------------------------------------------------
+
+/**
+ * Shows a temporary notification at the top-right of the screen.
+ *
+ * @param {string} message - Message text.
+ * @param {'success'|'error'} [type='success'] - Visual style.
+ */
+function toast(message, type = 'success') {
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.textContent = message;
+  document.getElementById('toast-container').appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+// ---------------------------------------------------------------------------
+// Utilities
+// ---------------------------------------------------------------------------
+
+/**
+ * Escapes HTML special characters.
+ *
+ * @param {string} str - Raw string.
+ * @returns {string} HTML-safe string.
+ */
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>
