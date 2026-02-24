@@ -4,157 +4,277 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create the Future — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* -----------------------------------------------------------------------
-       Reset & base
+       Reset & tokens
     ----------------------------------------------------------------------- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #7e22ce;
-      --primary-light: #a855f7;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --border: #e2e8f0;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --radius: 10px;
-      --shadow: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -1px rgba(0,0,0,.04);
-      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --sidebar-bg:    #09090b;
+      --sidebar-width: 240px;
+
+      --brand:         #7e22ce;
+      --brand-light:   #a855f7;
+      --brand-dark:    #6b21a8;
+      --accent:        #e11d48;
+
+      --bg:            #f4f4f5;
+      --surface:       #ffffff;
+      --border:        #e4e4e7;
+      --text:          #09090b;
+      --text-muted:    #71717a;
+
+      --danger:        #dc2626;
+      --success:       #16a34a;
+
+      --radius:        8px;
+      --radius-lg:     12px;
+
+      --shadow:        0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:     0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -1px rgba(0,0,0,.04);
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     /* -----------------------------------------------------------------------
-       Login screen
+       Login
     ----------------------------------------------------------------------- */
     #login-screen {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #7e22ce15, #e11d4815);
+      background: var(--sidebar-bg);
     }
 
     .login-card {
-      background: var(--surface);
-      border-radius: 16px;
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: var(--radius-lg);
       padding: 2.5rem;
       width: 100%;
-      max-width: 380px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border);
+      max-width: 360px;
     }
 
-    .login-logo {
-      font-size: 1.3rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #7e22ce, #e11d48);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.25rem;
-    }
-
-    .login-subtitle {
-      color: var(--text-muted);
-      font-size: 0.85rem;
+    .login-brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
       margin-bottom: 2rem;
     }
 
-    /* -----------------------------------------------------------------------
-       Main layout
-    ----------------------------------------------------------------------- */
-    #app { display: none; }
+    .login-brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+    }
 
-    .header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 60px;
+    .login-brand-name {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.01em;
+    }
+
+    .login-headline {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .35rem;
+      letter-spacing: -.02em;
+    }
+
+    .login-sub {
+      font-size: .82rem;
+      color: #71717a;
+      margin-bottom: 1.75rem;
+    }
+
+    #login-error {
+      display: none;
+      font-size: .8rem;
+      color: #f87171;
+      margin-bottom: .75rem;
+      padding: .5rem .75rem;
+      background: rgba(220,38,38,.1);
+      border-radius: 6px;
+      border: 1px solid rgba(220,38,38,.2);
+    }
+
+    /* -----------------------------------------------------------------------
+       App shell
+    ----------------------------------------------------------------------- */
+    #app { display: none; min-height: 100vh; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    /* -----------------------------------------------------------------------
+       Sidebar
+    ----------------------------------------------------------------------- */
+    .sidebar {
+      background: var(--sidebar-bg);
+      grid-row: 1 / 3;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      padding: 1.25rem 0;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow);
+      height: 100vh;
+      overflow-y: auto;
     }
 
-    .header-logo {
-      font-weight: 700;
-      font-size: 1rem;
-      background: linear-gradient(135deg, #7e22ce, #e11d48);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: 0 1.25rem 1.5rem;
+      border-bottom: 1px solid #27272a;
+      margin-bottom: .5rem;
     }
 
-    .header-actions { display: flex; gap: 0.75rem; align-items: center; }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      min-height: calc(100vh - 60px);
+    .sidebar-brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-light), var(--accent));
+      flex-shrink: 0;
     }
 
-    .sidebar {
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      padding: 1.5rem 0;
+    .sidebar-brand-text {
+      font-size: .82rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sidebar-section {
+      padding: .25rem .75rem;
+      font-size: .68rem;
+      font-weight: 600;
+      color: #52525b;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: .75rem;
+      margin-bottom: .15rem;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1.5rem;
+      gap: .65rem;
+      padding: .55rem 1.25rem;
       cursor: pointer;
-      border-radius: 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      color: #a1a1aa;
+      font-size: .855rem;
       font-weight: 500;
-      transition: all 0.15s;
-      border-left: 3px solid transparent;
+      border-left: 2px solid transparent;
+      transition: all .12s;
+      user-select: none;
+      text-decoration: none;
     }
 
-    .nav-item:hover { background: #f1f5f9; color: var(--text); }
+    .nav-item:hover { color: #e4e4e7; background: rgba(255,255,255,.04); }
+
     .nav-item.active {
-      background: #f5f3ff;
-      color: var(--primary);
-      border-left-color: var(--primary);
+      color: #fff;
+      border-left-color: var(--brand-light);
+      background: rgba(168,85,247,.08);
     }
 
-    .nav-icon { font-size: 1.1rem; }
+    .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; stroke-width: 1.75; }
 
-    .content {
-      padding: 2rem;
-      overflow-y: auto;
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 1rem 1.25rem 0;
+      border-top: 1px solid #27272a;
+    }
+
+    .sidebar-footer-btn {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      width: 100%;
+      padding: .55rem .75rem;
+      border: none;
+      background: transparent;
+      color: #71717a;
+      cursor: pointer;
+      font-size: .82rem;
+      font-family: inherit;
+      border-radius: 6px;
+      transition: all .12s;
+      text-decoration: none;
+    }
+
+    .sidebar-footer-btn:hover { background: rgba(255,255,255,.06); color: #a1a1aa; }
+    .sidebar-footer-btn svg { width: 14px; height: 14px; stroke-width: 1.75; }
+
+    /* -----------------------------------------------------------------------
+       Topbar
+    ----------------------------------------------------------------------- */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.75rem;
+      height: 52px;
+    }
+
+    .topbar-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.01em;
     }
 
     /* -----------------------------------------------------------------------
-       Panels (tabs)
+       Main content
     ----------------------------------------------------------------------- */
+    .main {
+      padding: 1.75rem;
+      overflow-y: auto;
+    }
+
     .panel { display: none; }
     .panel.active { display: block; }
 
-    .panel-title {
-      font-size: 1.5rem;
+    /* -----------------------------------------------------------------------
+       Page header
+    ----------------------------------------------------------------------- */
+    .page-header { margin-bottom: 1.5rem; }
+
+    .page-header h1 {
+      font-size: 1.25rem;
       font-weight: 700;
-      margin-bottom: 0.35rem;
+      letter-spacing: -.02em;
+      margin-bottom: .2rem;
     }
 
-    .panel-desc {
+    .page-header p {
+      font-size: .82rem;
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
     }
 
     /* -----------------------------------------------------------------------
@@ -163,96 +283,117 @@
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--radius-lg);
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       box-shadow: var(--shadow);
     }
 
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
+    .card-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: .6rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: .875rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    .card-header svg { width: 15px; height: 15px; color: var(--brand-light); stroke-width: 1.75; }
+
+    .card-header-count {
+      margin-left: auto;
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--brand);
+      background: rgba(126,34,206,.08);
+      border: 1px solid rgba(126,34,206,.15);
+      border-radius: 20px;
+      padding: .1rem .5rem;
     }
 
     /* -----------------------------------------------------------------------
-       Form elements
+       Form
     ----------------------------------------------------------------------- */
-    label {
+    .form-label {
       display: block;
-      font-size: 0.8rem;
+      font-size: .72rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.35rem;
+      letter-spacing: .055em;
+      margin-bottom: .35rem;
     }
 
-    input[type="text"],
-    input[type="password"],
-    input[type="url"],
-    textarea {
+    .form-input {
       width: 100%;
-      padding: 0.6rem 0.875rem;
+      padding: .55rem .75rem;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
+      border-radius: var(--radius);
+      font-size: .875rem;
       font-family: inherit;
       background: var(--bg);
       color: var(--text);
-      transition: border-color 0.15s;
+      transition: border-color .15s, box-shadow .15s;
       outline: none;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--primary-light);
-      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+    .form-input:focus {
+      border-color: var(--brand-light);
+      box-shadow: 0 0 0 3px rgba(168,85,247,.1);
+      background: #fff;
     }
 
-    textarea { resize: vertical; min-height: 80px; }
-
-    .form-row {
-      margin-bottom: 1rem;
+    .form-input-mono {
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem;
     }
 
-    .form-grid {
+    textarea.form-input { resize: vertical; min-height: 72px; }
+
+    .form-row { margin-bottom: .875rem; }
+
+    .form-grid-2 {
       display: grid;
-      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+      gap: .875rem;
     }
 
-    .form-grid-2 { grid-template-columns: 1fr 1fr; }
+    .form-hint {
+      font-size: .72rem;
+      color: var(--text-muted);
+      margin-top: .3rem;
+    }
 
     /* -----------------------------------------------------------------------
-       Color inputs
+       Color row
     ----------------------------------------------------------------------- */
     .color-row {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      gap: .75rem;
+      margin-bottom: .875rem;
     }
 
-    .color-row label { margin: 0; white-space: nowrap; min-width: 160px; }
+    .color-row .form-label { margin: 0; min-width: 160px; }
 
     input[type="color"] {
-      width: 48px;
-      height: 36px;
-      padding: 2px;
+      width: 40px;
+      height: 34px;
+      padding: 2px 3px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       background: none;
+      flex-shrink: 0;
     }
 
-    .color-hex {
-      width: 100px;
-      font-family: monospace;
-    }
+    .color-hex { width: 96px; }
 
     /* -----------------------------------------------------------------------
        Buttons
@@ -260,31 +401,35 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.1rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
+      gap: .4rem;
+      padding: .5rem 1rem;
+      border-radius: var(--radius);
+      font-size: .8rem;
       font-weight: 600;
+      font-family: inherit;
       cursor: pointer;
       border: none;
       outline: none;
-      transition: all 0.15s;
+      transition: all .12s;
       text-decoration: none;
+      white-space: nowrap;
     }
+
+    .btn svg { width: 13px; height: 13px; stroke-width: 2; }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #6b21a8);
-      color: white;
-      box-shadow: 0 2px 8px rgba(126,34,206,0.3);
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 1px 4px rgba(126,34,206,.3);
     }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(126,34,206,0.35); }
+    .btn-primary:hover { background: var(--brand-dark); box-shadow: 0 2px 8px rgba(126,34,206,.35); }
 
-    .btn-secondary {
-      background: var(--bg);
-      color: var(--text);
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
       border: 1px solid var(--border);
     }
-    .btn-secondary:hover { background: #f1f5f9; }
+    .btn-ghost:hover { background: var(--bg); color: var(--text); }
 
     .btn-danger {
       background: #fef2f2;
@@ -293,101 +438,108 @@
     }
     .btn-danger:hover { background: #fee2e2; }
 
-    .btn-success {
-      background: linear-gradient(135deg, #16a34a, #15803d);
-      color: white;
-    }
-
-    .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
-    .btn-full { width: 100%; justify-content: center; }
-
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; pointer-events: none; }
 
     /* -----------------------------------------------------------------------
        TikTok list
     ----------------------------------------------------------------------- */
-    .tiktok-list { display: flex; flex-direction: column; gap: 1rem; }
+    .tiktok-list { display: flex; flex-direction: column; gap: .75rem; }
 
-    .tiktok-card {
-      background: var(--surface);
+    .tiktok-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.125rem;
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.25rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      align-items: start;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.15s;
+      transition: box-shadow .15s;
     }
 
-    .tiktok-card:hover { box-shadow: var(--shadow-lg); }
+    .tiktok-item:hover { box-shadow: var(--shadow-md); background: #fff; }
 
-    .tiktok-card-title {
+    .tiktok-item-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .tiktok-item-icon svg { width: 16px; height: 16px; stroke-width: 2; }
+
+    .tiktok-item-body { flex: 1; min-width: 0; }
+
+    .tiktok-item-title {
+      font-size: .855rem;
       font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .tiktok-card-url {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-family: monospace;
+      margin-bottom: .2rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 400px;
     }
 
-    .tiktok-card-desc {
-      font-size: 0.82rem;
+    .tiktok-item-url {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
       color: var(--text-muted);
-      margin-top: 0.4rem;
-      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .tiktok-card-actions { display: flex; gap: 0.5rem; align-items: center; }
-
-    .drag-handle {
-      cursor: grab;
+    .tiktok-item-desc {
+      font-size: .78rem;
       color: var(--text-muted);
-      font-size: 1.2rem;
-      padding: 0 0.5rem;
+      margin-top: .3rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
+
+    .tiktok-item-actions { flex-shrink: 0; }
 
     .empty-state {
       text-align: center;
-      padding: 3rem;
+      padding: 2.5rem;
       color: var(--text-muted);
       border: 2px dashed var(--border);
       border-radius: var(--radius);
+      font-size: .82rem;
     }
+
+    .empty-state svg { width: 28px; height: 28px; margin: 0 auto .75rem; display: block; opacity: .35; }
 
     /* -----------------------------------------------------------------------
        Gradient builder
     ----------------------------------------------------------------------- */
     .gradient-preview {
-      height: 80px;
-      border-radius: 8px;
+      height: 72px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
       margin-bottom: 1rem;
-      transition: background 0.3s;
+      transition: background .3s;
     }
 
     .gradient-row {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      gap: .75rem;
+      margin-bottom: .75rem;
     }
 
-    .gradient-row label { margin: 0; min-width: 110px; }
+    .gradient-row .form-label { margin: 0; min-width: 90px; }
 
     select {
-      padding: 0.55rem 0.875rem;
+      padding: .5rem .75rem;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
+      border-radius: var(--radius);
+      font-size: .855rem;
       font-family: inherit;
       background: var(--bg);
       color: var(--text);
@@ -395,75 +547,82 @@
       cursor: pointer;
     }
 
-    select:focus { border-color: var(--primary-light); }
+    select:focus { border-color: var(--brand-light); }
+
+    input[type="range"] { flex: 1; accent-color: var(--brand); }
+
+    .opacity-val { min-width: 32px; font-size: .78rem; font-family: 'DM Mono', monospace; color: var(--text-muted); }
 
     /* -----------------------------------------------------------------------
-       Toast notifications
+       Section divider
+    ----------------------------------------------------------------------- */
+    .sep { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+    /* -----------------------------------------------------------------------
+       Toast
     ----------------------------------------------------------------------- */
     #toast-container {
       position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
+      bottom: 1.25rem;
+      right: 1.25rem;
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: .4rem;
     }
 
     .toast {
-      padding: 0.75rem 1.25rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
+      padding: .65rem 1rem;
+      border-radius: var(--radius);
+      font-size: .8rem;
       font-weight: 500;
-      box-shadow: var(--shadow-lg);
-      animation: slideIn 0.25s ease;
-      max-width: 320px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.12);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      animation: toastIn .2s ease;
+      max-width: 300px;
     }
+
+    .toast svg { width: 14px; height: 14px; flex-shrink: 0; stroke-width: 2; }
 
     .toast-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
     .toast-error   { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
 
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to   { opacity: 1; transform: translateX(0); }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* -----------------------------------------------------------------------
-       Misc
+       Spinner
     ----------------------------------------------------------------------- */
-    .section-sep {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 1.5rem 0;
-    }
-
-    .badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
-      border-radius: 20px;
-      background: #f3e8ff;
-      color: var(--primary);
-    }
-
     .spinner {
       display: inline-block;
-      width: 18px; height: 18px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: white;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,.35);
+      border-top-color: #fff;
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      animation: spin .65s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .link-ext {
-      color: var(--primary);
-      font-size: 0.82rem;
-      text-decoration: underline;
+    /* -----------------------------------------------------------------------
+       Action row
+    ----------------------------------------------------------------------- */
+    .action-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-top: .5rem;
     }
 
-    @media (max-width: 768px) {
-      .layout { grid-template-columns: 1fr; }
+    /* -----------------------------------------------------------------------
+       Responsive
+    ----------------------------------------------------------------------- */
+    @media (max-width: 800px) {
+      .shell { grid-template-columns: 1fr; }
       .sidebar { display: none; }
       .form-grid-2 { grid-template-columns: 1fr; }
     }
@@ -472,170 +631,239 @@
 <body>
 
 <!-- =========================================================================
-     LOGIN SCREEN
+     LOGIN
 ========================================================================== -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-logo">Create the Future</div>
-    <div class="login-subtitle">Admin Panel</div>
-
-    <div class="form-row">
-      <label for="pwd-input">Password</label>
-      <input type="password" id="pwd-input" placeholder="Enter admin password" autocomplete="current-password" />
+    <div class="login-brand">
+      <div class="login-brand-dot"></div>
+      <span class="login-brand-name">Create the Future</span>
     </div>
 
-    <div id="login-error" style="color:#dc2626;font-size:.82rem;margin-bottom:.75rem;display:none;"></div>
+    <div class="login-headline">Admin Panel</div>
+    <div class="login-sub">Enter your password to continue.</div>
 
-    <button class="btn btn-primary btn-full" id="login-btn" onclick="doLogin()">
+    <div id="login-error"></div>
+
+    <div class="form-row">
+      <label class="form-label" for="pwd-input">Password</label>
+      <input class="form-input" type="password" id="pwd-input"
+             placeholder="••••••••" autocomplete="current-password" />
+    </div>
+
+    <button class="btn btn-primary" id="login-btn" onclick="doLogin()"
+            style="width:100%;justify-content:center;padding:.65rem;">
       Sign in
     </button>
   </div>
 </div>
 
 <!-- =========================================================================
-     MAIN APP
+     APP
 ========================================================================== -->
 <div id="app">
   <div id="toast-container"></div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-logo">✦ Create the Future — Admin</div>
-    <div class="header-actions">
-      <a href="https://create-the-future.org" target="_blank" class="btn btn-secondary btn-sm">
-        🌐 View Site
-      </a>
-      <button class="btn btn-secondary btn-sm" onclick="logout()">Sign Out</button>
-    </div>
-  </header>
-
-  <div class="layout">
-    <!-- Sidebar -->
+  <div class="shell">
+    <!-- ===== Sidebar ===== -->
     <nav class="sidebar">
-      <div class="nav-item active" data-panel="tiktoks" onclick="showPanel('tiktoks', this)">
-        <span class="nav-icon">🎬</span> TikTok Videos
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-dot"></div>
+        <span class="sidebar-brand-text">Create the Future</span>
       </div>
-      <div class="nav-item" data-panel="theme" onclick="showPanel('theme', this)">
-        <span class="nav-icon">🎨</span> Colors & Theme
+
+      <div class="sidebar-section">Content</div>
+
+      <div class="nav-item active" data-panel="tiktoks" onclick="showPanel('tiktoks',this)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+        TikTok Videos
       </div>
-      <div class="nav-item" data-panel="texts" onclick="showPanel('texts', this)">
-        <span class="nav-icon">✏️</span> Texts & Stats
+
+      <div class="nav-item" data-panel="theme" onclick="showPanel('theme',this)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/>
+          <circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+        Colors & Theme
       </div>
-      <div class="nav-item" data-panel="settings" onclick="showPanel('settings', this)">
-        <span class="nav-icon">⚙️</span> Settings
+
+      <div class="nav-item" data-panel="texts" onclick="showPanel('texts',this)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 6.1H3"/><path d="M21 12.1H3"/><path d="M15.1 18H3"/>
+        </svg>
+        Texts & Stats
+      </div>
+
+      <div class="sidebar-section">Account</div>
+
+      <div class="nav-item" data-panel="settings" onclick="showPanel('settings',this)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        Settings
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="https://create-the-future.org" target="_blank" class="sidebar-footer-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          View website
+        </a>
+        <button class="sidebar-footer-btn" onclick="logout()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign out
+        </button>
       </div>
     </nav>
 
-    <!-- Content area -->
-    <main class="content">
+    <!-- ===== Topbar ===== -->
+    <header class="topbar">
+      <span class="topbar-title" id="topbar-title">TikTok Videos</span>
+    </header>
 
-      <!-- ===== TIKTOKS PANEL ===== -->
+    <!-- ===== Main ===== -->
+    <main class="main">
+
+      <!-- ===== TIKTOKS ===== -->
       <div class="panel active" id="panel-tiktoks">
-        <div class="panel-title">🎬 TikTok Videos</div>
-        <div class="panel-desc">Add, remove or reorder the interview videos shown on the site.</div>
-
-        <!-- Add new TikTok -->
-        <div class="card">
-          <div class="card-title">➕ Add New Video</div>
-          <div class="form-grid form-grid-2">
-            <div class="form-row">
-              <label>Title (English)</label>
-              <input type="text" id="new-title" placeholder="Interview with a…" />
-            </div>
-            <div class="form-row">
-              <label>Title (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
-              <input type="text" id="new-title-pl" placeholder="Wywiad z…" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label>TikTok Embed URL</label>
-            <input type="url" id="new-embed" placeholder="https://www.tiktok.com/embed/v2/…" />
-            <div style="font-size:.75rem;color:var(--text-muted);margin-top:.35rem;">
-              💡 On TikTok.com → share → embed → copy the URL from the iframe src attribute
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label>Short description (English)</label>
-            <textarea id="new-desc" placeholder="What the interview is about…" rows="2"></textarea>
-          </div>
-
-          <div class="form-row">
-            <label>Short description (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
-            <textarea id="new-desc-pl" placeholder="O czym jest wywiad…" rows="2"></textarea>
-          </div>
-
-          <button class="btn btn-primary" onclick="addTikTok()">➕ Add Video</button>
+        <div class="page-header">
+          <h1>TikTok Videos</h1>
+          <p>Add, remove or reorder interview videos shown on the site.</p>
         </div>
 
-        <!-- Existing TikToks -->
         <div class="card">
-          <div class="card-title">📋 Current Videos <span class="badge" id="tiktok-count">0</span></div>
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="m8 12 4-4 4 4"/></svg>
+            <h2>Add new video</h2>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">Title (English)</label>
+              <input class="form-input" type="text" id="new-title" placeholder="Interview with a…" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">Title (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+              <input class="form-input" type="text" id="new-title-pl" placeholder="Wywiad z…" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label">TikTok Embed URL</label>
+            <input class="form-input form-input-mono" type="url" id="new-embed"
+                   placeholder="https://www.tiktok.com/embed/v2/…" />
+            <div class="form-hint">Share on TikTok.com &rarr; Embed &rarr; copy the iframe src URL</div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">Description (English)</label>
+              <textarea class="form-input" id="new-desc" rows="2" placeholder="What the interview is about…"></textarea>
+            </div>
+            <div class="form-row">
+              <label class="form-label">Description (Polish) <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+              <textarea class="form-input" id="new-desc-pl" rows="2" placeholder="O czym jest wywiad…"></textarea>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="addTikTok()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              Add video
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            <h2>Current videos</h2>
+            <span class="card-header-count" id="tiktok-count">0</span>
+          </div>
           <div class="tiktok-list" id="tiktok-list">
-            <div class="empty-state">Loading…</div>
+            <div class="empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              Loading…
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ===== THEME PANEL ===== -->
+      <!-- ===== THEME ===== -->
       <div class="panel" id="panel-theme">
-        <div class="panel-title">🎨 Colors & Theme</div>
-        <div class="panel-desc">Change the main brand colors. The site updates automatically after saving.</div>
+        <div class="page-header">
+          <h1>Colors & Theme</h1>
+          <p>Edit brand colors and background gradients. Changes are reflected immediately after saving.</p>
+        </div>
 
-        <!-- Main colors -->
         <div class="card">
-          <div class="card-title">🖌️ Brand Colors</div>
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h3l6-6"/><path d="m22 2-7 7"/><path d="M17.657 6.343 6.343 17.657"/></svg>
+            <h2>Brand colors</h2>
+          </div>
 
           <div class="color-row">
-            <label>Primary (purple)</label>
+            <label class="form-label">Primary (purple)</label>
             <input type="color" id="c-primary" value="#7e22ce" oninput="syncHex(this,'h-primary')" />
-            <input type="text" class="color-hex" id="h-primary" value="#7e22ce" oninput="syncColor(this,'c-primary')" maxlength="7" />
+            <input type="text" class="form-input form-input-mono color-hex" id="h-primary" value="#7e22ce"
+                   oninput="syncColor(this,'c-primary')" maxlength="7" />
           </div>
 
           <div class="color-row">
-            <label>Primary Light</label>
+            <label class="form-label">Primary light</label>
             <input type="color" id="c-primary-light" value="#a855f7" oninput="syncHex(this,'h-primary-light')" />
-            <input type="text" class="color-hex" id="h-primary-light" value="#a855f7" oninput="syncColor(this,'c-primary-light')" maxlength="7" />
+            <input type="text" class="form-input form-input-mono color-hex" id="h-primary-light" value="#a855f7"
+                   oninput="syncColor(this,'c-primary-light')" maxlength="7" />
           </div>
 
           <div class="color-row">
-            <label>Primary Dark</label>
+            <label class="form-label">Primary dark</label>
             <input type="color" id="c-primary-dark" value="#6b21a8" oninput="syncHex(this,'h-primary-dark')" />
-            <input type="text" class="color-hex" id="h-primary-dark" value="#6b21a8" oninput="syncColor(this,'c-primary-dark')" maxlength="7" />
+            <input type="text" class="form-input form-input-mono color-hex" id="h-primary-dark" value="#6b21a8"
+                   oninput="syncColor(this,'c-primary-dark')" maxlength="7" />
           </div>
 
-          <hr class="section-sep" />
+          <hr class="sep" />
 
           <div class="color-row">
-            <label>Secondary (red/pink)</label>
+            <label class="form-label">Secondary (red/pink)</label>
             <input type="color" id="c-secondary" value="#e11d48" oninput="syncHex(this,'h-secondary')" />
-            <input type="text" class="color-hex" id="h-secondary" value="#e11d48" oninput="syncColor(this,'c-secondary')" maxlength="7" />
+            <input type="text" class="form-input form-input-mono color-hex" id="h-secondary" value="#e11d48"
+                   oninput="syncColor(this,'c-secondary')" maxlength="7" />
           </div>
 
           <div class="color-row">
-            <label>Secondary Light</label>
+            <label class="form-label">Secondary light</label>
             <input type="color" id="c-secondary-light" value="#fb7185" oninput="syncHex(this,'h-secondary-light')" />
-            <input type="text" class="color-hex" id="h-secondary-light" value="#fb7185" oninput="syncColor(this,'c-secondary-light')" maxlength="7" />
+            <input type="text" class="form-input form-input-mono color-hex" id="h-secondary-light" value="#fb7185"
+                   oninput="syncColor(this,'c-secondary-light')" maxlength="7" />
           </div>
 
-          <div style="margin-top:1.5rem;">
-            <button class="btn btn-primary" onclick="saveTheme()">💾 Save Colors</button>
-            <button class="btn btn-secondary" style="margin-left:.5rem;" onclick="resetThemeDefaults()">↺ Reset to defaults</button>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="saveTheme()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save colors
+            </button>
+            <button class="btn btn-ghost" onclick="resetThemeDefaults()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset to defaults
+            </button>
           </div>
         </div>
 
-        <!-- Background gradient builder -->
         <div class="card">
-          <div class="card-title">🌈 Hero Background Gradient</div>
-          <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:1rem;">
-            This gradient appears behind the main hero section.
-          </p>
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="m8 21 4-7 4 7"/></svg>
+            <h2>Hero background gradient</h2>
+          </div>
 
           <div class="gradient-preview" id="grad-preview"></div>
 
           <div class="gradient-row">
-            <label>Direction</label>
+            <label class="form-label">Direction</label>
             <select id="grad-dir" onchange="updateGradientPreview()">
               <option value="135deg">Diagonal ↘</option>
               <option value="90deg">Horizontal →</option>
@@ -645,129 +873,163 @@
           </div>
 
           <div class="gradient-row">
-            <label>Color 1</label>
+            <label class="form-label">Color 1</label>
             <input type="color" id="grad-c1" value="#7e22ce" oninput="updateGradientPreview()" />
-            <input type="range" id="grad-op1" min="0" max="100" value="20" style="flex:1;" oninput="updateGradientPreview()" />
-            <span id="grad-op1-val" style="min-width:35px;font-size:.8rem;color:var(--text-muted);">20%</span>
+            <input type="range" id="grad-op1" min="0" max="100" value="8" oninput="updateGradientPreview()" />
+            <span class="opacity-val" id="grad-op1-val">8%</span>
           </div>
 
           <div class="gradient-row">
-            <label>Color 2</label>
+            <label class="form-label">Color 2</label>
             <input type="color" id="grad-c2" value="#e11d48" oninput="updateGradientPreview()" />
-            <input type="range" id="grad-op2" min="0" max="100" value="20" style="flex:1;" oninput="updateGradientPreview()" />
-            <span id="grad-op2-val" style="min-width:35px;font-size:.8rem;color:var(--text-muted);">20%</span>
+            <input type="range" id="grad-op2" min="0" max="100" value="8" oninput="updateGradientPreview()" />
+            <span class="opacity-val" id="grad-op2-val">8%</span>
           </div>
 
-          <div style="margin-top:1rem;">
-            <label>Generated CSS</label>
-            <input type="text" id="grad-css" readonly style="font-family:monospace;font-size:.8rem;background:#f8fafc;" />
+          <div class="form-row" style="margin-top:.75rem;">
+            <label class="form-label">Generated CSS</label>
+            <input type="text" class="form-input form-input-mono" id="grad-css" readonly />
           </div>
 
-          <div style="margin-top:1rem;">
-            <button class="btn btn-primary" onclick="saveGradient()">💾 Save Gradient</button>
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="saveGradient()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save gradient
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- ===== TEXTS & STATS PANEL ===== -->
+      <!-- ===== TEXTS ===== -->
       <div class="panel" id="panel-texts">
-        <div class="panel-title">✏️ Texts & Stats</div>
-        <div class="panel-desc">Edit key texts and the statistics shown on the About page.</div>
+        <div class="page-header">
+          <h1>Texts & Stats</h1>
+          <p>Edit the hero section copy and the statistics shown on the About page.</p>
+        </div>
 
         <div class="card">
-          <div class="card-title">🏠 Hero Section</div>
-          <div class="form-grid form-grid-2">
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <h2>Hero section</h2>
+          </div>
+
+          <div class="form-grid-2">
             <div class="form-row">
-              <label>Main Title (EN)</label>
-              <input type="text" id="t-hero-title" placeholder="Create the Future" />
+              <label class="form-label">Main title (EN)</label>
+              <input class="form-input" type="text" id="t-hero-title" placeholder="Create the Future" />
             </div>
             <div class="form-row">
-              <label>Main Title (PL)</label>
-              <input type="text" id="t-hero-title-pl" placeholder="Zapracuj na przyszłość" />
+              <label class="form-label">Main title (PL)</label>
+              <input class="form-input" type="text" id="t-hero-title-pl" placeholder="Zapracuj na przyszłość" />
             </div>
             <div class="form-row">
-              <label>Subtitle (EN)</label>
-              <input type="text" id="t-hero-subtitle" />
+              <label class="form-label">Subtitle (EN)</label>
+              <input class="form-input" type="text" id="t-hero-subtitle" />
             </div>
             <div class="form-row">
-              <label>Subtitle (PL)</label>
-              <input type="text" id="t-hero-subtitle-pl" />
+              <label class="form-label">Subtitle (PL)</label>
+              <input class="form-input" type="text" id="t-hero-subtitle-pl" />
             </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title">📊 Stats (About page)</div>
-          <div class="form-grid form-grid-2">
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <h2>Statistics</h2>
+          </div>
+
+          <div class="form-grid-2">
             <div class="form-row">
-              <label>Interviews conducted</label>
-              <input type="text" id="t-stat-interviews" placeholder="20" />
+              <label class="form-label">Interviews conducted</label>
+              <input class="form-input" type="text" id="t-stat-interviews" placeholder="20" />
             </div>
             <div class="form-row">
-              <label>Industries shown</label>
-              <input type="text" id="t-stat-industries" placeholder="15" />
+              <label class="form-label">Industries shown</label>
+              <input class="form-input" type="text" id="t-stat-industries" placeholder="15" />
             </div>
             <div class="form-row">
-              <label>TikTok followers</label>
-              <input type="text" id="t-stat-followers" placeholder="5500" />
+              <label class="form-label">TikTok followers</label>
+              <input class="form-input" type="text" id="t-stat-followers" placeholder="5500" />
             </div>
             <div class="form-row">
-              <label>Total views</label>
-              <input type="text" id="t-stat-views" placeholder="1500000" />
+              <label class="form-label">Total views</label>
+              <input class="form-input" type="text" id="t-stat-views" placeholder="1500000" />
             </div>
           </div>
         </div>
 
-        <button class="btn btn-primary" onclick="saveTexts()">💾 Save All Texts & Stats</button>
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="saveTexts()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save all texts & stats
+          </button>
+        </div>
       </div>
 
-      <!-- ===== SETTINGS PANEL ===== -->
+      <!-- ===== SETTINGS ===== -->
       <div class="panel" id="panel-settings">
-        <div class="panel-title">⚙️ Settings</div>
-        <div class="panel-desc">Admin account and server settings.</div>
-
-        <div class="card">
-          <div class="card-title">🔐 Change Password</div>
-          <div class="form-row">
-            <label>New Password</label>
-            <input type="password" id="new-pwd" placeholder="Min. 8 characters" />
-          </div>
-          <div class="form-row">
-            <label>Confirm New Password</label>
-            <input type="password" id="new-pwd-confirm" placeholder="Repeat password" />
-          </div>
-          <button class="btn btn-primary" onclick="changePassword()">🔐 Change Password</button>
+        <div class="page-header">
+          <h1>Settings</h1>
+          <p>Admin account configuration.</p>
         </div>
 
         <div class="card">
-          <div class="card-title">ℹ️ About This Admin Panel</div>
-          <p style="font-size:.85rem;color:var(--text-muted);line-height:1.6;">
-            Changes made here are saved to the server and reflected on the live site immediately.<br><br>
-            <strong>TikTok Embed URL format:</strong><br>
-            <code style="background:#f1f5f9;padding:.2rem .4rem;border-radius:4px;font-size:.8rem;">
-              https://www.tiktok.com/embed/v2/VIDEO_ID_HERE
-            </code><br><br>
-            To find the Video ID: open TikTok → share → copy link → the long number at the end is the ID.
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <h2>Change password</h2>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">New password</label>
+              <input class="form-input" type="password" id="new-pwd" placeholder="Min. 8 characters" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">Confirm new password</label>
+              <input class="form-input" type="password" id="new-pwd-confirm" placeholder="Repeat password" />
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-primary" onclick="changePassword()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              Change password
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <h2>About this panel</h2>
+          </div>
+          <p style="font-size:.82rem;color:var(--text-muted);line-height:1.7;">
+            All changes are saved directly to the server and reflected on the live site immediately.
+          </p>
+          <p style="font-size:.82rem;color:var(--text-muted);line-height:1.7;margin-top:.75rem;">
+            <strong style="color:var(--text);">TikTok embed URL format:</strong><br />
+            <code style="font-family:'DM Mono',monospace;font-size:.78rem;background:var(--bg);padding:.2rem .4rem;border-radius:4px;border:1px solid var(--border);">https://www.tiktok.com/embed/v2/VIDEO_ID</code><br />
+            Open TikTok &rarr; Share &rarr; Copy link &rarr; the long number at the end is the ID.
           </p>
         </div>
       </div>
 
     </main>
-  </div>
-</div>
+  </div><!-- /.shell -->
+</div><!-- /#app -->
 
-<!-- =========================================================================
-     JAVASCRIPT
-========================================================================== -->
 <script>
 'use strict';
 
 // ---------------------------------------------------------------------------
-// Config — change this to your server URL in production
+// Config
 // ---------------------------------------------------------------------------
-const API = window.location.hostname === 'localhost'
+
+/** Base API URL — empty string means same-origin (nginx proxies subdomain to Express). */
+const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:3001'
-  : ''; // same-origin when served by the Express server
+  : '';
 
 let TOKEN = localStorage.getItem('ctf_admin_token');
 
@@ -776,13 +1038,13 @@ let TOKEN = localStorage.getItem('ctf_admin_token');
 // ---------------------------------------------------------------------------
 
 /**
- * Attempts login with the password from the input field.
- * On success stores the JWT and shows the main app.
+ * Attempts login with the entered password.
+ * On success stores the JWT and enters the app.
  */
 async function doLogin() {
-  const btn  = document.getElementById('login-btn');
-  const pwd  = document.getElementById('pwd-input').value;
-  const err  = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  const pwd = document.getElementById('pwd-input').value;
+  const err = document.getElementById('login-error');
 
   if (!pwd) return;
 
@@ -797,7 +1059,6 @@ async function doLogin() {
       body: JSON.stringify({ password: pwd }),
     });
     const data = await res.json();
-
     if (!res.ok) throw new Error(data.error || 'Login failed');
 
     TOKEN = data.token;
@@ -808,40 +1069,38 @@ async function doLogin() {
     err.style.display = 'block';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Sign in';
+    btn.innerHTML = 'Sign in';
   }
 }
 
-// Allow Enter key on the password field
 document.getElementById('pwd-input').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') doLogin();
 });
 
 /**
- * Clears the stored token and returns to the login screen.
+ * Clears the JWT and returns to the login screen.
  */
 function logout() {
   TOKEN = null;
   localStorage.removeItem('ctf_admin_token');
-  document.getElementById('app').style.display = 'none';
+  document.getElementById('app').style.display          = 'none';
   document.getElementById('login-screen').style.display = 'flex';
 }
 
 // ---------------------------------------------------------------------------
-// App bootstrap
+// Bootstrap
 // ---------------------------------------------------------------------------
 
 /**
- * Shows the main admin app and loads all content from the API.
+ * Shows the main app and loads all content from the API.
  */
 async function showApp() {
   document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
+  document.getElementById('app').style.display          = 'block';
   await loadContent();
   updateGradientPreview();
 }
 
-// On page load: if we have a stored token, try to go straight to the app.
 if (TOKEN) {
   showApp().catch(() => logout());
 }
@@ -851,14 +1110,14 @@ if (TOKEN) {
 // ---------------------------------------------------------------------------
 
 /**
- * Fetches site content from the API and populates all form fields.
+ * Fetches content from the API and populates all form fields.
  */
 async function loadContent() {
   try {
     const res  = await fetch(`${API}/api/content`);
     const data = await res.json();
     populateForms(data);
-  } catch (e) {
+  } catch {
     toast('Could not load content from server', 'error');
   }
 }
@@ -868,8 +1127,8 @@ async function loadContent() {
  *
  * @param {string} url - Endpoint path.
  * @param {string} method - HTTP method.
- * @param {Object} [body] - Request body.
- * @returns {Promise<Object>} Parsed response JSON.
+ * @param {Object|null} body - Optional request body.
+ * @returns {Promise<Object>} Parsed JSON response.
  */
 async function api(url, method = 'GET', body = null) {
   const opts = {
@@ -891,36 +1150,33 @@ async function api(url, method = 'GET', body = null) {
 }
 
 // ---------------------------------------------------------------------------
-// Populate forms with loaded data
+// Populate
 // ---------------------------------------------------------------------------
 
 /**
  * Fills all form fields from the content object returned by the API.
  *
- * @param {Object} content - Full content config from API.
+ * @param {Object} content - Content config from the API.
  */
 function populateForms(content) {
-  // TikToks
   renderTikTokList(content.tiktoks || []);
 
-  // Theme colors
   const t = content.theme || {};
-  setColorField('c-primary',        'h-primary',        t.primaryColor       || '#7e22ce');
-  setColorField('c-primary-light',  'h-primary-light',  t.primaryLight       || '#a855f7');
-  setColorField('c-primary-dark',   'h-primary-dark',   t.primaryDark        || '#6b21a8');
-  setColorField('c-secondary',      'h-secondary',      t.secondaryColor     || '#e11d48');
-  setColorField('c-secondary-light','h-secondary-light',t.secondaryLight     || '#fb7185');
+  setColor('c-primary',        'h-primary',        t.primaryColor    || '#7e22ce');
+  setColor('c-primary-light',  'h-primary-light',  t.primaryLight    || '#a855f7');
+  setColor('c-primary-dark',   'h-primary-dark',   t.primaryDark     || '#6b21a8');
+  setColor('c-secondary',      'h-secondary',      t.secondaryColor  || '#e11d48');
+  setColor('c-secondary-light','h-secondary-light',t.secondaryLight  || '#fb7185');
 
-  // Texts
   const tx = content.texts || {};
-  setVal('t-hero-title',      tx.heroTitle      || '');
-  setVal('t-hero-subtitle',   tx.heroSubtitle   || '');
-  setVal('t-hero-title-pl',   tx.heroTitlePl    || '');
-  setVal('t-hero-subtitle-pl',tx.heroSubtitlePl || '');
-  setVal('t-stat-interviews', tx.statsInterviews || '');
-  setVal('t-stat-industries', tx.statsIndustries || '');
-  setVal('t-stat-followers',  tx.statsFollowers  || '');
-  setVal('t-stat-views',      tx.statsViews      || '');
+  setVal('t-hero-title',       tx.heroTitle       || '');
+  setVal('t-hero-subtitle',    tx.heroSubtitle    || '');
+  setVal('t-hero-title-pl',    tx.heroTitlePl     || '');
+  setVal('t-hero-subtitle-pl', tx.heroSubtitlePl  || '');
+  setVal('t-stat-interviews',  tx.statsInterviews || '');
+  setVal('t-stat-industries',  tx.statsIndustries || '');
+  setVal('t-stat-followers',   tx.statsFollowers  || '');
+  setVal('t-stat-views',       tx.statsViews      || '');
 }
 
 function setVal(id, val) {
@@ -928,7 +1184,7 @@ function setVal(id, val) {
   if (el) el.value = val;
 }
 
-function setColorField(colorId, hexId, value) {
+function setColor(colorId, hexId, value) {
   const c = document.getElementById(colorId);
   const h = document.getElementById(hexId);
   if (c) c.value = value;
@@ -940,7 +1196,7 @@ function setColorField(colorId, hexId, value) {
 // ---------------------------------------------------------------------------
 
 /**
- * Renders the list of TikTok cards.
+ * Renders the list of TikTok video cards.
  *
  * @param {Array<Object>} tiktoks - Array of TikTok objects from the API.
  */
@@ -950,26 +1206,36 @@ function renderTikTokList(tiktoks) {
   count.textContent = tiktoks.length;
 
   if (!tiktoks.length) {
-    list.innerHTML = '<div class="empty-state">No videos yet. Add one above ⬆️</div>';
+    list.innerHTML = `
+      <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        No videos yet. Add one above.
+      </div>`;
     return;
   }
 
   list.innerHTML = tiktoks.map((t) => `
-    <div class="tiktok-card" data-id="${t.id}">
-      <div>
-        <div class="tiktok-card-title">${escHtml(t.title)}</div>
-        <div class="tiktok-card-url">${escHtml(t.embedUrl)}</div>
-        ${t.description ? `<div class="tiktok-card-desc">${escHtml(t.description)}</div>` : ''}
+    <div class="tiktok-item" data-id="${t.id}">
+      <div class="tiktok-item-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
       </div>
-      <div class="tiktok-card-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteTikTok(${t.id}, this)">🗑 Remove</button>
+      <div class="tiktok-item-body">
+        <div class="tiktok-item-title">${escHtml(t.title)}</div>
+        <div class="tiktok-item-url">${escHtml(t.embedUrl)}</div>
+        ${t.description ? `<div class="tiktok-item-desc">${escHtml(t.description)}</div>` : ''}
+      </div>
+      <div class="tiktok-item-actions">
+        <button class="btn btn-danger" onclick="deleteTikTok(${t.id}, this)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Remove
+        </button>
       </div>
     </div>
   `).join('');
 }
 
 /**
- * Reads the "add TikTok" form fields and sends a POST to the API.
+ * Reads the add-video form and sends a POST to the API.
  */
 async function addTikTok() {
   const title   = document.getElementById('new-title').value.trim();
@@ -978,28 +1244,18 @@ async function addTikTok() {
   const desc    = document.getElementById('new-desc').value.trim();
   const descPl  = document.getElementById('new-desc-pl').value.trim();
 
-  if (!title || !embed) {
-    toast('Title and Embed URL are required', 'error');
-    return;
-  }
-
-  if (!embed.includes('tiktok.com/embed')) {
-    toast('That doesn\'t look like a TikTok embed URL', 'error');
-    return;
-  }
+  if (!title || !embed) { toast('Title and Embed URL are required', 'error'); return; }
+  if (!embed.includes('tiktok.com/embed')) { toast('That does not look like a TikTok embed URL', 'error'); return; }
 
   try {
     await api('/api/content/tiktoks', 'POST', {
       title, titlePl, embedUrl: embed, description: desc, descriptionPl: descPl,
       profileUrl: 'https://www.tiktok.com/@create_the_future_',
     });
-
-    // Clear form
     ['new-title','new-title-pl','new-embed','new-desc','new-desc-pl']
       .forEach((id) => { document.getElementById(id).value = ''; });
-
     await loadContent();
-    toast('Video added! ✅');
+    toast('Video added successfully');
   } catch (e) {
     toast(e.message, 'error');
   }
@@ -1013,10 +1269,7 @@ async function addTikTok() {
  */
 async function deleteTikTok(id, btn) {
   if (!confirm('Remove this video from the site?')) return;
-
   btn.disabled = true;
-  btn.textContent = '…';
-
   try {
     await api(`/api/content/tiktoks/${id}`, 'DELETE');
     await loadContent();
@@ -1024,12 +1277,11 @@ async function deleteTikTok(id, btn) {
   } catch (e) {
     toast(e.message, 'error');
     btn.disabled = false;
-    btn.textContent = '🗑 Remove';
   }
 }
 
 // ---------------------------------------------------------------------------
-// Theme / colors
+// Theme
 // ---------------------------------------------------------------------------
 
 function syncHex(colorInput, hexId) {
@@ -1037,9 +1289,8 @@ function syncHex(colorInput, hexId) {
 }
 
 function syncColor(hexInput, colorId) {
-  const v = hexInput.value;
-  if (/^#[0-9a-fA-F]{6}$/.test(v)) {
-    document.getElementById(colorId).value = v;
+  if (/^#[0-9a-fA-F]{6}$/.test(hexInput.value)) {
+    document.getElementById(colorId).value = hexInput.value;
   }
 }
 
@@ -1048,16 +1299,15 @@ function syncColor(hexInput, colorId) {
  */
 async function saveTheme() {
   const theme = {
-    primaryColor:    document.getElementById('h-primary').value,
-    primaryLight:    document.getElementById('h-primary-light').value,
-    primaryDark:     document.getElementById('h-primary-dark').value,
-    secondaryColor:  document.getElementById('h-secondary').value,
-    secondaryLight:  document.getElementById('h-secondary-light').value,
+    primaryColor:   document.getElementById('h-primary').value,
+    primaryLight:   document.getElementById('h-primary-light').value,
+    primaryDark:    document.getElementById('h-primary-dark').value,
+    secondaryColor: document.getElementById('h-secondary').value,
+    secondaryLight: document.getElementById('h-secondary-light').value,
   };
-
   try {
     await api('/api/content', 'PUT', { theme });
-    toast('Colors saved! ✅ The site will reflect changes after refresh.');
+    toast('Colors saved — site will reflect changes after a refresh');
   } catch (e) {
     toast(e.message, 'error');
   }
@@ -1067,11 +1317,11 @@ async function saveTheme() {
  * Resets color fields to the default brand palette.
  */
 function resetThemeDefaults() {
-  setColorField('c-primary',        'h-primary',        '#7e22ce');
-  setColorField('c-primary-light',  'h-primary-light',  '#a855f7');
-  setColorField('c-primary-dark',   'h-primary-dark',   '#6b21a8');
-  setColorField('c-secondary',      'h-secondary',      '#e11d48');
-  setColorField('c-secondary-light','h-secondary-light','#fb7185');
+  setColor('c-primary',        'h-primary',        '#7e22ce');
+  setColor('c-primary-light',  'h-primary-light',  '#a855f7');
+  setColor('c-primary-dark',   'h-primary-dark',   '#6b21a8');
+  setColor('c-secondary',      'h-secondary',      '#e11d48');
+  setColor('c-secondary-light','h-secondary-light','#fb7185');
 }
 
 // ---------------------------------------------------------------------------
@@ -1083,11 +1333,11 @@ function resetThemeDefaults() {
  * preview box and the generated-CSS field.
  */
 function updateGradientPreview() {
-  const dir  = document.getElementById('grad-dir').value;
-  const c1   = document.getElementById('grad-c1').value;
-  const c2   = document.getElementById('grad-c2').value;
-  const op1  = document.getElementById('grad-op1').value;
-  const op2  = document.getElementById('grad-op2').value;
+  const dir = document.getElementById('grad-dir').value;
+  const c1  = document.getElementById('grad-c1').value;
+  const c2  = document.getElementById('grad-c2').value;
+  const op1 = document.getElementById('grad-op1').value;
+  const op2 = document.getElementById('grad-op2').value;
 
   document.getElementById('grad-op1-val').textContent = `${op1}%`;
   document.getElementById('grad-op2-val').textContent = `${op2}%`;
@@ -1096,36 +1346,34 @@ function updateGradientPreview() {
   const rgba2 = hexToRgba(c2, op2 / 100);
   const css   = `linear-gradient(${dir}, ${rgba1} 0%, ${rgba2} 100%)`;
 
-  document.getElementById('grad-preview').style.background  = css;
+  document.getElementById('grad-preview').style.background = css;
   document.getElementById('grad-css').value = css;
 }
 
 /**
- * Saves the current gradient to the hero background.
+ * Saves the current gradient to the hero background via the API.
  */
 async function saveGradient() {
   const css = document.getElementById('grad-css').value;
   try {
-    await api('/api/content', 'PUT', {
-      theme: { backgroundHeroGradient: css },
-    });
-    toast('Gradient saved! ✅');
+    await api('/api/content', 'PUT', { theme: { backgroundHeroGradient: css } });
+    toast('Gradient saved');
   } catch (e) {
     toast(e.message, 'error');
   }
 }
 
 /**
- * Converts a hex color string to an rgba() CSS function string.
+ * Converts a hex color to rgba() CSS notation.
  *
  * @param {string} hex - 6-digit hex color (e.g. "#7e22ce").
- * @param {number} alpha - Opacity value 0–1.
+ * @param {number} alpha - Opacity 0–1.
  * @returns {string} rgba() string.
  */
 function hexToRgba(hex, alpha) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
   return `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
 }
 
@@ -1134,7 +1382,7 @@ function hexToRgba(hex, alpha) {
 // ---------------------------------------------------------------------------
 
 /**
- * Reads all text/stats fields and saves to the API.
+ * Reads all text/stats form fields and saves to the API.
  */
 async function saveTexts() {
   const texts = {
@@ -1147,17 +1395,16 @@ async function saveTexts() {
     statsFollowers:  Number(document.getElementById('t-stat-followers').value),
     statsViews:      Number(document.getElementById('t-stat-views').value),
   };
-
   try {
     await api('/api/content', 'PUT', { texts });
-    toast('Texts & stats saved! ✅');
+    toast('Texts & stats saved');
   } catch (e) {
     toast(e.message, 'error');
   }
 }
 
 // ---------------------------------------------------------------------------
-// Settings — change password
+// Settings
 // ---------------------------------------------------------------------------
 
 /**
@@ -1174,7 +1421,7 @@ async function changePassword() {
     await api('/api/auth/change-password', 'POST', { newPassword: p1 });
     document.getElementById('new-pwd').value = '';
     document.getElementById('new-pwd-confirm').value = '';
-    toast('Password changed! You will be signed out now.');
+    toast('Password changed — you will be signed out');
     setTimeout(logout, 2000);
   } catch (e) {
     toast(e.message, 'error');
@@ -1185,10 +1432,17 @@ async function changePassword() {
 // Navigation
 // ---------------------------------------------------------------------------
 
+const PANEL_LABELS = {
+  tiktoks:  'TikTok Videos',
+  theme:    'Colors & Theme',
+  texts:    'Texts & Stats',
+  settings: 'Settings',
+};
+
 /**
  * Shows the panel matching the given id and marks the nav item as active.
  *
- * @param {string} id - Panel identifier (e.g. 'tiktoks').
+ * @param {string} id - Panel identifier.
  * @param {HTMLElement} navEl - The clicked nav item element.
  */
 function showPanel(id, navEl) {
@@ -1196,6 +1450,7 @@ function showPanel(id, navEl) {
   document.querySelectorAll('.nav-item').forEach((n) => n.classList.remove('active'));
   document.getElementById(`panel-${id}`).classList.add('active');
   navEl.classList.add('active');
+  document.getElementById('topbar-title').textContent = PANEL_LABELS[id] || id;
 }
 
 // ---------------------------------------------------------------------------
@@ -1203,17 +1458,22 @@ function showPanel(id, navEl) {
 // ---------------------------------------------------------------------------
 
 /**
- * Shows a temporary notification at the top-right of the screen.
+ * Shows a temporary notification at the bottom-right of the screen.
  *
- * @param {string} message - Message text.
+ * @param {string} message - Notification text.
  * @param {'success'|'error'} [type='success'] - Visual style.
  */
 function toast(message, type = 'success') {
   const el = document.createElement('div');
   el.className = `toast toast-${type}`;
-  el.textContent = message;
+
+  const icon = type === 'success'
+    ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+
+  el.innerHTML = `${icon}${escHtml(message)}`;
   document.getElementById('toast-container').appendChild(el);
-  setTimeout(() => el.remove(), 4000);
+  setTimeout(() => el.remove(), 4500);
 }
 
 // ---------------------------------------------------------------------------
@@ -1221,7 +1481,7 @@ function toast(message, type = 'success') {
 // ---------------------------------------------------------------------------
 
 /**
- * Escapes HTML special characters.
+ * Escapes HTML special characters to prevent XSS in innerHTML assignments.
  *
  * @param {string} str - Raw string.
  * @returns {string} HTML-safe string.
