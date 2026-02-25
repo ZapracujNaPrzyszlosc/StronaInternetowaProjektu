@@ -2,5 +2,5 @@ node_modules
 build
 .idea
 
-cms-server/content.json
-.env.local
+*.env.local
+*.env
