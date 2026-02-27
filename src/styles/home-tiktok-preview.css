@@ -1,0 +1,328 @@
+/* ============================================================
+   HOME — TikTok Preview Section
+   ============================================================ */
+
+.tiktok-preview-section {
+  padding: 6rem 0;
+  position: relative;
+  /*
+   * FIX: overflow-x clips the decorative blobs horizontally,
+   * overflow-y: visible lets the section grow to fit all content.
+   * `overflow: hidden` or `clip` on the section was the root cause
+   * of the description card being cut off.
+   */
+  overflow-x: hidden;
+  overflow-y: visible;
+  background: linear-gradient(135deg, #1a0030 0%, #2d0050 50%, #1a0030 100%);
+}
+
+/* ── Section header overrides for dark background ── */
+.tiktok-preview-section .section-header h2 {
+  background: linear-gradient(135deg, #e9b8ff, #ff6b9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.tiktok-preview-section .section-header p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Layout grid ── */
+.tiktok-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 992px) {
+  .tiktok-content-wrapper {
+    grid-template-columns: 40% 60%;
+    gap: 3rem;
+  }
+}
+
+.tiktok-grid {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Phone frame ── */
+.tiktok-phone-container {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.tiktok-phone-frame {
+  width: 100%;
+  aspect-ratio: 9/19;
+  background: #000;
+  border-radius: 36px;
+  border: 8px solid #333;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  transform: rotateY(-2deg) rotateX(1deg);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tiktok-phone-frame:hover {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.tiktok-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 28px;
+  background-color: #000;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 10;
+}
+
+.tiktok-phone-button-right {
+  position: absolute;
+  right: -8px;
+  top: 100px;
+  width: 4px;
+  height: 60px;
+  background-color: #444;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  z-index: 10;
+}
+
+.tiktok-phone-button-left {
+  position: absolute;
+  left: -8px;
+  top: 140px;
+  width: 4px;
+  height: 60px;
+  background-color: #444;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  z-index: 10;
+}
+
+.tiktok-phone-volume {
+  position: absolute;
+  left: -8px;
+  top: 80px;
+  width: 4px;
+  height: 40px;
+  background-color: #444;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  z-index: 10;
+}
+
+.tiktok-embed-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  padding-top: 30px;
+}
+
+.tiktok-embed-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Description card ── */
+.tiktok-description-container {
+  width: 100%;
+  align-self: start;
+}
+
+.tiktok-description {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 20px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tiktok-description:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 25px 60px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+.tiktok-description h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #e9b8ff, #ff6b9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.tiktok-description p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+}
+
+/* ── Buttons row ── */
+.tiktok-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ── Statistics ── */
+.tiktok-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1;
+  background: linear-gradient(135deg, #e9b8ff, #ff6b9d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ── Background decorations ── */
+.tiktok-bg-decoration-1,
+.tiktok-bg-decoration-2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tiktok-bg-decoration-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(126, 34, 206, 0.5);
+  top: -80px;
+  left: -80px;
+  opacity: 0.7;
+}
+
+.tiktok-bg-decoration-2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(225, 29, 72, 0.45);
+  bottom: -80px;
+  right: -80px;
+  opacity: 0.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tiktok-buttons {
+    flex-direction: column;
+  }
+
+  .tiktok-description {
+    padding: 2rem;
+  }
+
+  .tiktok-description h3 {
+    font-size: 1.6rem;
+  }
+
+  .tiktok-description p {
+    font-size: 1rem;
+  }
+
+  .tiktok-stats {
+    gap: 0.75rem;
+  }
+
+  .tiktok-phone-container {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tiktok-phone-container {
+    max-width: 220px;
+  }
+
+  .stat-item {
+    width: 100%;
+    flex: unset;
+  }
+
+  .tiktok-stats {
+    gap: 0.8rem;
+  }
+}
