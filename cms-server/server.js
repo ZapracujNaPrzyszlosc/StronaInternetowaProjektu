@@ -62,7 +62,9 @@ async function initAdminHash() {
 // Admin panel static files
 // ---------------------------------------------------------------------------
 
-const ADMIN_DIR = path.join(__dirname, "../public/admin");
+const ADMIN_DIR = path.join(__dirname, "../admin");
+console.log("ADMIN_DIR:", ADMIN_DIR);
+console.log("__dirname:", __dirname);
 
 app.use((req, res, next) => {
   // Koyeb (and most reverse proxies) forward the original hostname via
