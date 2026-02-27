@@ -197,39 +197,48 @@ function TikTok() {
                   <motion.div
                     key={tiktok.id}
                     className={`tiktok-item ${index % 2 === 0 ? "left-video" : "right-video"}`}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
                     onViewportEnter={() => handleTikTokInView(tiktok)}
                   >
+                    {/* ── Video column ── */}
                     <div className="tiktok-video">
-                      <iframe
-                        src={tiktok.embedUrl}
-                        height="730"
-                        frameBorder="0"
-                        allowFullScreen
-                        scrolling="no"
-                        allow="encrypted-media;"
-                        title={tiktok.title}
-                      ></iframe>
+                      <div className="tiktok-video-inner">
+                        <iframe
+                          src={tiktok.embedUrl}
+                          height="730"
+                          frameBorder="0"
+                          allowFullScreen
+                          scrolling="no"
+                          allow="encrypted-media;"
+                          title={tiktok.title}
+                        ></iframe>
+                      </div>
                     </div>
+
+                    {/* ── Info column ── */}
                     <div className="tiktok-info">
                       <h3 className="tiktok-title">{tiktok.title}</h3>
-                      <p className="tiktok-description">{tiktok.description}</p>
+
+                      {tiktok.description && (
+                        <p className="tiktok-description">
+                          {tiktok.description}
+                        </p>
+                      )}
+
                       <a
                         href={tiktok.profileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-secondary btn-sm"
+                        className="tiktok-cta-btn"
                         onClick={() => handleTikTokClick(tiktok)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 448 512"
-                          width="20"
-                          height="20"
                           fill="currentColor"
-                          style={{ marginRight: "8px" }}
+                          aria-hidden="true"
                         >
                           <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" />
                         </svg>
