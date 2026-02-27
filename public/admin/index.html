@@ -9,492 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      :root {
-        --primary: #7e22ce;
-        --primary-l: #a855f7;
-        --primary-d: #6b21a8;
-        --accent: #e11d48;
-        --accent-l: #fb7185;
-        --bg: #faf5ff;
-        --surface: #fff;
-        --border: #e9d5ff;
-        --text: #09090b;
-        --muted: #71717a;
-        --danger: #dc2626;
-        --r: 8px;
-        --shadow: 0 1px 4px rgba(126, 34, 206, 0.08);
-        --shadow-md: 0 4px 16px rgba(126, 34, 206, 0.12);
-      }
-
-      body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        font-size: 14px;
-        line-height: 1.5;
-        min-height: 100vh;
-      }
-
-      /* ── Login ── */
-      #login-screen {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(
-          135deg,
-          var(--primary-d) 0%,
-          var(--accent) 100%
-        );
-      }
-      .login-card {
-        background: var(--surface);
-        border-radius: 16px;
-        padding: 2.5rem;
-        width: 100%;
-        max-width: 360px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-      }
-      .login-logo {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 1.75rem;
-      }
-      .login-logo span {
-        display: block;
-        font-size: 0.75rem;
-        font-weight: 400;
-        color: var(--muted);
-        margin-top: 0.15rem;
-      }
-      #login-error {
-        display: none;
-        font-size: 0.8rem;
-        color: var(--danger);
-        background: #fef2f2;
-        border: 1px solid #fecaca;
-        border-radius: var(--r);
-        padding: 0.5rem 0.75rem;
-        margin-bottom: 0.75rem;
-      }
-
-      /* ── Forms ── */
-      label {
-        display: block;
-        font-size: 0.72rem;
-        font-weight: 600;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.3rem;
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 0.55rem 0.75rem;
-        border: 1.5px solid var(--border);
-        border-radius: var(--r);
-        font-size: 0.875rem;
-        font-family: inherit;
-        background: var(--surface);
-        color: var(--text);
-        outline: none;
-        transition:
-          border-color 0.15s,
-          box-shadow 0.15s;
-      }
-      input:focus,
-      textarea:focus {
-        border-color: var(--primary-l);
-        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
-      }
-      textarea {
-        resize: vertical;
-        min-height: 70px;
-      }
-      .mono {
-        font-family: "DM Mono", monospace;
-        font-size: 0.8rem;
-      }
-      .form-row {
-        margin-bottom: 0.875rem;
-      }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.875rem;
-      }
-      .hint {
-        font-size: 0.72rem;
-        color: var(--muted);
-        margin-top: 0.25rem;
-      }
-      .req {
-        color: var(--accent);
-      }
-
-      /* ── Buttons ── */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.55rem 1.1rem;
-        border-radius: var(--r);
-        font-size: 0.82rem;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        transition: all 0.12s;
-        white-space: nowrap;
-      }
-      .btn svg {
-        width: 14px;
-        height: 14px;
-        stroke-width: 2;
-        flex-shrink: 0;
-      }
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        color: #fff;
-        box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
-      }
-      .btn-primary:hover {
-        filter: brightness(1.08);
-        transform: translateY(-1px);
-      }
-      .btn-ghost {
-        background: transparent;
-        color: var(--muted);
-        border: 1.5px solid var(--border);
-      }
-      .btn-ghost:hover {
-        background: var(--bg);
-        color: var(--text);
-      }
-      .btn-danger {
-        background: #fef2f2;
-        color: var(--danger);
-        border: 1.5px solid #fecaca;
-      }
-      .btn-danger:hover {
-        background: #fee2e2;
-      }
-      .btn-full {
-        width: 100%;
-        justify-content: center;
-        margin-top: 0.5rem;
-      }
-
-      /* ── App shell ── */
-      #app {
-        display: none;
-      }
-
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: var(--surface);
-        border-bottom: 1.5px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1.75rem;
-        height: 56px;
-      }
-      .topbar-brand {
-        font-size: 0.95rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      .topbar-right {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      /* ── Tabs ── */
-      .tabs {
-        display: flex;
-        gap: 0;
-        padding: 0 1.75rem;
-        border-bottom: 1.5px solid var(--border);
-        background: var(--surface);
-      }
-      .tab {
-        padding: 0.875rem 1.25rem;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: var(--muted);
-        cursor: pointer;
-        border: none;
-        background: transparent;
-        border-bottom: 2px solid transparent;
-        margin-bottom: -1.5px;
-        font-family: inherit;
-        transition:
-          color 0.15s,
-          border-color 0.15s;
-      }
-      .tab:hover {
-        color: var(--text);
-      }
-      .tab.active {
-        color: var(--primary);
-        border-bottom-color: var(--primary);
-      }
-
-      /* ── Main ── */
-      .main {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 2rem 1.75rem;
-      }
-
-      .panel {
-        display: none;
-      }
-      .panel.active {
-        display: block;
-      }
-
-      .page-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 0.3rem;
-        letter-spacing: -0.02em;
-      }
-      .page-subtitle {
-        font-size: 0.82rem;
-        color: var(--muted);
-        margin-bottom: 1.75rem;
-      }
-
-      /* ── Cards ── */
-      .card {
-        background: var(--surface);
-        border: 1.5px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1.25rem;
-        box-shadow: var(--shadow);
-      }
-      .card-title {
-        font-size: 0.9rem;
-        font-weight: 700;
-        margin-bottom: 1.25rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1.5px solid var(--border);
-        color: var(--primary-d);
-      }
-
-      /* ── TikTok list ── */
-      .tt-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .tt-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 1rem 1.125rem;
-        background: var(--bg);
-        border: 1.5px solid var(--border);
-        border-radius: var(--r);
-        transition: box-shadow 0.15s;
-      }
-      .tt-item:hover {
-        box-shadow: var(--shadow-md);
-        background: var(--surface);
-      }
-      .tt-num {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        color: #fff;
-        font-size: 0.72rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        margin-top: 0.1rem;
-      }
-      .tt-body {
-        flex: 1;
-        min-width: 0;
-      }
-      .tt-title-en {
-        font-size: 0.875rem;
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .tt-title-pl {
-        font-size: 0.78rem;
-        color: var(--muted);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-top: 0.1rem;
-      }
-      .tt-url {
-        font-family: "DM Mono", monospace;
-        font-size: 0.7rem;
-        color: var(--muted);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-top: 0.25rem;
-      }
-      .tt-actions {
-        display: flex;
-        gap: 0.4rem;
-        flex-shrink: 0;
-      }
-      .empty {
-        text-align: center;
-        padding: 2.5rem;
-        color: var(--muted);
-        border: 2px dashed var(--border);
-        border-radius: var(--r);
-        font-size: 0.82rem;
-      }
-
-      /* ── Edit mode for TikTok ── */
-      .tt-edit {
-        display: none;
-        padding: 0.75rem;
-        background: var(--bg);
-        border-radius: var(--r);
-        margin-top: 0.75rem;
-        border: 1.5px solid var(--border);
-      }
-      .tt-edit.open {
-        display: block;
-      }
-      .tt-edit .grid-2 {
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-      .tt-edit .form-row {
-        margin-bottom: 0.5rem;
-      }
-      .tt-edit-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-      }
-
-      /* ── Inline error ── */
-      .inline-error {
-        display: none;
-        font-size: 0.8rem;
-        color: var(--danger);
-        background: #fef2f2;
-        border: 1px solid #fecaca;
-        border-radius: var(--r);
-        padding: 0.5rem 0.75rem;
-        margin-bottom: 0.75rem;
-      }
-
-      /* ── Toasts ── */
-      #toast-root {
-        position: fixed;
-        bottom: 1.25rem;
-        right: 1.25rem;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-      .toast {
-        padding: 0.65rem 1rem;
-        border-radius: var(--r);
-        font-size: 0.82rem;
-        font-weight: 500;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        animation: toastIn 0.2s ease;
-        max-width: 280px;
-      }
-      .toast svg {
-        width: 14px;
-        height: 14px;
-        flex-shrink: 0;
-        stroke-width: 2.5;
-      }
-      .toast-success {
-        background: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        color: #166534;
-      }
-      .toast-error {
-        background: #fef2f2;
-        border: 1px solid #fecaca;
-        color: #991b1b;
-      }
-      @keyframes toastIn {
-        from {
-          opacity: 0;
-          transform: translateY(6px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* ── Count badge ── */
-      .badge {
-        font-size: 0.7rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        color: #fff;
-        border-radius: 20px;
-        padding: 0.1rem 0.55rem;
-        margin-left: 0.5rem;
-        vertical-align: middle;
-      }
-
-      @media (max-width: 600px) {
-        .grid-2 {
-          grid-template-columns: 1fr;
-        }
-        .tabs {
-          overflow-x: auto;
-        }
-        .main {
-          padding: 1.25rem 1rem;
-        }
-        .topbar {
-          padding: 0 1rem;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="admin.css" />
   </head>
   <body>
-    <!-- ── Login ── -->
+    <!-- ── Login ──────────────────────────────────────────────────────────────── -->
     <div id="login-screen">
       <div class="login-card">
         <div class="login-logo">
@@ -515,7 +33,7 @@
       </div>
     </div>
 
-    <!-- ── App ── -->
+    <!-- ── App ────────────────────────────────────────────────────────────────── -->
     <div id="app">
       <div class="topbar">
         <span class="topbar-brand">Create the Future</span>
@@ -528,51 +46,55 @@
         <button class="tab active" data-tab="tiktoks">
           TikToks <span id="tt-badge" class="badge">0</span>
         </button>
-        <button class="tab" data-tab="texts">Texts</button>
+        <button class="tab" data-tab="texts">Website texts</button>
         <button class="tab" data-tab="password">Password</button>
       </div>
 
       <div class="main">
-        <!-- TikToks -->
+        <!-- ── TikToks panel ── -->
         <div class="panel active" data-panel="tiktoks">
-          <div class="page-title">TikToks</div>
+          <div class="page-title">TikTok videos</div>
           <div class="page-subtitle">
-            Manage videos displayed on the public page. Drag to reorder is not
-            supported — delete and re-add to change order.
+            Manage the videos displayed on the public page. To change the order,
+            delete a video and add it again.
           </div>
 
           <div class="card">
-            <div class="card-title">Current videos</div>
+            <div class="card-title">Published videos</div>
             <div class="tt-list" id="tt-list"></div>
           </div>
 
           <div class="card">
-            <div class="card-title">Add new video</div>
+            <div class="card-title">Add a new video</div>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tt-en">Title EN <span class="req">*</span></label>
+                <label for="tt-en"
+                  >Title — English <span class="req">*</span></label
+                >
                 <input id="tt-en" type="text" placeholder="Interview with…" />
               </div>
               <div class="form-row">
-                <label for="tt-pl">Title PL</label>
+                <label for="tt-pl">Title — Polish</label>
                 <input id="tt-pl" type="text" placeholder="Wywiad z…" />
               </div>
             </div>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tt-desc-en">Description EN</label>
+                <label for="tt-desc-en">Short description — English</label>
                 <textarea
                   id="tt-desc-en"
                   placeholder="Short description…"
                 ></textarea>
               </div>
               <div class="form-row">
-                <label for="tt-desc-pl">Description PL</label>
+                <label for="tt-desc-pl">Short description — Polish</label>
                 <textarea id="tt-desc-pl" placeholder="Krótki opis…"></textarea>
               </div>
             </div>
             <div class="form-row">
-              <label for="tt-url">Embed URL <span class="req">*</span></label>
+              <label for="tt-url"
+                >TikTok embed URL <span class="req">*</span></label
+              >
               <input
                 id="tt-url"
                 type="url"
@@ -580,8 +102,8 @@
                 placeholder="https://www.tiktok.com/embed/v2/…"
               />
               <div class="hint">
-                Copy the embed URL from TikTok: Share video → Embed → copy the
-                src="" value.
+                How to get the embed URL: open the video on TikTok → Share →
+                Embed → copy the value inside <code>src="…"</code>.
               </div>
             </div>
             <button id="tt-add-btn" class="btn btn-primary">
@@ -594,68 +116,113 @@
           </div>
         </div>
 
-        <!-- Texts -->
+        <!-- ── Texts panel ── -->
         <div class="panel" data-panel="texts">
-          <div class="page-title">Texts</div>
+          <div class="page-title">Website texts</div>
           <div class="page-subtitle">
-            All text content editable here. Changes are only saved when you
-            click Save.
+            Edit all visible text on the public site. Changes take effect
+            immediately after you click Save.
           </div>
 
           <div class="card">
-            <div class="card-title">Hero section</div>
+            <div class="card-title">
+              Home page — main headline &amp; tagline
+            </div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The first thing visitors read when they open the website.
+            </p>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tx-hero-title-en">Title EN</label>
-                <input id="tx-hero-title-en" type="text" />
+                <label for="tx-hero-title-en">Main headline — English</label>
+                <input
+                  id="tx-hero-title-en"
+                  type="text"
+                  placeholder="e.g. Create the Future"
+                />
               </div>
               <div class="form-row">
-                <label for="tx-hero-title-pl">Title PL</label>
-                <input id="tx-hero-title-pl" type="text" />
+                <label for="tx-hero-title-pl">Main headline — Polish</label>
+                <input
+                  id="tx-hero-title-pl"
+                  type="text"
+                  placeholder="np. Twórz Przyszłość"
+                />
               </div>
               <div class="form-row">
-                <label for="tx-hero-sub-en">Subtitle EN</label>
-                <textarea id="tx-hero-sub-en"></textarea>
+                <label for="tx-hero-sub-en"
+                  >Tagline / sub-headline — English</label
+                >
+                <textarea
+                  id="tx-hero-sub-en"
+                  placeholder="A short sentence below the headline…"
+                ></textarea>
               </div>
               <div class="form-row">
-                <label for="tx-hero-sub-pl">Subtitle PL</label>
-                <textarea id="tx-hero-sub-pl"></textarea>
+                <label for="tx-hero-sub-pl"
+                  >Tagline / sub-headline — Polish</label
+                >
+                <textarea
+                  id="tx-hero-sub-pl"
+                  placeholder="Krótkie zdanie pod nagłówkiem…"
+                ></textarea>
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">Call to Action</div>
+            <div class="card-title">
+              Call to action — button / invitation text
+            </div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The text on or near the main button that encourages visitors to
+              take action.
+            </p>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tx-cta-en">CTA Title EN</label>
-                <input id="tx-cta-en" type="text" />
+                <label for="tx-cta-en"
+                  >Button / invitation text — English</label
+                >
+                <input
+                  id="tx-cta-en"
+                  type="text"
+                  placeholder="e.g. Book a free call"
+                />
               </div>
               <div class="form-row">
-                <label for="tx-cta-pl">CTA Title PL</label>
-                <input id="tx-cta-pl" type="text" />
+                <label for="tx-cta-pl">Button / invitation text — Polish</label>
+                <input
+                  id="tx-cta-pl"
+                  type="text"
+                  placeholder="np. Zarezerwuj rozmowę"
+                />
               </div>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-title">Statistics</div>
+            <div class="card-title">
+              Statistics — numbers shown on the home page
+            </div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The four key numbers displayed in the stats bar (followers, views,
+              etc.).
+            </p>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tx-followers">Followers</label>
-                <input id="tx-followers" type="number" />
+                <label for="tx-followers">TikTok followers</label>
+                <input id="tx-followers" type="number" placeholder="0" />
               </div>
               <div class="form-row">
-                <label for="tx-views">Views</label>
-                <input id="tx-views" type="number" />
+                <label for="tx-views">Total video views</label>
+                <input id="tx-views" type="number" placeholder="0" />
               </div>
               <div class="form-row">
-                <label for="tx-interviews">Interviews</label>
-                <input id="tx-interviews" type="number" />
+                <label for="tx-interviews">Interviews conducted</label>
+                <input id="tx-interviews" type="number" placeholder="0" />
               </div>
               <div class="form-row">
-                <label for="tx-industries">Industries</label>
-                <input id="tx-industries" type="number" />
+                <label for="tx-industries">Industries covered</label>
+                <input id="tx-industries" type="number" placeholder="0" />
               </div>
             </div>
           </div>
@@ -668,37 +235,54 @@
               <polyline points="17 21 17 13 7 13 7 21" />
               <polyline points="7 3 7 8 15 8" />
             </svg>
-            Save texts
+            Save all texts
           </button>
         </div>
 
-        <!-- Password -->
+        <!-- ── Password panel ── -->
         <div class="panel" data-panel="password">
-          <div class="page-title">Change Password</div>
+          <div class="page-title">Change password</div>
           <div class="page-subtitle">
-            Update your admin panel password. You will remain logged in after
-            changing.
+            Update your admin panel login password. You will stay logged in
+            after the change.
           </div>
 
-          <div class="card" style="max-width: 400px">
-            <div id="pw-error" class="inline-error"></div>
+          <div class="card" style="max-width: 420px">
+            <div id="pw-error" class="inline-error" role="alert"></div>
+
             <div class="form-row">
               <label for="pw-new">New password</label>
-              <input id="pw-new" type="password" autocomplete="new-password" />
-              <div class="hint">Minimum 8 characters.</div>
+              <input
+                id="pw-new"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Minimum 8 characters"
+              />
+              <!-- strength meter injected by password.js -->
+              <div id="pw-strength" class="pw-strength">
+                <div class="pw-strength-bar">
+                  <div id="pw-strength-fill" class="pw-strength-fill"></div>
+                </div>
+                <div id="pw-strength-label" class="pw-strength-label"></div>
+              </div>
             </div>
+
             <div class="form-row">
-              <label for="pw-confirm">Confirm password</label>
+              <label for="pw-confirm">Repeat new password</label>
               <input
                 id="pw-confirm"
                 type="password"
                 autocomplete="new-password"
+                placeholder="Type the password again"
               />
+              <div id="pw-confirm-hint" class="field-hint"></div>
             </div>
+
             <button
               id="pw-save-btn"
               class="btn btn-primary"
-              style="margin-top: 0.5rem"
+              style="margin-top: 0.75rem"
+              disabled
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <rect x="3" y="11" width="18" height="11" rx="2" />
@@ -715,438 +299,12 @@
 
     <div id="toast-root" role="status" aria-live="polite"></div>
 
-    <script>
-      "use strict";
-
-      // ── API ────────────────────────────────────────────────────────────────────
-
-      const TOKEN_KEY = "ctf_token";
-      const API_BASE =
-        window.location.port === "3000" ? "http://localhost:3001" : "";
-      window.AUTH_TOKEN = sessionStorage.getItem(TOKEN_KEY) ?? null;
-
-      /**
-       * Authenticated JSON fetch wrapper.
-       * Reads the response as text first so non-JSON bodies produce a clear error
-       * instead of a cryptic JSON.parse failure.
-       *
-       * @param {string} path
-       * @param {RequestInit} [opts={}]
-       * @returns {Promise<Object>}
-       */
-      async function api(path, opts = {}) {
-        const headers = { "Content-Type": "application/json" };
-        if (window.AUTH_TOKEN)
-          headers["Authorization"] = `Bearer ${window.AUTH_TOKEN}`;
-
-        let res;
-        try {
-          res = await fetch(API_BASE + path, { ...opts, headers });
-        } catch (err) {
-          throw new Error(`Network error: ${err.message}`);
-        }
-
-        const text = await res.text();
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch {
-          // Server returned something that is not JSON (HTML error page, empty body, etc.)
-          throw new Error(
-            `Unexpected server response (${res.status}): ${text.slice(0, 120)}`,
-          );
-        }
-
-        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-        return data;
-      }
-
-      // ── Toast ──────────────────────────────────────────────────────────────────
-
-      /**
-       * Shows a self-dismissing toast notification.
-       *
-       * @param {string} msg
-       * @param {"success"|"error"} [type="success"]
-       */
-      function toast(msg, type = "success") {
-        const icon =
-          type === "success"
-            ? `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
-            : `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`;
-        const el = document.createElement("div");
-        el.className = `toast toast-${type}`;
-        el.innerHTML = `${icon}<span>${String(msg)}</span>`;
-        document.getElementById("toast-root").appendChild(el);
-        setTimeout(() => {
-          el.style.cssText =
-            "opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s";
-          setTimeout(() => el.remove(), 260);
-        }, 3000);
-      }
-
-      // ── Tabs ──────────────────────────────────────────────────────────────────
-
-      /**
-       * Switches the active tab panel.
-       *
-       * @param {string} name - Panel name matching data-panel attribute.
-       */
-      function showTab(name) {
-        document
-          .querySelectorAll(".tab")
-          .forEach((t) => t.classList.toggle("active", t.dataset.tab === name));
-        document
-          .querySelectorAll(".panel")
-          .forEach((p) =>
-            p.classList.toggle("active", p.dataset.panel === name),
-          );
-      }
-
-      document
-        .querySelectorAll(".tab")
-        .forEach((t) =>
-          t.addEventListener("click", () => showTab(t.dataset.tab)),
-        );
-
-      // ── TikToks ────────────────────────────────────────────────────────────────
-
-      /** @type {Array<Object>} */
-      let _tiktoks = [];
-
-      /**
-       * Renders the current TikTok list to the DOM.
-       */
-      function renderTikToks() {
-        const list = document.getElementById("tt-list");
-        const badge = document.getElementById("tt-badge");
-        badge.textContent = _tiktoks.length;
-
-        if (!_tiktoks.length) {
-          list.innerHTML =
-            '<div class="empty">No videos yet. Add one below.</div>';
-          return;
-        }
-
-        list.innerHTML = _tiktoks
-          .map(
-            (t, i) => `
-    <div class="tt-item" id="tt-item-${t.id}">
-      <div class="tt-num">${i + 1}</div>
-      <div class="tt-body">
-        <div class="tt-title-en">${esc(t.title)}</div>
-        ${t.titlePl ? `<div class="tt-title-pl">${esc(t.titlePl)}</div>` : ""}
-        <div class="tt-url">${esc(t.embedUrl)}</div>
-        <div class="tt-edit" id="edit-${t.id}">
-          <div class="grid-2">
-            <div class="form-row"><label>Title EN</label><input id="e-en-${t.id}" value="${esc(t.title)}" /></div>
-            <div class="form-row"><label>Title PL</label><input id="e-pl-${t.id}" value="${esc(t.titlePl || "")}" /></div>
-            <div class="form-row"><label>Description EN</label><textarea id="e-den-${t.id}">${esc(t.description || "")}</textarea></div>
-            <div class="form-row"><label>Description PL</label><textarea id="e-dpl-${t.id}">${esc(t.descriptionPl || "")}</textarea></div>
-          </div>
-          <div class="form-row"><label>Embed URL</label><input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}" /></div>
-          <div class="tt-edit-actions">
-            <button class="btn btn-primary" onclick="saveTikTok(${t.id})">Save</button>
-            <button class="btn btn-ghost" onclick="toggleEdit(${t.id})">Cancel</button>
-          </div>
-        </div>
-      </div>
-      <div class="tt-actions">
-        <button class="btn btn-ghost" onclick="toggleEdit(${t.id})" title="Edit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </button>
-        <button class="btn btn-danger" onclick="deleteTikTok(${t.id})" title="Delete">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-        </button>
-      </div>
-    </div>
-  `,
-          )
-          .join("");
-      }
-
-      /**
-       * Toggles the inline edit panel for a TikTok item.
-       *
-       * @param {number} id - TikTok record ID.
-       */
-      function toggleEdit(id) {
-        const panel = document.getElementById(`edit-${id}`);
-        panel.classList.toggle("open");
-      }
-
-      /**
-       * Saves edits to an existing TikTok by PUTting the full content object.
-       *
-       * @param {number} id - TikTok record ID.
-       */
-      async function saveTikTok(id) {
-        const get = (s) => document.getElementById(s)?.value.trim() ?? "";
-        const idx = _tiktoks.findIndex((t) => t.id === id);
-        if (idx < 0) return;
-
-        _tiktoks[idx] = {
-          ..._tiktoks[idx],
-          title: get(`e-en-${id}`),
-          titlePl: get(`e-pl-${id}`),
-          description: get(`e-den-${id}`),
-          descriptionPl: get(`e-dpl-${id}`),
-          embedUrl: get(`e-url-${id}`),
-        };
-
-        try {
-          await api("/api/content", {
-            method: "PUT",
-            body: JSON.stringify({ tiktoks: _tiktoks }),
-          });
-          renderTikToks();
-          toast("Video updated.");
-        } catch (err) {
-          toast(err.message, "error");
-        }
-      }
-
-      /**
-       * Reads the add-video form and posts a new TikTok to the API.
-       *
-       * @returns {Promise<void>}
-       */
-      async function addTikTok() {
-        const g = (id) => document.getElementById(id)?.value.trim() ?? "";
-        const title = g("tt-en"),
-          embedUrl = g("tt-url");
-        if (!title || !embedUrl) {
-          toast("Title (EN) and Embed URL are required.", "error");
-          return;
-        }
-
-        try {
-          await api("/api/content/tiktoks", {
-            method: "POST",
-            body: JSON.stringify({
-              title,
-              titlePl: g("tt-pl"),
-              description: g("tt-desc-en"),
-              descriptionPl: g("tt-desc-pl"),
-              embedUrl,
-            }),
-          });
-          const content = await api("/api/content");
-          _tiktoks = content.tiktoks ?? [];
-          renderTikToks();
-          ["tt-en", "tt-pl", "tt-desc-en", "tt-desc-pl", "tt-url"].forEach(
-            (id) => {
-              const el = document.getElementById(id);
-              if (el) el.value = "";
-            },
-          );
-          toast("Video added.");
-        } catch (err) {
-          toast(err.message, "error");
-        }
-      }
-
-      /**
-       * Deletes a TikTok by ID after confirmation.
-       *
-       * @param {number} id
-       * @returns {Promise<void>}
-       */
-      async function deleteTikTok(id) {
-        if (!confirm("Delete this video?")) return;
-        try {
-          await api(`/api/content/tiktoks/${id}`, { method: "DELETE" });
-          const content = await api("/api/content");
-          _tiktoks = content.tiktoks ?? [];
-          renderTikToks();
-          toast("Video removed.");
-        } catch (err) {
-          toast(err.message, "error");
-        }
-      }
-
-      document
-        .getElementById("tt-add-btn")
-        .addEventListener("click", addTikTok);
-
-      // ── Texts ──────────────────────────────────────────────────────────────────
-
-      const TEXT_FIELDS = [
-        { id: "tx-hero-title-en", key: "heroTitle" },
-        { id: "tx-hero-title-pl", key: "heroTitlePl" },
-        { id: "tx-hero-sub-en", key: "heroSubtitle" },
-        { id: "tx-hero-sub-pl", key: "heroSubtitlePl" },
-        { id: "tx-cta-en", key: "ctaTitle" },
-        { id: "tx-cta-pl", key: "ctaTitlePl" },
-        { id: "tx-followers", key: "statsFollowers" },
-        { id: "tx-views", key: "statsViews" },
-        { id: "tx-interviews", key: "statsInterviews" },
-        { id: "tx-industries", key: "statsIndustries" },
-      ];
-
-      /**
-       * Populates all text inputs from a content texts object.
-       *
-       * @param {Object} texts
-       */
-      function populateTexts(texts) {
-        TEXT_FIELDS.forEach(({ id, key }) => {
-          const el = document.getElementById(id);
-          if (el) el.value = texts[key] ?? "";
-        });
-      }
-
-      /**
-       * Reads all text inputs and saves to the API.
-       *
-       * @returns {Promise<void>}
-       */
-      async function saveTexts() {
-        const values = Object.fromEntries(
-          TEXT_FIELDS.map(({ id, key }) => [
-            key,
-            document.getElementById(id)?.value ?? "",
-          ]),
-        );
-        try {
-          await api("/api/content", {
-            method: "PUT",
-            body: JSON.stringify({ texts: values }),
-          });
-          toast("Texts saved.");
-        } catch (err) {
-          toast(err.message, "error");
-        }
-      }
-
-      document
-        .getElementById("texts-save-btn")
-        .addEventListener("click", saveTexts);
-
-      // ── Password ────────────────────────────────────────────────────────────────
-
-      /**
-       * Validates inputs and submits a password change request.
-       *
-       * @returns {Promise<void>}
-       */
-      async function changePassword() {
-        const errEl = document.getElementById("pw-error");
-        const next = document.getElementById("pw-new")?.value ?? "";
-        const confirm = document.getElementById("pw-confirm")?.value ?? "";
-        errEl.style.display = "none";
-
-        if (next.length < 8) {
-          errEl.textContent = "Password must be at least 8 characters.";
-          errEl.style.display = "block";
-          return;
-        }
-        if (next !== confirm) {
-          errEl.textContent = "Passwords do not match.";
-          errEl.style.display = "block";
-          return;
-        }
-
-        try {
-          await api("/api/auth/change-password", {
-            method: "POST",
-            body: JSON.stringify({ newPassword: next }),
-          });
-          document.getElementById("pw-new").value = "";
-          document.getElementById("pw-confirm").value = "";
-          toast("Password updated.");
-        } catch (err) {
-          errEl.textContent = err.message;
-          errEl.style.display = "block";
-        }
-      }
-
-      document
-        .getElementById("pw-save-btn")
-        .addEventListener("click", changePassword);
-
-      // ── Auth ───────────────────────────────────────────────────────────────────
-
-      /**
-       * Loads content from API and displays the main app view.
-       *
-       * @returns {Promise<void>}
-       */
-      async function enterPanel() {
-        const content = await api("/api/content");
-        _tiktoks = content.tiktoks ?? [];
-        renderTikToks();
-        populateTexts(content.texts ?? {});
-
-        document.getElementById("login-screen").style.display = "none";
-        document.getElementById("app").style.display = "block";
-      }
-
-      /**
-       * Attempts login with the supplied password.
-       *
-       * @returns {Promise<void>}
-       */
-      async function login() {
-        const errEl = document.getElementById("login-error");
-        const password = document.getElementById("login-password")?.value ?? "";
-        errEl.style.display = "none";
-
-        try {
-          const { token } = await api("/api/auth/login", {
-            method: "POST",
-            body: JSON.stringify({ password }),
-          });
-          window.AUTH_TOKEN = token;
-          sessionStorage.setItem(TOKEN_KEY, token);
-          await enterPanel();
-        } catch (err) {
-          errEl.textContent =
-            err.message === "Wrong password"
-              ? "Incorrect password."
-              : err.message;
-          errEl.style.display = "block";
-        }
-      }
-
-      /** Clears session and returns to login screen. */
-      function logout() {
-        window.AUTH_TOKEN = null;
-        sessionStorage.removeItem(TOKEN_KEY);
-        document.getElementById("app").style.display = "none";
-        document.getElementById("login-screen").style.display = "flex";
-        document.getElementById("login-password").value = "";
-      }
-
-      document.getElementById("login-btn").addEventListener("click", login);
-      document
-        .getElementById("login-password")
-        .addEventListener("keydown", (e) => {
-          if (e.key === "Enter") login();
-        });
-      document.getElementById("logout-btn").addEventListener("click", logout);
-
-      // Auto-login from stored token
-      if (window.AUTH_TOKEN) {
-        enterPanel().catch(logout);
-      }
-
-      // ── Util ───────────────────────────────────────────────────────────────────
-
-      /**
-       * Escapes HTML special characters to prevent XSS.
-       *
-       * @param {*} str
-       * @returns {string}
-       */
-      function esc(str) {
-        return String(str ?? "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#39;");
-      }
-    </script>
+    <!-- Scripts loaded in dependency order -->
+    <script src="api.js"></script>
+    <script src="utils.js"></script>
+    <script src="tiktoks.js"></script>
+    <script src="texts.js"></script>
+    <script src="password.js"></script>
+    <script src="auth.js"></script>
   </body>
 </html>
