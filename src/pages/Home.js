@@ -238,11 +238,13 @@ const TikTokPreview = () => {
                 <div className="tiktok-phone-button-left"></div>
                 <div className="tiktok-phone-volume"></div>
                 <div className="tiktok-embed-wrapper">
+                  {/* scrolling="no" + CSS pointer-events trick eliminates scroll-in-scroll */}
                   <iframe
                     src={tiktoks[activeTikTok].embedUrl}
                     allowFullScreen
                     allow="encrypted-media;"
                     title={t("tiktokPreview.title")}
+                    scrolling="no"
                   ></iframe>
                 </div>
               </div>
