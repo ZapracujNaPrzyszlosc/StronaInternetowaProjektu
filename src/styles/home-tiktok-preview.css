@@ -239,6 +239,12 @@
    * how tall the text column grows.
    */
   align-items: center;
+  /*
+   * FIX: align-self: center prevents the grid from stretching this cell
+   * taller than its content, which is the root cause of the icon appearing
+   * off-centre relative to the text.
+   */
+  align-self: center;
   gap: 0.65rem;
   padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.07);
@@ -250,10 +256,23 @@
 .stat-icon {
   width: 44px;
   height: 44px;
+  /*
+   * FIX: without min-width/min-height the browser can squash the circle in
+   * tight grid cells, breaking the 1:1 aspect-ratio and pushing the icon
+   * off-centre. Explicit minimums lock the dimensions regardless of context.
+   */
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  /*
+   * FIX: align-self: center alone is not enough when a global stylesheet
+   * adds implicit margin to flex/grid children. Resetting margin: 0 removes
+   * any vertical offset that shifts the circle away from the text baseline.
+   */
   align-self: center;
+  margin: 0;
   background: linear-gradient(
     135deg,
     var(--primary-color),
