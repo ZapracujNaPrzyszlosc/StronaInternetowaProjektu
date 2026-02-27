@@ -67,14 +67,12 @@ console.log("ADMIN_DIR:", ADMIN_DIR);
 console.log("__dirname:", __dirname);
 
 app.use((req, res, next) => {
-  // Koyeb (and most reverse proxies) forward the original hostname via
-  // X-Forwarded-Host. Fall back to req.hostname if the header is absent.
   const host = (req.headers["x-forwarded-host"] || req.hostname || "")
-    .split(",")[0] // x-forwarded-host can be a comma-separated list
+    .split(",")[0]
     .trim()
     .toLowerCase();
 
-  if (host.startsWith("admin.")) {
+  if (host.startsWith("admin.") && !req.path.startsWith("/api/")) {
     return express.static(ADMIN_DIR)(req, res, () => {
       res.sendFile(path.join(ADMIN_DIR, "index.html"));
     });
