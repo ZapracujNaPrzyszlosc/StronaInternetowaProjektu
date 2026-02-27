@@ -17,6 +17,50 @@ let _tiktoks = [];
 /** @type {number|null} Index of the item currently being dragged. */
 let _dragSrcIdx = null;
 
+// ── URL helpers ────────────────────────────────────────────────────────────────
+
+/**
+ * Extracts a TikTok video ID from any plausible input and returns the
+ * canonical embed URL.
+ *
+ * Handles:
+ *   - Regular video URLs: https://www.tiktok.com/@user/video/7580259479464217911
+ *   - Share/app URLs that contain /video/<id> anywhere in the path
+ *   - Already-formed embed URLs: https://www.tiktok.com/embed/v2/<id>
+ *   - Bare numeric IDs: "7580259479464217911"
+ *
+ * @param {string} input - Any TikTok-related URL or raw video ID.
+ * @returns {string|null} Canonical embed URL, or null if no ID could be found.
+ */
+function extractTikTokEmbedUrl(input) {
+  const trimmed = (input ?? "").trim();
+  if (!trimmed) return null;
+
+  // Already a valid embed URL — pass through unchanged.
+  if (/^https:\/\/www\.tiktok\.com\/embed\/v2\/\d+/.test(trimmed)) {
+    return trimmed.split("?")[0]; // strip any query params for cleanliness
+  }
+
+  // Extract ID from /video/<digits> (standard & share URLs).
+  const videoMatch = trimmed.match(/\/video\/(\d+)/);
+  if (videoMatch) {
+    return `https://www.tiktok.com/embed/v2/${videoMatch[1]}`;
+  }
+
+  // Extract ID from /embed/v2/<digits> (already embed but with extra stuff).
+  const embedMatch = trimmed.match(/\/embed\/v2\/(\d+)/);
+  if (embedMatch) {
+    return `https://www.tiktok.com/embed/v2/${embedMatch[1]}`;
+  }
+
+  // Bare numeric ID.
+  if (/^\d{10,}$/.test(trimmed)) {
+    return `https://www.tiktok.com/embed/v2/${trimmed}`;
+  }
+
+  return null;
+}
+
 // ── Public API ─────────────────────────────────────────────────────────────────
 
 /**
@@ -94,8 +138,10 @@ function renderTikToks() {
             </div>
           </div>
           <div class="form-row">
-            <label>Embed URL</label>
-            <input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}" />
+            <label>TikTok link</label>
+            <input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}"
+              placeholder="https://www.tiktok.com/@user/video/123456…" />
+            <div class="hint">Paste any TikTok link — the video ID will be extracted automatically.</div>
           </div>
           <div class="tt-edit-actions">
             <button class="btn btn-primary" onclick="saveTikTok(${t.id})">Save</button>
@@ -206,6 +252,8 @@ function toggleEdit(id) {
 
 /**
  * Persists edits to an existing TikTok by PUTting the full array.
+ * The URL field accepts any TikTok link — the video ID is extracted
+ * automatically via {@link extractTikTokEmbedUrl}.
  *
  * @param {number} id
  * @returns {Promise<void>}
@@ -215,13 +263,20 @@ async function saveTikTok(id) {
   const idx = _tiktoks.findIndex((t) => t.id === id);
   if (idx < 0) return;
 
+  const rawUrl = get(`e-url-${id}`);
+  const embedUrl = extractTikTokEmbedUrl(rawUrl);
+  if (!embedUrl) {
+    toast("Could not extract a video ID from that link.", "error");
+    return;
+  }
+
   _tiktoks[idx] = {
     ..._tiktoks[idx],
     title: get(`e-en-${id}`),
     titlePl: get(`e-pl-${id}`),
     description: get(`e-den-${id}`),
     descriptionPl: get(`e-dpl-${id}`),
-    embedUrl: get(`e-url-${id}`),
+    embedUrl,
   };
 
   try {
@@ -238,16 +293,24 @@ async function saveTikTok(id) {
 
 /**
  * POSTs a new TikTok from the add-form, then reloads the list.
+ * The URL field accepts any TikTok link — the video ID is extracted
+ * automatically via {@link extractTikTokEmbedUrl}.
  *
  * @returns {Promise<void>}
  */
 async function addTikTok() {
   const g = (id) => document.getElementById(id)?.value.trim() ?? "";
   const title = g("tt-en");
-  const embedUrl = g("tt-url");
+  const rawUrl = g("tt-url");
 
-  if (!title || !embedUrl) {
-    toast("Title (EN) and Embed URL are required.", "error");
+  if (!title) {
+    toast("Title (EN) is required.", "error");
+    return;
+  }
+
+  const embedUrl = extractTikTokEmbedUrl(rawUrl);
+  if (!embedUrl) {
+    toast("Could not extract a video ID from that link.", "error");
     return;
   }
 

@@ -99,18 +99,16 @@
               </div>
             </div>
             <div class="form-row">
-              <label for="tt-url"
-                >TikTok embed URL <span class="req">*</span></label
-              >
+              <label for="tt-url">TikTok link <span class="req">*</span></label>
               <input
                 id="tt-url"
                 type="url"
                 class="mono"
-                placeholder="https://www.tiktok.com/embed/v2/…"
+                placeholder="https://www.tiktok.com/@user/video/123456…"
               />
               <div class="hint">
-                How to get the embed URL: open the video on TikTok → Share →
-                Embed → copy the value inside <code>src="…"</code>.
+                Paste any TikTok link — a regular video URL, a share link, or an
+                embed URL. The video ID will be extracted automatically.
               </div>
             </div>
             <button id="tt-add-btn" class="btn btn-primary">
@@ -177,17 +175,13 @@
           </div>
 
           <div class="card">
-            <div class="card-title">
-              Call to action text
-            </div>
+            <div class="card-title">Call to action text</div>
             <p class="hint" style="margin-bottom: 1rem">
               The text encouraging visitors to follow us on social media.
             </p>
             <div class="grid-2">
               <div class="form-row">
-                <label for="tx-cta-en"
-                  >Call to action text — English</label
-                >
+                <label for="tx-cta-en">Call to action text — English</label>
                 <input
                   id="tx-cta-en"
                   type="text"
