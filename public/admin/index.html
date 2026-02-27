@@ -3,231 +3,205 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>CMS — Create the Future</title>
-
-    <!-- Fonts -->
+    <title>Admin — Create the Future</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Styles -->
     <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/preview.css" />
   </head>
   <body>
-    <!-- ================================================================
-       Login screen
-       ================================================================ -->
+    <!-- =========================================================
+     Login screen
+     ========================================================= -->
     <div id="login-screen">
       <div class="login-card">
-        <div class="login-brand">
-          <div class="login-brand-dot"></div>
-          <span class="login-brand-name">Create the Future</span>
+        <div class="login-logo">
+          <div class="login-logo-dot"></div>
+          <span class="login-logo-name">Create the Future</span>
         </div>
-        <p style="color: #a1a1aa; font-size: 0.875rem; margin-bottom: 1.5rem">
-          Sign in to the admin panel
-        </p>
-
+        <h1 class="login-title">Admin Panel</h1>
+        <p class="login-sub">Sign in to manage your content.</p>
+        <div id="login-error" role="alert"></div>
         <div class="form-row">
           <label class="form-label" for="login-password">Password</label>
           <input
             id="login-password"
             type="password"
             class="form-input"
-            placeholder="Enter admin password"
+            placeholder="••••••••"
+            autocomplete="current-password"
           />
         </div>
-        <p
-          id="login-error"
-          style="
-            color: #f87171;
-            font-size: 0.8rem;
-            min-height: 1.2rem;
-            margin-bottom: 0.75rem;
-          "
-        ></p>
-        <button id="login-btn" class="btn btn-primary" style="width: 100%">
+        <button
+          id="login-btn"
+          class="btn btn-primary"
+          style="width: 100%; margin-top: 0.5rem"
+        >
           Sign in
         </button>
       </div>
     </div>
 
-    <!-- ================================================================
-       Main panel
-       ================================================================ -->
-    <div id="panel" style="display: none">
-      <!-- Sidebar -->
+    <!-- =========================================================
+     App shell (hidden until login)
+     ========================================================= -->
+    <div id="app" hidden>
+      <!-- Sidebar ------------------------------------------------ -->
       <aside class="sidebar">
         <div class="sidebar-brand">
           <div class="sidebar-brand-dot"></div>
-          <span class="sidebar-brand-text">Create the Future</span>
+          <span class="sidebar-brand-name">Create the Future</span>
         </div>
 
-        <nav>
-          <div class="sidebar-section">Content</div>
-          <button class="nav-item active" data-section="tiktoks">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.9L15 14M3 8h12a2 2 0 012 2v4a2 2 0 01-2 2H3a2 2 0 01-2-2v-4a2 2 0 012-2z"
-              />
-            </svg>
-            TikToks
-          </button>
-          <button class="nav-item" data-section="texts">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              />
-            </svg>
-            Texts
-          </button>
+        <span class="sidebar-section-label">Content</span>
 
-          <div class="sidebar-section" style="margin-top: 0.75rem">
-            Appearance
-          </div>
-          <button class="nav-item" data-section="theme">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-              />
-            </svg>
-            Theme
-          </button>
+        <button class="nav-item" data-section="tiktoks">
+          <!-- TikTok icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61
+                 c3.95-.43 8.11-1.94 8.11-8.72A6.49 6.49 0 0 0 19 4.77
+                 5.91 5.91 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7
+                 0C5.27.65 4.09 1 4.09 1A5.91 5.91 0 0 0 4 4.77a6.49 6.49 0
+                 0 0-1.72 4.52c0 6.72 4.16 8.28 8.12 8.72A3.37 3.37 0 0 0 9
+                 20.13V24"
+            />
+          </svg>
+          TikToks
+        </button>
 
-          <div class="sidebar-section" style="margin-top: 0.75rem">Account</div>
-          <button class="nav-item" data-section="settings">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            Settings
-          </button>
-        </nav>
+        <button class="nav-item" data-section="texts">
+          <!-- Type icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="4 7 4 4 20 4 20 7" />
+            <line x1="9" y1="20" x2="15" y2="20" />
+            <line x1="12" y1="4" x2="12" y2="20" />
+          </svg>
+          Texts
+        </button>
+
+        <button class="nav-item" data-section="theme">
+          <!-- Palette icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+            <path
+              d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746
+                 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125
+                 a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554
+                 C21.965 6.012 17.461 2 12 2z"
+            />
+          </svg>
+          Theme
+        </button>
+
+        <span class="sidebar-section-label">Account</span>
+
+        <button class="nav-item" data-section="settings">
+          <!-- Settings icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83
+                 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1
+                 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65
+                 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65
+                 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65
+                 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1
+                 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3
+                 a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33
+                 l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65
+                 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            />
+          </svg>
+          Settings
+        </button>
 
         <div class="sidebar-footer">
-          <button id="logout-btn" class="sidebar-footer-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
+          <button id="logout-btn" class="btn-sidebar-logout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
             </svg>
             Sign out
           </button>
         </div>
       </aside>
 
-      <!-- Content area -->
-      <main class="main">
-        <!-- ---- TikToks ---- -->
-        <section class="section" data-section="tiktoks">
+      <!-- Content area ------------------------------------------- -->
+      <main class="content">
+        <!-- Topbar -->
+        <div class="topbar">
+          <button id="btn-preview" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            Live preview
+          </button>
+        </div>
+
+        <!-- ── TikToks panel ─────────────────────────────────────── -->
+        <section class="panel" data-section="tiktoks">
           <div class="page-header">
             <h1>TikToks</h1>
             <p class="page-desc">
-              Manage the video gallery displayed on the homepage.
+              Manage the videos shown on your public page.
             </p>
           </div>
 
-          <!-- Current TikToks -->
+          <!-- List -->
           <div class="card">
             <div class="card-header">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0
+                     0-.94-2.61c3.95-.43 8.11-1.94 8.11-8.72A6.49 6.49 0
+                     0 0 19 4.77 5.91 5.91 0 0 0 18.91 1S17.73.65 15 2.48a13.38
+                     13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.91 5.91 0 0 0 4
+                     4.77a6.49 6.49 0 0 0-1.72 4.52c0 6.72 4.16 8.28 8.12 8.72A3.37
+                     3.37 0 0 0 9 20.13V24"
                 />
               </svg>
-              <h2>Current videos</h2>
-              <span class="card-header-count" id="tiktok-count">0</span>
+              <h2>Video List</h2>
+              <span class="card-badge" id="tiktok-count">0</span>
             </div>
             <div id="tiktok-list"></div>
           </div>
 
-          <!-- Add TikTok -->
+          <!-- Add form -->
           <div class="card">
             <div class="card-header">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 4v16m8-8H4"
-                />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
-              <h2>Add a new TikTok</h2>
+              <h2>Add Video</h2>
             </div>
 
             <div class="form-grid-2">
               <div class="form-row">
-                <label class="form-label" for="tiktok-title"
-                  >Title (EN) <span style="color: var(--danger)">*</span></label
+                <label class="form-label" for="tt-title-en"
+                  >Title <span class="required">*</span> (EN)</label
                 >
                 <input
-                  id="tiktok-title"
+                  id="tt-title-en"
                   type="text"
                   class="form-input"
                   placeholder="English title"
                 />
               </div>
               <div class="form-row">
-                <label class="form-label" for="tiktok-titlePl"
-                  >Title (PL)</label
-                >
+                <label class="form-label" for="tt-title-pl">Title (PL)</label>
                 <input
-                  id="tiktok-titlePl"
+                  id="tt-title-pl"
                   type="text"
                   class="form-input"
                   placeholder="Polish title"
@@ -237,368 +211,438 @@
 
             <div class="form-grid-2">
               <div class="form-row">
-                <label class="form-label" for="tiktok-description"
+                <label class="form-label" for="tt-desc-en"
                   >Description (EN)</label
                 >
                 <textarea
-                  id="tiktok-description"
+                  id="tt-desc-en"
                   class="form-input"
-                  placeholder="English description"
+                  placeholder="Short description…"
                 ></textarea>
               </div>
               <div class="form-row">
-                <label class="form-label" for="tiktok-descriptionPl"
+                <label class="form-label" for="tt-desc-pl"
                   >Description (PL)</label
                 >
                 <textarea
-                  id="tiktok-descriptionPl"
+                  id="tt-desc-pl"
                   class="form-input"
-                  placeholder="Polish description"
+                  placeholder="Krótki opis…"
                 ></textarea>
               </div>
             </div>
 
             <div class="form-row">
-              <label class="form-label" for="tiktok-embedUrl"
-                >Embed URL <span style="color: var(--danger)">*</span></label
+              <label class="form-label" for="tt-url"
+                >Embed URL <span class="required">*</span></label
               >
               <input
-                id="tiktok-embedUrl"
+                id="tt-url"
                 type="url"
                 class="form-input form-input-mono"
-                placeholder="https://www.tiktok.com/embed/v2/…"
+                placeholder="https://www.tiktok.com/embed/…"
               />
-              <p class="form-hint">
-                Find this in TikTok → Share → Embed → copy the
-                <code>src</code> attribute.
-              </p>
+              <span class="form-hint">Paste the full TikTok embed URL.</span>
             </div>
 
-            <div class="form-row">
-              <label class="form-label" for="tiktok-profileUrl"
-                >Profile URL</label
-              >
-              <input
-                id="tiktok-profileUrl"
-                type="url"
-                class="form-input form-input-mono"
-                placeholder="https://www.tiktok.com/@create_the_future_"
-              />
-            </div>
-
-            <button id="add-tiktok-btn" class="btn btn-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 4v16m8-8H4"
-                />
+            <button id="tt-add-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
               Add TikTok
             </button>
           </div>
         </section>
 
-        <!-- ---- Texts ---- -->
-        <section class="section" data-section="texts" style="display: none">
+        <!-- ── Texts panel ───────────────────────────────────────── -->
+        <section class="panel" data-section="texts">
           <div class="page-header">
             <h1>Texts</h1>
             <p class="page-desc">
-              Edit the copy displayed on the public website.
+              Edit hero copy, CTA and statistics — in EN and PL.
             </p>
           </div>
 
+          <!-- Hero -->
           <div class="card">
             <div class="card-header">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
               </svg>
-              <h2>Site copy</h2>
+              <h2>Hero Section</h2>
             </div>
 
-            <!-- Hero -->
-            <p
-              class="form-label"
-              style="
-                font-weight: 600;
-                color: var(--text);
-                margin-bottom: 0.5rem;
-              "
-            >
-              Hero section
-            </p>
+            <div class="form-grid-2">
+              <div>
+                <div class="form-row">
+                  <label class="form-label" for="text-hero-title-en"
+                    >Title (EN)</label
+                  >
+                  <input
+                    id="text-hero-title-en"
+                    type="text"
+                    class="form-input"
+                  />
+                </div>
+                <div class="form-row">
+                  <label class="form-label" for="text-hero-subtitle-en"
+                    >Subtitle (EN)</label
+                  >
+                  <textarea
+                    id="text-hero-subtitle-en"
+                    class="form-input"
+                  ></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="form-row">
+                  <label class="form-label" for="text-hero-title-pl"
+                    >Title (PL)</label
+                  >
+                  <input
+                    id="text-hero-title-pl"
+                    type="text"
+                    class="form-input"
+                  />
+                </div>
+                <div class="form-row">
+                  <label class="form-label" for="text-hero-subtitle-pl"
+                    >Subtitle (PL)</label
+                  >
+                  <textarea
+                    id="text-hero-subtitle-pl"
+                    class="form-input"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="card">
+            <div class="card-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              <h2>Statistics</h2>
+            </div>
+
             <div class="form-grid-2">
               <div class="form-row">
-                <label class="form-label" for="text-heroTitleEn"
-                  >Hero title (EN)</label
+                <label class="form-label" for="text-stat-followers"
+                  >Followers</label
                 >
-                <input id="text-heroTitleEn" type="text" class="form-input" />
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="text-heroTitlePl"
-                  >Hero title (PL)</label
-                >
-                <input id="text-heroTitlePl" type="text" class="form-input" />
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="text-heroSubtitleEn"
-                  >Hero subtitle (EN)</label
-                >
-                <textarea
-                  id="text-heroSubtitleEn"
+                <input
+                  id="text-stat-followers"
+                  type="text"
                   class="form-input"
-                ></textarea>
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="text-heroSubtitlePl"
-                  >Hero subtitle (PL)</label
-                >
-                <textarea
-                  id="text-heroSubtitlePl"
-                  class="form-input"
-                ></textarea>
-              </div>
-            </div>
-
-            <!-- CTA -->
-            <p
-              class="form-label"
-              style="
-                font-weight: 600;
-                color: var(--text);
-                margin: 0.75rem 0 0.5rem;
-              "
-            >
-              Call to action
-            </p>
-            <div class="form-grid-2">
-              <div class="form-row">
-                <label class="form-label" for="text-ctaEn"
-                  >CTA button (EN)</label
-                >
-                <input id="text-ctaEn" type="text" class="form-input" />
-              </div>
-              <div class="form-row">
-                <label class="form-label" for="text-ctaPl"
-                  >CTA button (PL)</label
-                >
-                <input id="text-ctaPl" type="text" class="form-input" />
-              </div>
-            </div>
-
-            <button id="save-texts-btn" class="btn btn-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M5 13l4 4L19 7"
+                  placeholder="e.g. 125000"
                 />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="text-stat-views">Views</label>
+                <input
+                  id="text-stat-views"
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g. 4200000"
+                />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="text-stat-interviews"
+                  >Interviews</label
+                >
+                <input
+                  id="text-stat-interviews"
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g. 48"
+                />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="text-stat-industries"
+                  >Industries</label
+                >
+                <input
+                  id="text-stat-industries"
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g. 12"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="card">
+            <div class="card-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="13 17 18 12 13 7" />
+                <polyline points="6  17 11 12  6  7" />
               </svg>
-              Save texts
+              <h2>Call to Action</h2>
+            </div>
+
+            <div class="form-grid-2">
+              <div>
+                <div class="form-row">
+                  <label class="form-label" for="text-cta-title-en"
+                    >CTA Title (EN)</label
+                  >
+                  <input
+                    id="text-cta-title-en"
+                    type="text"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="form-row">
+                  <label class="form-label" for="text-cta-title-pl"
+                    >CTA Title (PL)</label
+                  >
+                  <input
+                    id="text-cta-title-pl"
+                    type="text"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button id="texts-save-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path
+                  d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+                />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+              </svg>
+              Save Texts
             </button>
           </div>
         </section>
 
-        <!-- ---- Theme ---- -->
-        <section class="section" data-section="theme" style="display: none">
+        <!-- ── Theme panel ───────────────────────────────────────── -->
+        <section class="panel" data-section="theme">
           <div class="page-header">
             <h1>Theme</h1>
             <p class="page-desc">
-              Adjust the color palette of the public website.
+              Adjust brand colors. The gradient preview updates in real-time.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746
+                     1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125
+                     a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554
+                     C21.965 6.012 17.461 2 12 2z"
                 />
               </svg>
-              <h2>Color palette</h2>
+              <h2>Brand Colors</h2>
             </div>
 
+            <!-- Color rows -->
             <div class="color-row">
-              <label class="form-label" for="theme-primary">Primary</label>
+              <label class="form-label">Primary</label>
               <input
-                id="theme-primary"
+                id="theme-primary-hex"
+                type="text"
+                class="form-input color-hex"
+                maxlength="7"
+                placeholder="#7e22ce"
+              />
+              <input id="theme-primary" type="color" title="Primary color" />
+            </div>
+            <div class="color-row">
+              <label class="form-label">Primary Light</label>
+              <input
+                id="theme-primary-light-hex"
+                type="text"
+                class="form-input color-hex"
+                maxlength="7"
+                placeholder="#a855f7"
+              />
+              <input
+                id="theme-primary-light"
                 type="color"
-                class="form-input"
-                style="height: 40px; padding: 0.25rem"
+                title="Primary light"
               />
             </div>
             <div class="color-row">
-              <label class="form-label" for="theme-secondary"
-                >Secondary (accent)</label
-              >
+              <label class="form-label">Primary Dark</label>
+              <input
+                id="theme-primary-dark-hex"
+                type="text"
+                class="form-input color-hex"
+                maxlength="7"
+                placeholder="#6b21a8"
+              />
+              <input
+                id="theme-primary-dark"
+                type="color"
+                title="Primary dark"
+              />
+            </div>
+            <div class="color-row">
+              <label class="form-label">Secondary</label>
+              <input
+                id="theme-secondary-hex"
+                type="text"
+                class="form-input color-hex"
+                maxlength="7"
+                placeholder="#e11d48"
+              />
               <input
                 id="theme-secondary"
                 type="color"
-                class="form-input"
-                style="height: 40px; padding: 0.25rem"
+                title="Secondary color"
               />
             </div>
             <div class="color-row">
-              <label class="form-label" for="theme-accent"
-                >Accent / light tint</label
-              >
+              <label class="form-label">Secondary Light</label>
               <input
-                id="theme-accent"
-                type="color"
-                class="form-input"
-                style="height: 40px; padding: 0.25rem"
+                id="theme-secondary-light-hex"
+                type="text"
+                class="form-input color-hex"
+                maxlength="7"
+                placeholder="#fb7185"
               />
-            </div>
-            <div class="color-row">
-              <label class="form-label" for="theme-background"
-                >Background</label
-              >
               <input
-                id="theme-background"
+                id="theme-secondary-light"
                 type="color"
-                class="form-input"
-                style="height: 40px; padding: 0.25rem"
-              />
-            </div>
-            <div class="color-row">
-              <label class="form-label" for="theme-text">Text</label>
-              <input
-                id="theme-text"
-                type="color"
-                class="form-input"
-                style="height: 40px; padding: 0.25rem"
+                title="Secondary light"
               />
             </div>
 
             <!-- Gradient preview -->
-            <div style="margin: 1.25rem 0">
-              <p class="form-label" style="margin-bottom: 0.5rem">
-                Gradient preview
-              </p>
-              <div
-                id="gradient-preview"
-                style="
-                  height: 56px;
-                  border-radius: var(--radius);
-                  transition: background 0.3s;
-                "
-              ></div>
-            </div>
+            <div id="gradient-strip" class="gradient-strip"></div>
 
-            <button id="save-theme-btn" class="btn btn-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <button id="theme-save-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M5 13l4 4L19 7"
+                  d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
                 />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
               </svg>
-              Save theme
+              Save Theme
             </button>
           </div>
         </section>
 
-        <!-- ---- Settings ---- -->
-        <section class="section" data-section="settings" style="display: none">
+        <!-- ── Settings panel ────────────────────────────────────── -->
+        <section class="panel" data-section="settings">
           <div class="page-header">
             <h1>Settings</h1>
-            <p class="page-desc">Manage your admin account.</p>
+            <p class="page-desc">Change your admin password.</p>
           </div>
 
-          <div class="card">
+          <div class="card" style="max-width: 420px">
             <div class="card-header">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
-              <h2>Change password</h2>
+              <h2>Change Password</h2>
             </div>
 
+            <div
+              id="settings-error"
+              class="form-hint"
+              style="color: var(--danger); margin-bottom: 0.75rem"
+              hidden
+            ></div>
+
             <div class="form-row">
-              <label class="form-label" for="new-password">New password</label>
-              <input
-                id="new-password"
-                type="password"
-                class="form-input"
-                placeholder="At least 8 characters"
-              />
-            </div>
-            <div class="form-row">
-              <label class="form-label" for="confirm-password"
-                >Confirm new password</label
+              <label class="form-label" for="settings-new-password"
+                >New Password</label
               >
               <input
-                id="confirm-password"
+                id="settings-new-password"
                 type="password"
                 class="form-input"
-                placeholder="Repeat the password"
+                autocomplete="new-password"
+              />
+              <span class="form-hint">Minimum 8 characters.</span>
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="settings-confirm-password"
+                >Confirm New Password</label
+              >
+              <input
+                id="settings-confirm-password"
+                type="password"
+                class="form-input"
+                autocomplete="new-password"
               />
             </div>
 
-            <button id="change-password-btn" class="btn btn-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
+            <button id="settings-save-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
-              Update password
+              Update Password
             </button>
           </div>
         </section>
       </main>
+      <!-- /content -->
+
+      <!-- Preview panel ------------------------------------------ -->
+      <aside id="preview-panel" class="preview-panel" hidden>
+        <div class="preview-header">
+          <div class="preview-header-title">
+            <div class="preview-dot"></div>
+            Live Preview
+          </div>
+          <div class="preview-lang-toggle">
+            <button class="btn-lang active" data-lang="en">EN</button>
+            <button class="btn-lang" data-lang="pl">PL</button>
+          </div>
+        </div>
+
+        <div class="preview-viewport">
+          <div class="preview-phone">
+            <iframe
+              id="preview-frame"
+              title="Site preview"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+          <p class="preview-scale-note">Preview — mobile view</p>
+        </div>
+      </aside>
     </div>
-    <!-- /panel -->
+    <!-- /#app -->
 
     <!-- Toast container -->
-    <div id="toast-container"></div>
+    <div id="toast-root" role="status" aria-live="polite"></div>
 
-    <!-- Scripts -->
-    <script src="js/admin.js"></script>
+    <!-- ============================================================
+     Scripts — load order matters, no ES modules used
+     ============================================================ -->
+    <script src="js/api.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/tiktoks.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/texts.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/preview.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
