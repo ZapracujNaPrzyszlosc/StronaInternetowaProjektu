@@ -9,7 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="tiktoks.css" />
+    <link rel="stylesheet" href="password.css" />
   </head>
   <body>
     <!-- ── Login ──────────────────────────────────────────────────────────────── -->
@@ -35,28 +38,32 @@
 
     <!-- ── App ────────────────────────────────────────────────────────────────── -->
     <div id="app">
+      <!-- Single topbar: brand | nav tabs | sign-out -->
       <div class="topbar">
         <span class="topbar-brand">Create the Future</span>
+
+        <nav class="topbar-tabs" role="tablist">
+          <button class="tab active" data-tab="tiktoks" role="tab">
+            TikToks <span id="tt-badge" class="badge">0</span>
+          </button>
+          <button class="tab" data-tab="texts" role="tab">Website texts</button>
+          <button class="tab" data-tab="password" role="tab">
+            Change password
+          </button>
+        </nav>
+
         <div class="topbar-right">
           <button id="logout-btn" class="btn btn-ghost">Sign out</button>
         </div>
       </div>
 
-      <div class="tabs">
-        <button class="tab active" data-tab="tiktoks">
-          TikToks <span id="tt-badge" class="badge">0</span>
-        </button>
-        <button class="tab" data-tab="texts">Website texts</button>
-        <button class="tab" data-tab="password">Password</button>
-      </div>
-
       <div class="main">
-        <!-- ── TikToks panel ── -->
-        <div class="panel active" data-panel="tiktoks">
+        <!-- TikToks panel -->
+        <div class="panel active" data-panel="tiktoks" role="tabpanel">
           <div class="page-title">TikTok videos</div>
           <div class="page-subtitle">
-            Manage the videos displayed on the public page. To change the order,
-            delete a video and add it again.
+            Manage the videos displayed on the public page. Drag the handle on
+            the left to reorder.
           </div>
 
           <div class="card">
@@ -116,12 +123,12 @@
           </div>
         </div>
 
-        <!-- ── Texts panel ── -->
-        <div class="panel" data-panel="texts">
+        <!-- Texts panel -->
+        <div class="panel" data-panel="texts" role="tabpanel">
           <div class="page-title">Website texts</div>
           <div class="page-subtitle">
-            Edit all visible text on the public site. Changes take effect
-            immediately after you click Save.
+            Edit all visible text on the public site. Changes take effect after
+            you click Save.
           </div>
 
           <div class="card">
@@ -171,29 +178,28 @@
 
           <div class="card">
             <div class="card-title">
-              Call to action — button / invitation text
+              Call to action text
             </div>
             <p class="hint" style="margin-bottom: 1rem">
-              The text on or near the main button that encourages visitors to
-              take action.
+              The text encouraging visitors to follow us on social media.
             </p>
             <div class="grid-2">
               <div class="form-row">
                 <label for="tx-cta-en"
-                  >Button / invitation text — English</label
+                  >Call to action text — English</label
                 >
                 <input
                   id="tx-cta-en"
                   type="text"
-                  placeholder="e.g. Book a free call"
+                  placeholder="e.g. Follow us on TikTok"
                 />
               </div>
               <div class="form-row">
-                <label for="tx-cta-pl">Button / invitation text — Polish</label>
+                <label for="tx-cta-pl">Call to action — Polish</label>
                 <input
                   id="tx-cta-pl"
                   type="text"
-                  placeholder="np. Zarezerwuj rozmowę"
+                  placeholder="np. Obserwuj nas na TikToku"
                 />
               </div>
             </div>
@@ -204,8 +210,7 @@
               Statistics — numbers shown on the home page
             </div>
             <p class="hint" style="margin-bottom: 1rem">
-              The four key numbers displayed in the stats bar (followers, views,
-              etc.).
+              The four key numbers displayed in the stats bar.
             </p>
             <div class="grid-2">
               <div class="form-row">
@@ -239,8 +244,8 @@
           </button>
         </div>
 
-        <!-- ── Password panel ── -->
-        <div class="panel" data-panel="password">
+        <!-- Password panel -->
+        <div class="panel" data-panel="password" role="tabpanel">
           <div class="page-title">Change password</div>
           <div class="page-subtitle">
             Update your admin panel login password. You will stay logged in
@@ -258,7 +263,6 @@
                 autocomplete="new-password"
                 placeholder="Minimum 8 characters"
               />
-              <!-- strength meter injected by password.js -->
               <div id="pw-strength" class="pw-strength">
                 <div class="pw-strength-bar">
                   <div id="pw-strength-fill" class="pw-strength-fill"></div>

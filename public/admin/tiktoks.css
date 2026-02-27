@@ -1,0 +1,176 @@
+/* ── TikTok list ────────────────────────────────────────────────────────────── */
+
+.tt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.tt-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  transition:
+    box-shadow 0.15s,
+    background 0.15s,
+    opacity 0.15s;
+  cursor: default;
+}
+.tt-item:hover {
+  box-shadow: var(--shadow-md);
+  background: var(--surface);
+}
+
+/* ── Drag handle ─────────────────────────────────────────────────────────────── */
+
+.tt-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  color: var(--border);
+  cursor: grab;
+  transition: color 0.15s;
+  margin-top: 0.15rem;
+  touch-action: none;
+  user-select: none;
+}
+.tt-drag-handle:active {
+  cursor: grabbing;
+}
+.tt-item:hover .tt-drag-handle {
+  color: var(--muted);
+}
+.tt-drag-handle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Drag-and-drop visual states ─────────────────────────────────────────────── */
+
+.tt-item.dragging {
+  opacity: 0.4;
+  box-shadow: none;
+}
+.tt-item.drag-over {
+  border-color: var(--primary-l);
+  background: #f5f0ff;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+/* ── Number badge ────────────────────────────────────────────────────────────── */
+
+.tt-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+/* ── Item body ───────────────────────────────────────────────────────────────── */
+
+.tt-body {
+  flex: 1;
+  min-width: 0;
+}
+.tt-title-en {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tt-title-pl {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.1rem;
+}
+.tt-url {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.2rem;
+}
+.tt-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────────── */
+
+.empty {
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--muted);
+  border: 2px dashed var(--border);
+  border-radius: var(--r);
+  font-size: 0.82rem;
+}
+
+/* ── Inline edit panel ───────────────────────────────────────────────────────── */
+
+.tt-edit {
+  display: none;
+  padding: 1.25rem;
+  background: var(--bg);
+  border-radius: var(--r);
+  margin-top: 1rem;
+  border: 1.5px solid var(--border);
+}
+.tt-edit.open {
+  display: block;
+}
+
+.tt-edit .titles-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+.tt-edit .desc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+  margin-bottom: 0.875rem;
+}
+.tt-edit .form-row {
+  margin-bottom: 0;
+}
+.tt-edit .titles-grid input {
+  font-size: 0.9rem;
+}
+.tt-edit textarea {
+  min-height: 130px;
+  font-size: 0.875rem;
+}
+.tt-edit-actions {
+  display: flex;
+  gap: 0.625rem;
+  margin-top: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .tt-edit .desc-grid {
+    grid-template-columns: 1fr;
+  }
+}

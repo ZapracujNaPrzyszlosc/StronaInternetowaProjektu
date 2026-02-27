@@ -1,26 +1,39 @@
 "use strict";
 
 /**
- * @fileoverview TikTok video management: render list, add, edit, delete.
+ * @fileoverview TikTok video management: render list, drag-and-drop reordering,
+ * inline edit, add, and delete.
+ *
+ * Drag-and-drop uses the native HTML5 Drag and Drop API (no external library).
+ * The order is persisted to the API via PUT /api/content immediately after a
+ * successful drop.
+ *
  * Depends on: api() from api.js, toast() / esc() from utils.js.
  */
 
 /** @type {Array<Object>} Local cache of TikTok records from the API. */
 let _tiktoks = [];
 
+/** @type {number|null} Index of the item currently being dragged. */
+let _dragSrcIdx = null;
+
+// ── Public API ─────────────────────────────────────────────────────────────────
+
 /**
- * Replaces the TikTok list cache and re-renders the DOM.
+ * Replaces the local TikTok cache and re-renders the list.
  *
- * @param {Array<Object>} tiktoks - Array of TikTok objects from the API.
+ * @param {Array<Object>} tiktoks - Fresh array from the API.
  */
 function setTikToks(tiktoks) {
   _tiktoks = tiktoks;
   renderTikToks();
 }
 
+// ── Rendering ──────────────────────────────────────────────────────────────────
+
 /**
- * Renders the current `_tiktoks` array to the `#tt-list` container and updates
- * the count badge.
+ * Renders the current `_tiktoks` array to `#tt-list` and updates the count badge.
+ * Each item gets a drag handle and the full set of action buttons.
  */
 function renderTikToks() {
   const list = document.getElementById("tt-list");
@@ -35,26 +48,62 @@ function renderTikToks() {
   list.innerHTML = _tiktoks
     .map(
       (t, i) => `
-    <div class="tt-item" id="tt-item-${t.id}">
+    <div class="tt-item"
+         id="tt-item-${t.id}"
+         data-id="${t.id}"
+         data-idx="${i}"
+         draggable="true">
+
+      <div class="tt-drag-handle" title="Drag to reorder" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="9"  cy="5"  r="1.2" fill="#aaa"/>
+          <circle cx="15" cy="5"  r="1.2" fill="#aaa"/>
+          <circle cx="9"  cy="12" r="1.2" fill="#aaa"/>
+          <circle cx="15" cy="12" r="1.2" fill="#aaa"/>
+          <circle cx="9"  cy="19" r="1.2" fill="#aaa"/>
+          <circle cx="15" cy="19" r="1.2" fill="#aaa"/>
+        </svg>
+      </div>
+
       <div class="tt-num">${i + 1}</div>
+
       <div class="tt-body">
         <div class="tt-title-en">${esc(t.title)}</div>
         ${t.titlePl ? `<div class="tt-title-pl">${esc(t.titlePl)}</div>` : ""}
         <div class="tt-url">${esc(t.embedUrl)}</div>
+
         <div class="tt-edit" id="edit-${t.id}">
-          <div class="grid-2">
-            <div class="form-row"><label>Title EN</label><input id="e-en-${t.id}" value="${esc(t.title)}" /></div>
-            <div class="form-row"><label>Title PL</label><input id="e-pl-${t.id}" value="${esc(t.titlePl || "")}" /></div>
-            <div class="form-row"><label>Description EN</label><textarea id="e-den-${t.id}">${esc(t.description || "")}</textarea></div>
-            <div class="form-row"><label>Description PL</label><textarea id="e-dpl-${t.id}">${esc(t.descriptionPl || "")}</textarea></div>
+          <div class="titles-grid">
+            <div class="form-row">
+              <label>Title — English</label>
+              <input id="e-en-${t.id}" value="${esc(t.title)}" />
+            </div>
+            <div class="form-row">
+              <label>Title — Polish</label>
+              <input id="e-pl-${t.id}" value="${esc(t.titlePl || "")}" />
+            </div>
           </div>
-          <div class="form-row"><label>Embed URL</label><input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}" /></div>
+          <div class="desc-grid">
+            <div class="form-row">
+              <label>Description — English</label>
+              <textarea id="e-den-${t.id}">${esc(t.description || "")}</textarea>
+            </div>
+            <div class="form-row">
+              <label>Description — Polish</label>
+              <textarea id="e-dpl-${t.id}">${esc(t.descriptionPl || "")}</textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Embed URL</label>
+            <input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}" />
+          </div>
           <div class="tt-edit-actions">
             <button class="btn btn-primary" onclick="saveTikTok(${t.id})">Save</button>
-            <button class="btn btn-ghost" onclick="toggleEdit(${t.id})">Cancel</button>
+            <button class="btn btn-ghost"   onclick="toggleEdit(${t.id})">Cancel</button>
           </div>
         </div>
       </div>
+
       <div class="tt-actions">
         <button class="btn btn-ghost" onclick="toggleEdit(${t.id})" title="Edit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -67,21 +116,98 @@ function renderTikToks() {
   `,
     )
     .join("");
+
+  _attachDragHandlers();
 }
 
+// ── Drag & Drop ────────────────────────────────────────────────────────────────
+
 /**
- * Toggles the inline edit panel for the given TikTok item.
+ * Attaches HTML5 drag-and-drop event listeners to every `.tt-item` after render.
  *
- * @param {number} id - TikTok record ID.
+ * Only initiates a drag when the pointer went down on the drag handle, so
+ * clicking buttons and inputs inside the card still works normally.
+ *
+ * @private
+ */
+function _attachDragHandlers() {
+  document.querySelectorAll(".tt-item[draggable]").forEach((item) => {
+    // Allow drag only when the mousedown target was the handle
+    item.addEventListener("mousedown", (e) => {
+      item.draggable = !!e.target.closest(".tt-drag-handle");
+    });
+
+    item.addEventListener("dragstart", (e) => {
+      if (!item.draggable) {
+        e.preventDefault();
+        return;
+      }
+      _dragSrcIdx = Number(item.dataset.idx);
+      e.dataTransfer.effectAllowed = "move";
+      setTimeout(() => item.classList.add("dragging"), 0);
+    });
+
+    item.addEventListener("dragend", () => {
+      item.classList.remove("dragging");
+      document
+        .querySelectorAll(".tt-item")
+        .forEach((el) => el.classList.remove("drag-over"));
+    });
+
+    item.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      if (Number(item.dataset.idx) !== _dragSrcIdx) {
+        document
+          .querySelectorAll(".tt-item")
+          .forEach((el) => el.classList.remove("drag-over"));
+        item.classList.add("drag-over");
+      }
+    });
+
+    item.addEventListener("dragleave", () => {
+      item.classList.remove("drag-over");
+    });
+
+    item.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      const targetIdx = Number(item.dataset.idx);
+      if (_dragSrcIdx === null || targetIdx === _dragSrcIdx) return;
+
+      const moved = _tiktoks.splice(_dragSrcIdx, 1)[0];
+      _tiktoks.splice(targetIdx, 0, moved);
+      _dragSrcIdx = null;
+
+      renderTikToks();
+
+      try {
+        await api("/api/content", {
+          method: "PUT",
+          body: JSON.stringify({ tiktoks: _tiktoks }),
+        });
+        toast("Order saved.");
+      } catch (err) {
+        toast(err.message, "error");
+      }
+    });
+  });
+}
+
+// ── CRUD ───────────────────────────────────────────────────────────────────────
+
+/**
+ * Toggles the inline edit panel for the given TikTok.
+ *
+ * @param {number} id
  */
 function toggleEdit(id) {
   document.getElementById(`edit-${id}`).classList.toggle("open");
 }
 
 /**
- * Saves edits to an existing TikTok by PUTting the full tiktoks array.
+ * Persists edits to an existing TikTok by PUTting the full array.
  *
- * @param {number} id - TikTok record ID.
+ * @param {number} id
  * @returns {Promise<void>}
  */
 async function saveTikTok(id) {
@@ -111,8 +237,7 @@ async function saveTikTok(id) {
 }
 
 /**
- * Reads the add-video form and posts a new TikTok to the API.
- * Reloads the full list from the server after success to stay in sync.
+ * POSTs a new TikTok from the add-form, then reloads the list.
  *
  * @returns {Promise<void>}
  */
@@ -137,15 +262,12 @@ async function addTikTok() {
         embedUrl,
       }),
     });
-
     const content = await api("/api/content");
     setTikToks(content.tiktoks ?? []);
-
     ["tt-en", "tt-pl", "tt-desc-en", "tt-desc-pl", "tt-url"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.value = "";
     });
-
     toast("Video added.");
   } catch (err) {
     toast(err.message, "error");
@@ -153,15 +275,13 @@ async function addTikTok() {
 }
 
 /**
- * Deletes a TikTok by ID after a native confirm dialog.
- * Reloads the full list from the server after success.
+ * DELETEs a TikTok after confirmation, then reloads the list.
  *
  * @param {number} id
  * @returns {Promise<void>}
  */
 async function deleteTikTok(id) {
   if (!confirm("Delete this video? This cannot be undone.")) return;
-
   try {
     await api(`/api/content/tiktoks/${id}`, { method: "DELETE" });
     const content = await api("/api/content");
