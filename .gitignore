@@ -4,4 +4,3 @@ build
 
 *.env.local
 *.env
-cms-server/content.json
