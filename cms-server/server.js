@@ -65,7 +65,13 @@ async function initAdminHash() {
 const ADMIN_DIR = path.join(__dirname, "../public/admin");
 
 app.use((req, res, next) => {
-  const host = req.hostname || "";
+  // Koyeb (and most reverse proxies) forward the original hostname via
+  // X-Forwarded-Host. Fall back to req.hostname if the header is absent.
+  const host = (req.headers["x-forwarded-host"] || req.hostname || "")
+    .split(",")[0] // x-forwarded-host can be a comma-separated list
+    .trim()
+    .toLowerCase();
+
   if (host.startsWith("admin.")) {
     return express.static(ADMIN_DIR)(req, res, () => {
       res.sendFile(path.join(ADMIN_DIR, "index.html"));
