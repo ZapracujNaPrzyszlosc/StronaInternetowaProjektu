@@ -6,7 +6,7 @@
     <title>Admin — Create the Future</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -17,487 +17,360 @@
         margin: 0;
         padding: 0;
       }
+
       :root {
-        --sidebar-bg: #09090b;
-        --sidebar-w: 220px;
-        --brand: #7e22ce;
-        --brand-l: #a855f7;
-        --brand-d: #6b21a8;
+        --primary: #7e22ce;
+        --primary-l: #a855f7;
+        --primary-d: #6b21a8;
         --accent: #e11d48;
-        --bg: #f4f4f5;
+        --accent-l: #fb7185;
+        --bg: #faf5ff;
         --surface: #fff;
-        --border: #e4e4e7;
+        --border: #e9d5ff;
         --text: #09090b;
         --muted: #71717a;
         --danger: #dc2626;
         --r: 8px;
-        --r-lg: 12px;
-        --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow: 0 1px 4px rgba(126, 34, 206, 0.08);
+        --shadow-md: 0 4px 16px rgba(126, 34, 206, 0.12);
       }
+
       body {
         font-family: "DM Sans", sans-serif;
         background: var(--bg);
         color: var(--text);
-        min-height: 100vh;
         font-size: 14px;
         line-height: 1.5;
+        min-height: 100vh;
       }
 
-      /* ── Login ─────────────────────────────────────────────────────── */
+      /* ── Login ── */
       #login-screen {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--sidebar-bg);
+        background: linear-gradient(
+          135deg,
+          var(--primary-d) 0%,
+          var(--accent) 100%
+        );
       }
       .login-card {
-        background: #18181b;
-        border: 1px solid #27272a;
-        border-radius: var(--r-lg);
+        background: var(--surface);
+        border-radius: 16px;
         padding: 2.5rem;
         width: 100%;
         max-width: 360px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
       }
-      .login-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 2rem;
-      }
-      .login-brand-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--brand), var(--accent));
-      }
-      .login-brand-name {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #fff;
-      }
-      .login-headline {
-        font-size: 1.4rem;
+      .login-logo {
+        font-size: 1.1rem;
         font-weight: 700;
-        color: #fff;
-        margin-bottom: 0.3rem;
-        letter-spacing: -0.02em;
-      }
-      .login-sub {
-        font-size: 0.82rem;
-        color: #71717a;
+        color: var(--primary);
         margin-bottom: 1.75rem;
+      }
+      .login-logo span {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: var(--muted);
+        margin-top: 0.15rem;
       }
       #login-error {
         display: none;
         font-size: 0.8rem;
-        color: #f87171;
-        margin-bottom: 0.75rem;
+        color: var(--danger);
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: var(--r);
         padding: 0.5rem 0.75rem;
-        background: rgba(220, 38, 38, 0.1);
-        border-radius: 6px;
-        border: 1px solid rgba(220, 38, 38, 0.2);
+        margin-bottom: 0.75rem;
       }
 
-      /* ── Forms ─────────────────────────────────────────────────────── */
-      .form-label {
+      /* ── Forms ── */
+      label {
         display: block;
         font-size: 0.72rem;
         font-weight: 600;
         color: var(--muted);
         text-transform: uppercase;
-        letter-spacing: 0.055em;
-        margin-bottom: 0.35rem;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.3rem;
       }
-      .form-input {
+      input,
+      textarea {
         width: 100%;
         padding: 0.55rem 0.75rem;
-        border: 1px solid var(--border);
+        border: 1.5px solid var(--border);
         border-radius: var(--r);
         font-size: 0.875rem;
         font-family: inherit;
-        background: var(--bg);
+        background: var(--surface);
         color: var(--text);
         outline: none;
         transition:
           border-color 0.15s,
           box-shadow 0.15s;
       }
-      .form-input:focus {
-        border-color: var(--brand-l);
-        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
-        background: #fff;
+      input:focus,
+      textarea:focus {
+        border-color: var(--primary-l);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
       }
-      .form-input-mono {
+      textarea {
+        resize: vertical;
+        min-height: 70px;
+      }
+      .mono {
         font-family: "DM Mono", monospace;
         font-size: 0.8rem;
-      }
-      textarea.form-input {
-        resize: vertical;
-        min-height: 72px;
       }
       .form-row {
         margin-bottom: 0.875rem;
       }
-      .form-grid-2 {
+      .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0.875rem;
       }
-      .form-hint {
+      .hint {
         font-size: 0.72rem;
         color: var(--muted);
-        margin-top: 0.3rem;
+        margin-top: 0.25rem;
       }
-      .required {
+      .req {
         color: var(--accent);
       }
 
-      /* ── Buttons ───────────────────────────────────────────────────── */
+      /* ── Buttons ── */
       .btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
         gap: 0.4rem;
-        padding: 0.5rem 1rem;
+        padding: 0.55rem 1.1rem;
         border-radius: var(--r);
-        font-size: 0.8rem;
+        font-size: 0.82rem;
         font-weight: 600;
         font-family: inherit;
         cursor: pointer;
         border: none;
         outline: none;
         transition: all 0.12s;
-        text-decoration: none;
         white-space: nowrap;
       }
       .btn svg {
-        width: 13px;
-        height: 13px;
+        width: 14px;
+        height: 14px;
         stroke-width: 2;
         flex-shrink: 0;
       }
       .btn-primary {
-        background: var(--brand);
+        background: linear-gradient(135deg, var(--primary), var(--accent));
         color: #fff;
-        box-shadow: 0 1px 4px rgba(126, 34, 206, 0.3);
+        box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
       }
       .btn-primary:hover {
-        background: var(--brand-d);
+        filter: brightness(1.08);
+        transform: translateY(-1px);
       }
       .btn-ghost {
         background: transparent;
         color: var(--muted);
-        border: 1px solid var(--border);
+        border: 1.5px solid var(--border);
       }
       .btn-ghost:hover {
         background: var(--bg);
         color: var(--text);
       }
-      .btn-ghost.active-preview {
-        background: rgba(126, 34, 206, 0.08);
-        color: var(--brand);
-        border-color: rgba(126, 34, 206, 0.3);
-      }
       .btn-danger {
         background: #fef2f2;
         color: var(--danger);
-        border: 1px solid #fecaca;
+        border: 1.5px solid #fecaca;
       }
       .btn-danger:hover {
         background: #fee2e2;
       }
-      .btn-lang {
-        padding: 0.2rem 0.5rem;
-        border: 1px solid var(--border);
-        background: transparent;
-        border-radius: 4px;
-        font-size: 0.72rem;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: inherit;
-        color: var(--muted);
-      }
-      .btn-lang.active {
-        background: var(--brand);
-        color: #fff;
-        border-color: var(--brand);
+      .btn-full {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
       }
 
-      /* ── Shell ─────────────────────────────────────────────────────── */
+      /* ── App shell ── */
       #app {
         display: none;
       }
-      .shell {
-        display: grid;
-        grid-template-columns: var(--sidebar-w) 1fr;
-        min-height: 100vh;
-      }
-      .shell.preview-open {
-        grid-template-columns: var(--sidebar-w) 1fr 320px;
-      }
 
-      /* ── Sidebar ───────────────────────────────────────────────────── */
-      .sidebar {
-        background: var(--sidebar-bg);
-        display: flex;
-        flex-direction: column;
-        padding: 1.25rem 0;
+      .topbar {
         position: sticky;
         top: 0;
-        height: 100vh;
-        overflow-y: auto;
-      }
-      .sidebar-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0 1.25rem 1.5rem;
-        border-bottom: 1px solid #27272a;
-        margin-bottom: 0.5rem;
-      }
-      .sidebar-brand-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--brand-l), var(--accent));
-        flex-shrink: 0;
-      }
-      .sidebar-brand-text {
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: #fff;
-      }
-      .sidebar-section {
-        padding: 0.25rem 0.75rem;
-        font-size: 0.68rem;
-        font-weight: 600;
-        color: #52525b;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-top: 0.75rem;
-        margin-bottom: 0.15rem;
-      }
-      .nav-item {
-        display: flex;
-        align-items: center;
-        gap: 0.65rem;
-        padding: 0.55rem 1.25rem;
-        cursor: pointer;
-        color: #a1a1aa;
-        font-size: 0.855rem;
-        font-weight: 500;
-        border: none;
-        border-left: 2px solid transparent;
-        background: transparent;
-        transition: all 0.12s;
-        width: 100%;
-        font-family: inherit;
-      }
-      .nav-item:hover {
-        color: #e4e4e7;
-        background: rgba(255, 255, 255, 0.04);
-      }
-      .nav-item.active {
-        color: #fff;
-        border-left-color: var(--brand-l);
-        background: rgba(168, 85, 247, 0.08);
-      }
-      .nav-item svg {
-        width: 15px;
-        height: 15px;
-        flex-shrink: 0;
-        stroke-width: 1.75;
-      }
-      .sidebar-footer {
-        margin-top: auto;
-        padding: 1rem 1.25rem 0;
-        border-top: 1px solid #27272a;
-      }
-      .sidebar-footer-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: none;
-        background: transparent;
-        color: #71717a;
-        cursor: pointer;
-        font-size: 0.82rem;
-        font-family: inherit;
-        border-radius: 6px;
-        transition: all 0.12s;
-      }
-      .sidebar-footer-btn:hover {
-        background: rgba(255, 255, 255, 0.06);
-        color: #a1a1aa;
-      }
-      .sidebar-footer-btn svg {
-        width: 14px;
-        height: 14px;
-        stroke-width: 1.75;
-      }
-
-      /* ── Main area ─────────────────────────────────────────────────── */
-      .main-area {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        overflow: hidden;
-      }
-      .topbar {
+        z-index: 100;
         background: var(--surface);
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1.5px solid var(--border);
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 1.75rem;
-        height: 52px;
-        flex-shrink: 0;
+        height: 56px;
       }
-      .topbar-title {
-        font-size: 0.9rem;
+      .topbar-brand {
+        font-size: 0.95rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      /* ── Tabs ── */
+      .tabs {
+        display: flex;
+        gap: 0;
+        padding: 0 1.75rem;
+        border-bottom: 1.5px solid var(--border);
+        background: var(--surface);
+      }
+      .tab {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.85rem;
         font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1.5px;
+        font-family: inherit;
+        transition:
+          color 0.15s,
+          border-color 0.15s;
       }
+      .tab:hover {
+        color: var(--text);
+      }
+      .tab.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      /* ── Main ── */
       .main {
-        padding: 1.75rem;
-        overflow-y: auto;
-        flex: 1;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2rem 1.75rem;
       }
+
       .panel {
         display: none;
       }
       .panel.active {
         display: block;
       }
-      .page-header {
-        margin-bottom: 1.5rem;
-      }
-      .page-header h1 {
-        font-size: 1.25rem;
+
+      .page-title {
+        font-size: 1.3rem;
         font-weight: 700;
+        margin-bottom: 0.3rem;
         letter-spacing: -0.02em;
-        margin-bottom: 0.2rem;
       }
-      .page-header p {
+      .page-subtitle {
         font-size: 0.82rem;
         color: var(--muted);
+        margin-bottom: 1.75rem;
       }
 
-      /* ── Cards ─────────────────────────────────────────────────────── */
+      /* ── Cards ── */
       .card {
         background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--r-lg);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.25rem;
         box-shadow: var(--shadow);
       }
-      .card-header {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 1.25rem;
-        padding-bottom: 0.875rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .card-header h2 {
+      .card-title {
         font-size: 0.9rem;
-        font-weight: 600;
-      }
-      .card-header svg {
-        width: 15px;
-        height: 15px;
-        color: var(--brand-l);
-        stroke-width: 1.75;
-      }
-      .card-count {
-        margin-left: auto;
-        font-size: 0.72rem;
-        font-weight: 600;
-        color: var(--brand);
-        background: rgba(126, 34, 206, 0.08);
-        border: 1px solid rgba(126, 34, 206, 0.15);
-        border-radius: 20px;
-        padding: 0.1rem 0.5rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1.5px solid var(--border);
+        color: var(--primary-d);
       }
 
-      /* ── TikTok list ───────────────────────────────────────────────── */
-      .tiktok-list {
+      /* ── TikTok list ── */
+      .tt-list {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
       }
-      .tiktok-item {
+      .tt-item {
         display: flex;
         align-items: flex-start;
         gap: 1rem;
         padding: 1rem 1.125rem;
         background: var(--bg);
-        border: 1px solid var(--border);
+        border: 1.5px solid var(--border);
         border-radius: var(--r);
         transition: box-shadow 0.15s;
       }
-      .tiktok-item:hover {
+      .tt-item:hover {
         box-shadow: var(--shadow-md);
-        background: #fff;
+        background: var(--surface);
       }
-      .tiktok-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 6px;
-        background: linear-gradient(135deg, var(--brand), var(--accent));
+      .tt-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
         flex-shrink: 0;
+        margin-top: 0.1rem;
       }
-      .tiktok-icon svg {
-        width: 16px;
-        height: 16px;
-        stroke-width: 2;
-      }
-      .tiktok-body {
+      .tt-body {
         flex: 1;
         min-width: 0;
       }
-      .tiktok-title {
-        font-size: 0.855rem;
+      .tt-title-en {
+        font-size: 0.875rem;
         font-weight: 600;
-        margin-bottom: 0.15rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .tiktok-title-pl {
+      .tt-title-pl {
         font-size: 0.78rem;
         color: var(--muted);
-        margin-bottom: 0.2rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-top: 0.1rem;
       }
-      .tiktok-url {
+      .tt-url {
         font-family: "DM Mono", monospace;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         color: var(--muted);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-      .tiktok-desc {
-        font-size: 0.78rem;
-        color: var(--muted);
         margin-top: 0.25rem;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
       }
-      .empty-state {
+      .tt-actions {
+        display: flex;
+        gap: 0.4rem;
+        flex-shrink: 0;
+      }
+      .empty {
         text-align: center;
         padding: 2.5rem;
         color: var(--muted);
@@ -506,110 +379,44 @@
         font-size: 0.82rem;
       }
 
-      /* ── Color pickers ─────────────────────────────────────────────── */
-      .color-row {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.875rem;
-      }
-      .color-row .form-label {
-        margin: 0;
-        min-width: 130px;
-      }
-      input[type="color"] {
-        width: 40px;
-        height: 34px;
-        padding: 2px 3px;
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        cursor: pointer;
-        background: none;
-        flex-shrink: 0;
-      }
-      .color-hex {
-        width: 96px;
-      }
-      .gradient-preview {
-        height: 72px;
-        border-radius: var(--r);
-        border: 1px solid var(--border);
-        margin-bottom: 1rem;
-        transition: background 0.3s;
-      }
-
-      /* ── Preview panel ─────────────────────────────────────────────── */
-      .preview-panel {
-        background: var(--surface);
-        border-left: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-        overflow: hidden;
-      }
-      .preview-panel.hidden {
+      /* ── Edit mode for TikTok ── */
+      .tt-edit {
         display: none;
+        padding: 0.75rem;
+        background: var(--bg);
+        border-radius: var(--r);
+        margin-top: 0.75rem;
+        border: 1.5px solid var(--border);
       }
-      .preview-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid var(--border);
-        flex-shrink: 0;
-      }
-      .preview-header-title {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.82rem;
-        font-weight: 600;
-      }
-      .preview-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--brand);
-      }
-      .preview-lang-toggle {
-        display: flex;
-        gap: 0.25rem;
-      }
-      .preview-viewport {
-        flex: 1;
-        overflow-y: auto;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .preview-phone {
-        width: 100%;
-        max-width: 272px;
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow:
-          0 0 0 8px #18181b,
-          0 0 0 10px #27272a,
-          0 20px 40px rgba(0, 0, 0, 0.3);
-      }
-      .preview-phone iframe {
+      .tt-edit.open {
         display: block;
-        width: 100%;
-        height: 540px;
-        border: none;
-        background: #fff;
       }
-      .preview-scale-note {
-        margin-top: 0.6rem;
-        font-size: 0.65rem;
-        color: var(--muted);
-        text-align: center;
+      .tt-edit .grid-2 {
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .tt-edit .form-row {
+        margin-bottom: 0.5rem;
+      }
+      .tt-edit-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
       }
 
-      /* ── Toasts ────────────────────────────────────────────────────── */
+      /* ── Inline error ── */
+      .inline-error {
+        display: none;
+        font-size: 0.8rem;
+        color: var(--danger);
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: var(--r);
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      /* ── Toasts ── */
       #toast-root {
         position: fixed;
         bottom: 1.25rem;
@@ -622,14 +429,14 @@
       .toast {
         padding: 0.65rem 1rem;
         border-radius: var(--r);
-        font-size: 0.8rem;
+        font-size: 0.82rem;
         font-weight: 500;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         display: flex;
         align-items: center;
         gap: 0.5rem;
         animation: toastIn 0.2s ease;
-        max-width: 300px;
+        max-width: 280px;
       }
       .toast svg {
         width: 14px;
@@ -658,573 +465,251 @@
         }
       }
 
-      /* ── Settings error ────────────────────────────────────────────── */
-      .inline-error {
-        display: none;
-        font-size: 0.8rem;
-        color: var(--danger);
-        margin-bottom: 0.75rem;
-        padding: 0.5rem 0.75rem;
-        background: rgba(220, 38, 38, 0.1);
-        border-radius: 6px;
-        border: 1px solid rgba(220, 38, 38, 0.2);
+      /* ── Count badge ── */
+      .badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border-radius: 20px;
+        padding: 0.1rem 0.55rem;
+        margin-left: 0.5rem;
+        vertical-align: middle;
       }
 
-      @media (max-width: 800px) {
-        .shell,
-        .shell.preview-open {
+      @media (max-width: 600px) {
+        .grid-2 {
           grid-template-columns: 1fr;
         }
-        .sidebar {
-          display: none;
+        .tabs {
+          overflow-x: auto;
         }
-        .form-grid-2 {
-          grid-template-columns: 1fr;
+        .main {
+          padding: 1.25rem 1rem;
         }
-        .preview-panel {
-          display: none !important;
+        .topbar {
+          padding: 0 1rem;
         }
       }
     </style>
   </head>
   <body>
-    <!-- ── Login screen ──────────────────────────────────────────────────── -->
+    <!-- ── Login ── -->
     <div id="login-screen">
       <div class="login-card">
-        <div class="login-brand">
-          <div class="login-brand-dot"></div>
-          <span class="login-brand-name">Create the Future</span>
+        <div class="login-logo">
+          Create the Future
+          <span>Admin Panel</span>
         </div>
-        <h1 class="login-headline">Admin Panel</h1>
-        <p class="login-sub">Sign in to manage your content.</p>
         <div id="login-error" role="alert"></div>
         <div class="form-row">
-          <label class="form-label" for="login-password">Password</label>
+          <label for="login-password">Password</label>
           <input
             id="login-password"
             type="password"
-            class="form-input"
             placeholder="••••••••"
             autocomplete="current-password"
           />
         </div>
-        <button
-          id="login-btn"
-          class="btn btn-primary"
-          style="width: 100%; margin-top: 0.5rem"
-        >
-          Sign in
-        </button>
+        <button id="login-btn" class="btn btn-primary btn-full">Sign in</button>
       </div>
     </div>
 
-    <!-- ── App shell ─────────────────────────────────────────────────────── -->
+    <!-- ── App ── -->
     <div id="app">
-      <div class="shell" id="shell">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-          <div class="sidebar-brand">
-            <div class="sidebar-brand-dot"></div>
-            <span class="sidebar-brand-text">Create the Future</span>
-          </div>
-
-          <span class="sidebar-section">Content</span>
-
-          <button class="nav-item" data-section="tiktoks">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.95-.43 8.11-1.94 8.11-8.72A6.49 6.49 0 0 0 19 4.77 5.91 5.91 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.91 5.91 0 0 0 4 4.77a6.49 6.49 0 0 0-1.72 4.52c0 6.72 4.16 8.28 8.12 8.72A3.37 3.37 0 0 0 9 20.13V24"
-              />
-            </svg>
-            TikToks
-          </button>
-          <button class="nav-item" data-section="texts">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <polyline points="4 7 4 4 20 4 20 7" />
-              <line x1="9" y1="20" x2="15" y2="20" />
-              <line x1="12" y1="4" x2="12" y2="20" />
-            </svg>
-            Texts
-          </button>
-          <button class="nav-item" data-section="theme">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
-              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
-              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
-              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
-              <path
-                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
-              />
-            </svg>
-            Theme
-          </button>
-
-          <span class="sidebar-section">Account</span>
-
-          <button class="nav-item" data-section="settings">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="3" />
-              <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-              />
-            </svg>
-            Settings
-          </button>
-
-          <div class="sidebar-footer">
-            <button id="logout-btn" class="sidebar-footer-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                <polyline points="16 17 21 12 16 7" />
-                <line x1="21" y1="12" x2="9" y2="12" />
-              </svg>
-              Sign out
-            </button>
-          </div>
-        </aside>
-
-        <!-- Main area -->
-        <div class="main-area">
-          <div class="topbar">
-            <span class="topbar-title" id="topbar-title">TikToks</span>
-            <button id="btn-preview" class="btn btn-ghost">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              Live preview
-            </button>
-          </div>
-
-          <div class="main">
-            <!-- TikToks -->
-            <section class="panel" data-section="tiktoks">
-              <div class="page-header">
-                <h1>TikToks</h1>
-                <p>Manage videos shown on your public page.</p>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <polyline points="8 21 12 17 16 21" />
-                  </svg>
-                  <h2>Video List</h2>
-                  <span class="card-count" id="tiktok-count">0</span>
-                </div>
-                <div class="tiktok-list" id="tiktok-list"></div>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                  <h2>Add Video</h2>
-                </div>
-                <div class="form-grid-2">
-                  <div class="form-row">
-                    <label class="form-label" for="tt-title-en"
-                      >Title <span class="required">*</span> (EN)</label
-                    >
-                    <input
-                      id="tt-title-en"
-                      type="text"
-                      class="form-input"
-                      placeholder="English title"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="tt-title-pl"
-                      >Title (PL)</label
-                    >
-                    <input
-                      id="tt-title-pl"
-                      type="text"
-                      class="form-input"
-                      placeholder="Polish title"
-                    />
-                  </div>
-                </div>
-                <div class="form-grid-2">
-                  <div class="form-row">
-                    <label class="form-label" for="tt-desc-en"
-                      >Description (EN)</label
-                    >
-                    <textarea
-                      id="tt-desc-en"
-                      class="form-input"
-                      placeholder="Short description…"
-                    ></textarea>
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="tt-desc-pl"
-                      >Description (PL)</label
-                    >
-                    <textarea
-                      id="tt-desc-pl"
-                      class="form-input"
-                      placeholder="Krótki opis…"
-                    ></textarea>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <label class="form-label" for="tt-url"
-                    >Embed URL <span class="required">*</span></label
-                  >
-                  <input
-                    id="tt-url"
-                    type="url"
-                    class="form-input form-input-mono"
-                    placeholder="https://www.tiktok.com/embed/v2/…"
-                  />
-                  <span class="form-hint"
-                    >Paste the full TikTok embed URL.</span
-                  >
-                </div>
-                <button id="tt-add-btn" class="btn btn-primary">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                  Add TikTok
-                </button>
-              </div>
-            </section>
-
-            <!-- Texts -->
-            <section class="panel" data-section="texts">
-              <div class="page-header">
-                <h1>Texts</h1>
-                <p>Edit hero copy, CTA and statistics — in EN and PL.</p>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  </svg>
-                  <h2>Hero Section</h2>
-                </div>
-                <div class="form-grid-2">
-                  <div>
-                    <div class="form-row">
-                      <label class="form-label" for="text-hero-title-en"
-                        >Title (EN)</label
-                      >
-                      <input
-                        id="text-hero-title-en"
-                        type="text"
-                        class="form-input"
-                      />
-                    </div>
-                    <div class="form-row">
-                      <label class="form-label" for="text-hero-subtitle-en"
-                        >Subtitle (EN)</label
-                      >
-                      <textarea
-                        id="text-hero-subtitle-en"
-                        class="form-input"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="form-row">
-                      <label class="form-label" for="text-hero-title-pl"
-                        >Title (PL)</label
-                      >
-                      <input
-                        id="text-hero-title-pl"
-                        type="text"
-                        class="form-input"
-                      />
-                    </div>
-                    <div class="form-row">
-                      <label class="form-label" for="text-hero-subtitle-pl"
-                        >Subtitle (PL)</label
-                      >
-                      <textarea
-                        id="text-hero-subtitle-pl"
-                        class="form-input"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <line x1="18" y1="20" x2="18" y2="10" />
-                    <line x1="12" y1="20" x2="12" y2="4" />
-                    <line x1="6" y1="20" x2="6" y2="14" />
-                  </svg>
-                  <h2>Statistics</h2>
-                </div>
-                <div class="form-grid-2">
-                  <div class="form-row">
-                    <label class="form-label" for="text-stat-followers"
-                      >Followers</label
-                    >
-                    <input
-                      id="text-stat-followers"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="text-stat-views"
-                      >Views</label
-                    >
-                    <input
-                      id="text-stat-views"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="text-stat-interviews"
-                      >Interviews</label
-                    >
-                    <input
-                      id="text-stat-interviews"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="text-stat-industries"
-                      >Industries</label
-                    >
-                    <input
-                      id="text-stat-industries"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <polyline points="13 17 18 12 13 7" />
-                    <polyline points="6 17 11 12 6 7" />
-                  </svg>
-                  <h2>Call to Action</h2>
-                </div>
-                <div class="form-grid-2">
-                  <div class="form-row">
-                    <label class="form-label" for="text-cta-title-en"
-                      >CTA Title (EN)</label
-                    >
-                    <input
-                      id="text-cta-title-en"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                  <div class="form-row">
-                    <label class="form-label" for="text-cta-title-pl"
-                      >CTA Title (PL)</label
-                    >
-                    <input
-                      id="text-cta-title-pl"
-                      type="text"
-                      class="form-input"
-                    />
-                  </div>
-                </div>
-                <button id="texts-save-btn" class="btn btn-primary">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path
-                      d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
-                    />
-                    <polyline points="17 21 17 13 7 13 7 21" />
-                    <polyline points="7 3 7 8 15 8" />
-                  </svg>
-                  Save Texts
-                </button>
-              </div>
-            </section>
-
-            <!-- Theme -->
-            <section class="panel" data-section="theme">
-              <div class="page-header">
-                <h1>Theme</h1>
-                <p>
-                  Adjust brand colors. The gradient preview updates in
-                  real-time.
-                </p>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
-                    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
-                    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
-                    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
-                    <path
-                      d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
-                    />
-                  </svg>
-                  <h2>Brand Colors</h2>
-                </div>
-
-                <div id="gradient-preview" class="gradient-preview"></div>
-
-                <div class="color-row">
-                  <label class="form-label">Primary</label>
-                  <input id="theme-primary" type="color" />
-                  <input
-                    id="theme-primary-hex"
-                    type="text"
-                    class="form-input color-hex"
-                    maxlength="7"
-                    placeholder="#7e22ce"
-                  />
-                </div>
-                <div class="color-row">
-                  <label class="form-label">Primary Light</label>
-                  <input id="theme-primary-light" type="color" />
-                  <input
-                    id="theme-primary-light-hex"
-                    type="text"
-                    class="form-input color-hex"
-                    maxlength="7"
-                    placeholder="#a855f7"
-                  />
-                </div>
-                <div class="color-row">
-                  <label class="form-label">Primary Dark</label>
-                  <input id="theme-primary-dark" type="color" />
-                  <input
-                    id="theme-primary-dark-hex"
-                    type="text"
-                    class="form-input color-hex"
-                    maxlength="7"
-                    placeholder="#6b21a8"
-                  />
-                </div>
-                <div class="color-row">
-                  <label class="form-label">Secondary</label>
-                  <input id="theme-secondary" type="color" />
-                  <input
-                    id="theme-secondary-hex"
-                    type="text"
-                    class="form-input color-hex"
-                    maxlength="7"
-                    placeholder="#e11d48"
-                  />
-                </div>
-                <div class="color-row">
-                  <label class="form-label">Secondary Light</label>
-                  <input id="theme-secondary-light" type="color" />
-                  <input
-                    id="theme-secondary-light-hex"
-                    type="text"
-                    class="form-input color-hex"
-                    maxlength="7"
-                    placeholder="#fb7185"
-                  />
-                </div>
-
-                <button
-                  id="theme-save-btn"
-                  class="btn btn-primary"
-                  style="margin-top: 0.5rem"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path
-                      d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
-                    />
-                    <polyline points="17 21 17 13 7 13 7 21" />
-                    <polyline points="7 3 7 8 15 8" />
-                  </svg>
-                  Save Theme
-                </button>
-              </div>
-            </section>
-
-            <!-- Settings -->
-            <section class="panel" data-section="settings">
-              <div class="page-header">
-                <h1>Settings</h1>
-                <p>Change your admin password.</p>
-              </div>
-              <div class="card" style="max-width: 420px">
-                <div class="card-header">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <rect x="3" y="11" width="18" height="11" rx="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                  <h2>Change Password</h2>
-                </div>
-                <div id="settings-error" class="inline-error"></div>
-                <div class="form-row">
-                  <label class="form-label" for="settings-new-password"
-                    >New Password</label
-                  >
-                  <input
-                    id="settings-new-password"
-                    type="password"
-                    class="form-input"
-                    autocomplete="new-password"
-                  />
-                  <span class="form-hint">Minimum 8 characters.</span>
-                </div>
-                <div class="form-row">
-                  <label class="form-label" for="settings-confirm-password"
-                    >Confirm Password</label
-                  >
-                  <input
-                    id="settings-confirm-password"
-                    type="password"
-                    class="form-input"
-                    autocomplete="new-password"
-                  />
-                </div>
-                <button id="settings-save-btn" class="btn btn-primary">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <rect x="3" y="11" width="18" height="11" rx="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  </svg>
-                  Update Password
-                </button>
-              </div>
-            </section>
-          </div>
-          <!-- /.main -->
+      <div class="topbar">
+        <span class="topbar-brand">Create the Future</span>
+        <div class="topbar-right">
+          <button id="logout-btn" class="btn btn-ghost">Sign out</button>
         </div>
-        <!-- /.main-area -->
-
-        <!-- Preview panel -->
-        <aside class="preview-panel hidden" id="preview-panel">
-          <div class="preview-header">
-            <div class="preview-header-title">
-              <div class="preview-dot"></div>
-              Live Preview
-            </div>
-            <div class="preview-lang-toggle">
-              <button class="btn-lang active" data-lang="en">EN</button>
-              <button class="btn-lang" data-lang="pl">PL</button>
-            </div>
-          </div>
-          <div class="preview-viewport">
-            <div class="preview-phone">
-              <iframe
-                id="preview-frame"
-                title="Site preview"
-                sandbox="allow-same-origin"
-              ></iframe>
-            </div>
-            <p class="preview-scale-note">Preview — mobile view</p>
-          </div>
-        </aside>
       </div>
-      <!-- /.shell -->
+
+      <div class="tabs">
+        <button class="tab active" data-tab="tiktoks">
+          TikToks <span id="tt-badge" class="badge">0</span>
+        </button>
+        <button class="tab" data-tab="texts">Texts</button>
+        <button class="tab" data-tab="password">Password</button>
+      </div>
+
+      <div class="main">
+        <!-- TikToks -->
+        <div class="panel active" data-panel="tiktoks">
+          <div class="page-title">TikToks</div>
+          <div class="page-subtitle">
+            Manage videos displayed on the public page. Drag to reorder is not
+            supported — delete and re-add to change order.
+          </div>
+
+          <div class="card">
+            <div class="card-title">Current videos</div>
+            <div class="tt-list" id="tt-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Add new video</div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tt-en">Title EN <span class="req">*</span></label>
+                <input id="tt-en" type="text" placeholder="Interview with…" />
+              </div>
+              <div class="form-row">
+                <label for="tt-pl">Title PL</label>
+                <input id="tt-pl" type="text" placeholder="Wywiad z…" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tt-desc-en">Description EN</label>
+                <textarea
+                  id="tt-desc-en"
+                  placeholder="Short description…"
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <label for="tt-desc-pl">Description PL</label>
+                <textarea id="tt-desc-pl" placeholder="Krótki opis…"></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="tt-url">Embed URL <span class="req">*</span></label>
+              <input
+                id="tt-url"
+                type="url"
+                class="mono"
+                placeholder="https://www.tiktok.com/embed/v2/…"
+              />
+              <div class="hint">
+                Copy the embed URL from TikTok: Share video → Embed → copy the
+                src="" value.
+              </div>
+            </div>
+            <button id="tt-add-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add video
+            </button>
+          </div>
+        </div>
+
+        <!-- Texts -->
+        <div class="panel" data-panel="texts">
+          <div class="page-title">Texts</div>
+          <div class="page-subtitle">
+            All text content editable here. Changes are only saved when you
+            click Save.
+          </div>
+
+          <div class="card">
+            <div class="card-title">Hero section</div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-hero-title-en">Title EN</label>
+                <input id="tx-hero-title-en" type="text" />
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-title-pl">Title PL</label>
+                <input id="tx-hero-title-pl" type="text" />
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-sub-en">Subtitle EN</label>
+                <textarea id="tx-hero-sub-en"></textarea>
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-sub-pl">Subtitle PL</label>
+                <textarea id="tx-hero-sub-pl"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Call to Action</div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-cta-en">CTA Title EN</label>
+                <input id="tx-cta-en" type="text" />
+              </div>
+              <div class="form-row">
+                <label for="tx-cta-pl">CTA Title PL</label>
+                <input id="tx-cta-pl" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Statistics</div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-followers">Followers</label>
+                <input id="tx-followers" type="number" />
+              </div>
+              <div class="form-row">
+                <label for="tx-views">Views</label>
+                <input id="tx-views" type="number" />
+              </div>
+              <div class="form-row">
+                <label for="tx-interviews">Interviews</label>
+                <input id="tx-interviews" type="number" />
+              </div>
+              <div class="form-row">
+                <label for="tx-industries">Industries</label>
+                <input id="tx-industries" type="number" />
+              </div>
+            </div>
+          </div>
+
+          <button id="texts-save-btn" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+              />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            Save texts
+          </button>
+        </div>
+
+        <!-- Password -->
+        <div class="panel" data-panel="password">
+          <div class="page-title">Change Password</div>
+          <div class="page-subtitle">
+            Update your admin panel password. You will remain logged in after
+            changing.
+          </div>
+
+          <div class="card" style="max-width: 400px">
+            <div id="pw-error" class="inline-error"></div>
+            <div class="form-row">
+              <label for="pw-new">New password</label>
+              <input id="pw-new" type="password" autocomplete="new-password" />
+              <div class="hint">Minimum 8 characters.</div>
+            </div>
+            <div class="form-row">
+              <label for="pw-confirm">Confirm password</label>
+              <input
+                id="pw-confirm"
+                type="password"
+                autocomplete="new-password"
+              />
+            </div>
+            <button
+              id="pw-save-btn"
+              class="btn btn-primary"
+              style="margin-top: 0.5rem"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Update password
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.main -->
     </div>
     <!-- /#app -->
 
@@ -1233,13 +718,426 @@
     <script>
       "use strict";
 
-      // ── Utilities ──────────────────────────────────────────────────────────────
+      // ── API ────────────────────────────────────────────────────────────────────
+
+      const TOKEN_KEY = "ctf_token";
+      const API_BASE =
+        window.location.port === "3000" ? "http://localhost:3001" : "";
+      window.AUTH_TOKEN = sessionStorage.getItem(TOKEN_KEY) ?? null;
 
       /**
-       * Escapes HTML special characters to prevent XSS in dynamic content.
+       * Authenticated JSON fetch wrapper.
+       * Reads the response as text first so non-JSON bodies produce a clear error
+       * instead of a cryptic JSON.parse failure.
        *
-       * @param {*} str - Value to escape.
-       * @returns {string} HTML-safe string.
+       * @param {string} path
+       * @param {RequestInit} [opts={}]
+       * @returns {Promise<Object>}
+       */
+      async function api(path, opts = {}) {
+        const headers = { "Content-Type": "application/json" };
+        if (window.AUTH_TOKEN)
+          headers["Authorization"] = `Bearer ${window.AUTH_TOKEN}`;
+
+        let res;
+        try {
+          res = await fetch(API_BASE + path, { ...opts, headers });
+        } catch (err) {
+          throw new Error(`Network error: ${err.message}`);
+        }
+
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          // Server returned something that is not JSON (HTML error page, empty body, etc.)
+          throw new Error(
+            `Unexpected server response (${res.status}): ${text.slice(0, 120)}`,
+          );
+        }
+
+        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+        return data;
+      }
+
+      // ── Toast ──────────────────────────────────────────────────────────────────
+
+      /**
+       * Shows a self-dismissing toast notification.
+       *
+       * @param {string} msg
+       * @param {"success"|"error"} [type="success"]
+       */
+      function toast(msg, type = "success") {
+        const icon =
+          type === "success"
+            ? `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
+            : `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`;
+        const el = document.createElement("div");
+        el.className = `toast toast-${type}`;
+        el.innerHTML = `${icon}<span>${String(msg)}</span>`;
+        document.getElementById("toast-root").appendChild(el);
+        setTimeout(() => {
+          el.style.cssText =
+            "opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s";
+          setTimeout(() => el.remove(), 260);
+        }, 3000);
+      }
+
+      // ── Tabs ──────────────────────────────────────────────────────────────────
+
+      /**
+       * Switches the active tab panel.
+       *
+       * @param {string} name - Panel name matching data-panel attribute.
+       */
+      function showTab(name) {
+        document
+          .querySelectorAll(".tab")
+          .forEach((t) => t.classList.toggle("active", t.dataset.tab === name));
+        document
+          .querySelectorAll(".panel")
+          .forEach((p) =>
+            p.classList.toggle("active", p.dataset.panel === name),
+          );
+      }
+
+      document
+        .querySelectorAll(".tab")
+        .forEach((t) =>
+          t.addEventListener("click", () => showTab(t.dataset.tab)),
+        );
+
+      // ── TikToks ────────────────────────────────────────────────────────────────
+
+      /** @type {Array<Object>} */
+      let _tiktoks = [];
+
+      /**
+       * Renders the current TikTok list to the DOM.
+       */
+      function renderTikToks() {
+        const list = document.getElementById("tt-list");
+        const badge = document.getElementById("tt-badge");
+        badge.textContent = _tiktoks.length;
+
+        if (!_tiktoks.length) {
+          list.innerHTML =
+            '<div class="empty">No videos yet. Add one below.</div>';
+          return;
+        }
+
+        list.innerHTML = _tiktoks
+          .map(
+            (t, i) => `
+    <div class="tt-item" id="tt-item-${t.id}">
+      <div class="tt-num">${i + 1}</div>
+      <div class="tt-body">
+        <div class="tt-title-en">${esc(t.title)}</div>
+        ${t.titlePl ? `<div class="tt-title-pl">${esc(t.titlePl)}</div>` : ""}
+        <div class="tt-url">${esc(t.embedUrl)}</div>
+        <div class="tt-edit" id="edit-${t.id}">
+          <div class="grid-2">
+            <div class="form-row"><label>Title EN</label><input id="e-en-${t.id}" value="${esc(t.title)}" /></div>
+            <div class="form-row"><label>Title PL</label><input id="e-pl-${t.id}" value="${esc(t.titlePl || "")}" /></div>
+            <div class="form-row"><label>Description EN</label><textarea id="e-den-${t.id}">${esc(t.description || "")}</textarea></div>
+            <div class="form-row"><label>Description PL</label><textarea id="e-dpl-${t.id}">${esc(t.descriptionPl || "")}</textarea></div>
+          </div>
+          <div class="form-row"><label>Embed URL</label><input id="e-url-${t.id}" class="mono" value="${esc(t.embedUrl)}" /></div>
+          <div class="tt-edit-actions">
+            <button class="btn btn-primary" onclick="saveTikTok(${t.id})">Save</button>
+            <button class="btn btn-ghost" onclick="toggleEdit(${t.id})">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="tt-actions">
+        <button class="btn btn-ghost" onclick="toggleEdit(${t.id})" title="Edit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button class="btn btn-danger" onclick="deleteTikTok(${t.id})" title="Delete">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        </button>
+      </div>
+    </div>
+  `,
+          )
+          .join("");
+      }
+
+      /**
+       * Toggles the inline edit panel for a TikTok item.
+       *
+       * @param {number} id - TikTok record ID.
+       */
+      function toggleEdit(id) {
+        const panel = document.getElementById(`edit-${id}`);
+        panel.classList.toggle("open");
+      }
+
+      /**
+       * Saves edits to an existing TikTok by PUTting the full content object.
+       *
+       * @param {number} id - TikTok record ID.
+       */
+      async function saveTikTok(id) {
+        const get = (s) => document.getElementById(s)?.value.trim() ?? "";
+        const idx = _tiktoks.findIndex((t) => t.id === id);
+        if (idx < 0) return;
+
+        _tiktoks[idx] = {
+          ..._tiktoks[idx],
+          title: get(`e-en-${id}`),
+          titlePl: get(`e-pl-${id}`),
+          description: get(`e-den-${id}`),
+          descriptionPl: get(`e-dpl-${id}`),
+          embedUrl: get(`e-url-${id}`),
+        };
+
+        try {
+          await api("/api/content", {
+            method: "PUT",
+            body: JSON.stringify({ tiktoks: _tiktoks }),
+          });
+          renderTikToks();
+          toast("Video updated.");
+        } catch (err) {
+          toast(err.message, "error");
+        }
+      }
+
+      /**
+       * Reads the add-video form and posts a new TikTok to the API.
+       *
+       * @returns {Promise<void>}
+       */
+      async function addTikTok() {
+        const g = (id) => document.getElementById(id)?.value.trim() ?? "";
+        const title = g("tt-en"),
+          embedUrl = g("tt-url");
+        if (!title || !embedUrl) {
+          toast("Title (EN) and Embed URL are required.", "error");
+          return;
+        }
+
+        try {
+          await api("/api/content/tiktoks", {
+            method: "POST",
+            body: JSON.stringify({
+              title,
+              titlePl: g("tt-pl"),
+              description: g("tt-desc-en"),
+              descriptionPl: g("tt-desc-pl"),
+              embedUrl,
+            }),
+          });
+          const content = await api("/api/content");
+          _tiktoks = content.tiktoks ?? [];
+          renderTikToks();
+          ["tt-en", "tt-pl", "tt-desc-en", "tt-desc-pl", "tt-url"].forEach(
+            (id) => {
+              const el = document.getElementById(id);
+              if (el) el.value = "";
+            },
+          );
+          toast("Video added.");
+        } catch (err) {
+          toast(err.message, "error");
+        }
+      }
+
+      /**
+       * Deletes a TikTok by ID after confirmation.
+       *
+       * @param {number} id
+       * @returns {Promise<void>}
+       */
+      async function deleteTikTok(id) {
+        if (!confirm("Delete this video?")) return;
+        try {
+          await api(`/api/content/tiktoks/${id}`, { method: "DELETE" });
+          const content = await api("/api/content");
+          _tiktoks = content.tiktoks ?? [];
+          renderTikToks();
+          toast("Video removed.");
+        } catch (err) {
+          toast(err.message, "error");
+        }
+      }
+
+      document
+        .getElementById("tt-add-btn")
+        .addEventListener("click", addTikTok);
+
+      // ── Texts ──────────────────────────────────────────────────────────────────
+
+      const TEXT_FIELDS = [
+        { id: "tx-hero-title-en", key: "heroTitle" },
+        { id: "tx-hero-title-pl", key: "heroTitlePl" },
+        { id: "tx-hero-sub-en", key: "heroSubtitle" },
+        { id: "tx-hero-sub-pl", key: "heroSubtitlePl" },
+        { id: "tx-cta-en", key: "ctaTitle" },
+        { id: "tx-cta-pl", key: "ctaTitlePl" },
+        { id: "tx-followers", key: "statsFollowers" },
+        { id: "tx-views", key: "statsViews" },
+        { id: "tx-interviews", key: "statsInterviews" },
+        { id: "tx-industries", key: "statsIndustries" },
+      ];
+
+      /**
+       * Populates all text inputs from a content texts object.
+       *
+       * @param {Object} texts
+       */
+      function populateTexts(texts) {
+        TEXT_FIELDS.forEach(({ id, key }) => {
+          const el = document.getElementById(id);
+          if (el) el.value = texts[key] ?? "";
+        });
+      }
+
+      /**
+       * Reads all text inputs and saves to the API.
+       *
+       * @returns {Promise<void>}
+       */
+      async function saveTexts() {
+        const values = Object.fromEntries(
+          TEXT_FIELDS.map(({ id, key }) => [
+            key,
+            document.getElementById(id)?.value ?? "",
+          ]),
+        );
+        try {
+          await api("/api/content", {
+            method: "PUT",
+            body: JSON.stringify({ texts: values }),
+          });
+          toast("Texts saved.");
+        } catch (err) {
+          toast(err.message, "error");
+        }
+      }
+
+      document
+        .getElementById("texts-save-btn")
+        .addEventListener("click", saveTexts);
+
+      // ── Password ────────────────────────────────────────────────────────────────
+
+      /**
+       * Validates inputs and submits a password change request.
+       *
+       * @returns {Promise<void>}
+       */
+      async function changePassword() {
+        const errEl = document.getElementById("pw-error");
+        const next = document.getElementById("pw-new")?.value ?? "";
+        const confirm = document.getElementById("pw-confirm")?.value ?? "";
+        errEl.style.display = "none";
+
+        if (next.length < 8) {
+          errEl.textContent = "Password must be at least 8 characters.";
+          errEl.style.display = "block";
+          return;
+        }
+        if (next !== confirm) {
+          errEl.textContent = "Passwords do not match.";
+          errEl.style.display = "block";
+          return;
+        }
+
+        try {
+          await api("/api/auth/change-password", {
+            method: "POST",
+            body: JSON.stringify({ newPassword: next }),
+          });
+          document.getElementById("pw-new").value = "";
+          document.getElementById("pw-confirm").value = "";
+          toast("Password updated.");
+        } catch (err) {
+          errEl.textContent = err.message;
+          errEl.style.display = "block";
+        }
+      }
+
+      document
+        .getElementById("pw-save-btn")
+        .addEventListener("click", changePassword);
+
+      // ── Auth ───────────────────────────────────────────────────────────────────
+
+      /**
+       * Loads content from API and displays the main app view.
+       *
+       * @returns {Promise<void>}
+       */
+      async function enterPanel() {
+        const content = await api("/api/content");
+        _tiktoks = content.tiktoks ?? [];
+        renderTikToks();
+        populateTexts(content.texts ?? {});
+
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+      }
+
+      /**
+       * Attempts login with the supplied password.
+       *
+       * @returns {Promise<void>}
+       */
+      async function login() {
+        const errEl = document.getElementById("login-error");
+        const password = document.getElementById("login-password")?.value ?? "";
+        errEl.style.display = "none";
+
+        try {
+          const { token } = await api("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ password }),
+          });
+          window.AUTH_TOKEN = token;
+          sessionStorage.setItem(TOKEN_KEY, token);
+          await enterPanel();
+        } catch (err) {
+          errEl.textContent =
+            err.message === "Wrong password"
+              ? "Incorrect password."
+              : err.message;
+          errEl.style.display = "block";
+        }
+      }
+
+      /** Clears session and returns to login screen. */
+      function logout() {
+        window.AUTH_TOKEN = null;
+        sessionStorage.removeItem(TOKEN_KEY);
+        document.getElementById("app").style.display = "none";
+        document.getElementById("login-screen").style.display = "flex";
+        document.getElementById("login-password").value = "";
+      }
+
+      document.getElementById("login-btn").addEventListener("click", login);
+      document
+        .getElementById("login-password")
+        .addEventListener("keydown", (e) => {
+          if (e.key === "Enter") login();
+        });
+      document.getElementById("logout-btn").addEventListener("click", logout);
+
+      // Auto-login from stored token
+      if (window.AUTH_TOKEN) {
+        enterPanel().catch(logout);
+      }
+
+      // ── Util ───────────────────────────────────────────────────────────────────
+
+      /**
+       * Escapes HTML special characters to prevent XSS.
+       *
+       * @param {*} str
+       * @returns {string}
        */
       function esc(str) {
         return String(str ?? "")
@@ -1249,731 +1147,6 @@
           .replace(/"/g, "&quot;")
           .replace(/'/g, "&#39;");
       }
-
-      // ── API ────────────────────────────────────────────────────────────────────
-
-      const TOKEN_KEY = "ctf_token";
-      window.AUTH_TOKEN = sessionStorage.getItem(TOKEN_KEY) ?? null;
-
-      /**
-       * Makes an authenticated JSON request to the CMS API.
-       *
-       * @param {string} path - Endpoint path, e.g. "/api/content".
-       * @param {RequestInit} [opts={}] - Additional fetch options.
-       * @returns {Promise<Object>} Parsed JSON response.
-       * @throws {Error} On non-ok HTTP status.
-       */
-      async function apiFetch(path, opts = {}) {
-        const headers = { "Content-Type": "application/json" };
-        if (window.AUTH_TOKEN)
-          headers["Authorization"] = `Bearer ${window.AUTH_TOKEN}`;
-        const res = await fetch(path, { ...opts, headers });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-        return data;
-      }
-
-      // ── Toast ──────────────────────────────────────────────────────────────────
-
-      const _TOAST_ICONS = {
-        success: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`,
-        error: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`,
-      };
-
-      /**
-       * Displays a transient toast notification that auto-dismisses after 3 s.
-       *
-       * @param {string} message - Message to display.
-       * @param {"success"|"error"} [type="success"] - Visual variant.
-       */
-      function toast(message, type = "success") {
-        const root = document.getElementById("toast-root");
-        const el = document.createElement("div");
-        el.className = `toast toast-${type}`;
-        el.innerHTML = `${_TOAST_ICONS[type] ?? ""}<span>${esc(message)}</span>`;
-        root.appendChild(el);
-        setTimeout(() => {
-          el.style.cssText =
-            "opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s";
-          setTimeout(() => el.remove(), 260);
-        }, 3000);
-      }
-
-      // ── State ──────────────────────────────────────────────────────────────────
-
-      /**
-       * Centralised draft-state store. Keeps saved and draft copies of content.
-       * Listeners are notified on every patch.
-       */
-      const State = (() => {
-        let _saved = {},
-          _draft = {};
-        const _listeners = [];
-
-        const clone = (o) => JSON.parse(JSON.stringify(o));
-
-        /**
-         * Sets a nested value using a dot-separated path, creating objects as needed.
-         *
-         * @param {Object} obj
-         * @param {string} path - e.g. "texts.heroTitle"
-         * @param {*} val
-         */
-        function _setPath(obj, path, val) {
-          const keys = path.split(".");
-          let cur = obj;
-          for (let i = 0; i < keys.length - 1; i++) {
-            if (!cur[keys[i]] || typeof cur[keys[i]] !== "object")
-              cur[keys[i]] = {};
-            cur = cur[keys[i]];
-          }
-          cur[keys[keys.length - 1]] = val;
-        }
-
-        const _notify = () => _listeners.forEach((fn) => fn(_draft));
-
-        return {
-          /** @param {Object} data */
-          init(data) {
-            _saved = clone(data);
-            _draft = clone(data);
-          },
-          /** @param {string} path @param {*} value */
-          patch(path, value) {
-            _setPath(_draft, path, value);
-            _notify();
-          },
-          /** @param {string} section @param {Object|Array} value */
-          patchSection(sec, val) {
-            _draft[sec] =
-              typeof val === "object" && !Array.isArray(val)
-                ? { ...(_draft[sec] || {}), ...val }
-                : val;
-            _notify();
-          },
-          get() {
-            return clone(_draft);
-          },
-          isDirty() {
-            return JSON.stringify(_draft) !== JSON.stringify(_saved);
-          },
-          commit() {
-            _saved = clone(_draft);
-          },
-          discard() {
-            _draft = clone(_saved);
-            _notify();
-          },
-          /** @param {function(Object): void} fn */
-          onChange(fn) {
-            _listeners.push(fn);
-          },
-        };
-      })();
-
-      // ── Nav ────────────────────────────────────────────────────────────────────
-
-      const Nav = (() => {
-        const TITLES = {
-          tiktoks: "TikToks",
-          texts: "Texts",
-          theme: "Theme",
-          settings: "Settings",
-        };
-
-        /**
-         * Activates a named panel and updates sidebar highlights.
-         * @param {string} section - Value of data-section attribute.
-         */
-        function show(section) {
-          document
-            .querySelectorAll(".panel")
-            .forEach((el) =>
-              el.classList.toggle("active", el.dataset.section === section),
-            );
-          document
-            .querySelectorAll(".nav-item[data-section]")
-            .forEach((btn) =>
-              btn.classList.toggle("active", btn.dataset.section === section),
-            );
-          const el = document.getElementById("topbar-title");
-          if (el) el.textContent = TITLES[section] ?? section;
-        }
-
-        /** Wires click handlers. Call once on DOMContentLoaded. */
-        function init() {
-          document
-            .querySelectorAll(".nav-item[data-section]")
-            .forEach((btn) =>
-              btn.addEventListener("click", () => show(btn.dataset.section)),
-            );
-        }
-
-        return { init, show };
-      })();
-
-      // ── Auth ───────────────────────────────────────────────────────────────────
-
-      const Auth = (() => {
-        /**
-         * Fetches content, populates all sections, and switches to the app view.
-         * @returns {Promise<void>}
-         */
-        async function _enterPanel() {
-          const content = await apiFetch("/api/content");
-          State.init(content);
-          TikToks.populate(content.tiktoks ?? []);
-          Theme.populate(content.theme ?? {});
-          Texts.populate(content.texts ?? {});
-          State.onChange((draft) => {
-            if (
-              !document
-                .getElementById("preview-panel")
-                .classList.contains("hidden")
-            ) {
-              Preview.render(draft);
-            }
-          });
-          document.getElementById("login-screen").style.display = "none";
-          document.getElementById("app").style.display = "block";
-          Nav.show("tiktoks");
-        }
-
-        /**
-         * Attempts login with the supplied password.
-         * @param {string} password
-         * @returns {Promise<void>}
-         */
-        async function login(password) {
-          const errEl = document.getElementById("login-error");
-          errEl.style.display = "none";
-          try {
-            const { token } = await apiFetch("/api/auth/login", {
-              method: "POST",
-              body: JSON.stringify({ password }),
-            });
-            window.AUTH_TOKEN = token;
-            sessionStorage.setItem(TOKEN_KEY, token);
-            await _enterPanel();
-          } catch (err) {
-            errEl.textContent =
-              err.message === "Wrong password"
-                ? "Incorrect password."
-                : err.message;
-            errEl.style.display = "block";
-          }
-        }
-
-        /** Clears the session and returns to the login screen. */
-        function logout() {
-          window.AUTH_TOKEN = null;
-          sessionStorage.removeItem(TOKEN_KEY);
-          document.getElementById("app").style.display = "none";
-          document.getElementById("login-screen").style.display = "flex";
-          document.getElementById("login-password").value = "";
-          // Close preview if open
-          const panel = document.getElementById("preview-panel");
-          const shell = document.getElementById("shell");
-          panel.classList.add("hidden");
-          shell.classList.remove("preview-open");
-          document
-            .getElementById("btn-preview")
-            .classList.remove("active-preview");
-        }
-
-        /**
-         * Attempts auto-login from a stored session token on page load.
-         * @returns {Promise<void>}
-         */
-        async function tryAutoLogin() {
-          if (!window.AUTH_TOKEN) return;
-          try {
-            await _enterPanel();
-          } catch {
-            logout();
-          }
-        }
-
-        return { login, logout, tryAutoLogin };
-      })();
-
-      // ── TikToks ────────────────────────────────────────────────────────────────
-
-      const TikToks = (() => {
-        /** @type {Array<Object>} */
-        let _list = [];
-
-        const _ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:16px;height:16px;stroke-width:2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.95-.43 8.11-1.94 8.11-8.72A6.49 6.49 0 0 0 19 4.77 5.91 5.91 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.91 5.91 0 0 0 4 4.77a6.49 6.49 0 0 0-1.72 4.52c0 6.72 4.16 8.28 8.12 8.72A3.37 3.37 0 0 0 9 20.13V24"/></svg>`;
-
-        /** Re-renders the TikTok list and updates the count badge. */
-        function _render() {
-          const listEl = document.getElementById("tiktok-list");
-          const countEl = document.getElementById("tiktok-count");
-          if (countEl) countEl.textContent = _list.length;
-          if (!_list.length) {
-            listEl.innerHTML =
-              '<div class="empty-state">No videos yet. Add one below.</div>';
-            return;
-          }
-          listEl.innerHTML = _list
-            .map(
-              (t, i) => `
-      <div class="tiktok-item">
-        <div class="tiktok-icon">${_ICON}</div>
-        <div class="tiktok-body">
-          <div class="tiktok-title">${esc(t.title ?? "")}</div>
-          ${t.titlePl ? `<div class="tiktok-title-pl">${esc(t.titlePl)}</div>` : ""}
-          <div class="tiktok-url">${esc(t.embedUrl ?? "")}</div>
-          ${t.description ? `<div class="tiktok-desc">${esc(t.description)}</div>` : ""}
-        </div>
-        <button class="btn btn-danger" onclick="TikToks.delete(${i})" title="Delete">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-          Delete
-        </button>
-      </div>`,
-            )
-            .join("");
-        }
-
-        /**
-         * Initialises the list from existing content.
-         * @param {Array<Object>} list
-         */
-        function populate(list) {
-          _list = list ?? [];
-          _render();
-          State.patchSection("tiktoks", [..._list]);
-        }
-
-        /**
-         * Reads the add-video form and submits a new TikTok to the API.
-         * @returns {Promise<void>}
-         */
-        async function add() {
-          const get = (id) => document.getElementById(id)?.value.trim() ?? "";
-          const title = get("tt-title-en"),
-            embedUrl = get("tt-url");
-          if (!title || !embedUrl)
-            return toast("Title (EN) and Embed URL are required.", "error");
-          try {
-            await apiFetch("/api/content/tiktoks", {
-              method: "POST",
-              body: JSON.stringify({
-                title,
-                titlePl: get("tt-title-pl"),
-                description: get("tt-desc-en"),
-                descriptionPl: get("tt-desc-pl"),
-                embedUrl,
-              }),
-            });
-            const content = await apiFetch("/api/content");
-            _list = content.tiktoks ?? _list;
-            _render();
-            State.patchSection("tiktoks", [..._list]);
-            State.commit();
-            [
-              "tt-title-en",
-              "tt-title-pl",
-              "tt-desc-en",
-              "tt-desc-pl",
-              "tt-url",
-            ].forEach((id) => {
-              const el = document.getElementById(id);
-              if (el) el.value = "";
-            });
-            toast("TikTok added.", "success");
-          } catch (err) {
-            toast(err.message, "error");
-          }
-        }
-
-        /**
-         * Deletes a TikTok by its rendered list index.
-         * @param {number} index
-         * @returns {Promise<void>}
-         */
-        async function del(index) {
-          const item = _list[index];
-          if (!item) return;
-          try {
-            await apiFetch(`/api/content/tiktoks/${item.id}`, {
-              method: "DELETE",
-            });
-            const content = await apiFetch("/api/content");
-            _list = content.tiktoks ?? _list.filter((_, i) => i !== index);
-            _render();
-            State.patchSection("tiktoks", [..._list]);
-            State.commit();
-            toast("TikTok removed.", "success");
-          } catch (err) {
-            toast(err.message, "error");
-          }
-        }
-
-        return { populate, add, delete: del };
-      })();
-
-      // ── Theme ──────────────────────────────────────────────────────────────────
-
-      const Theme = (() => {
-        const FIELDS = [
-          { id: "theme-primary", key: "primaryColor", def: "#7e22ce" },
-          { id: "theme-primary-light", key: "primaryLight", def: "#a855f7" },
-          { id: "theme-primary-dark", key: "primaryDark", def: "#6b21a8" },
-          { id: "theme-secondary", key: "secondaryColor", def: "#e11d48" },
-          {
-            id: "theme-secondary-light",
-            key: "secondaryLight",
-            def: "#fb7185",
-          },
-        ];
-
-        const _read = () =>
-          Object.fromEntries(
-            FIELDS.map(({ id, key }) => [
-              key,
-              document.getElementById(id)?.value ?? "",
-            ]),
-          );
-
-        function _updatePreview() {
-          const v = _read();
-          const el = document.getElementById("gradient-preview");
-          if (el)
-            el.style.background = `linear-gradient(135deg, ${v.primaryColor} 0%, ${v.primaryLight} 50%, ${v.secondaryColor} 100%)`;
-        }
-
-        /**
-         * Fills color inputs and attaches live-update listeners.
-         * @param {Object} theme
-         */
-        function populate(theme) {
-          FIELDS.forEach(({ id, key, def }) => {
-            const picker = document.getElementById(id);
-            const hex = document.getElementById(`${id}-hex`);
-            const val = theme[key] ?? def;
-            if (picker) {
-              picker.value = val;
-              picker.addEventListener("input", () => {
-                if (hex) hex.value = picker.value;
-                _updatePreview();
-                State.patchSection("theme", _read());
-              });
-            }
-            if (hex) {
-              hex.value = val;
-              hex.addEventListener("input", () => {
-                if (/^#[0-9a-fA-F]{6}$/.test(hex.value.trim())) {
-                  if (picker) picker.value = hex.value.trim();
-                  _updatePreview();
-                  State.patchSection("theme", _read());
-                }
-              });
-            }
-          });
-          _updatePreview();
-        }
-
-        /**
-         * Saves theme values to the API.
-         * @returns {Promise<void>}
-         */
-        async function save() {
-          try {
-            const values = _read();
-            await apiFetch("/api/content", {
-              method: "PUT",
-              body: JSON.stringify({ theme: values }),
-            });
-            State.patchSection("theme", values);
-            State.commit();
-            toast("Theme saved.", "success");
-          } catch (err) {
-            toast(err.message, "error");
-          }
-        }
-
-        return { populate, save };
-      })();
-
-      // ── Texts ──────────────────────────────────────────────────────────────────
-
-      const Texts = (() => {
-        const FIELDS = [
-          { id: "text-hero-title-en", path: "heroTitle" },
-          { id: "text-hero-subtitle-en", path: "heroSubtitle" },
-          { id: "text-hero-title-pl", path: "heroTitlePl" },
-          { id: "text-hero-subtitle-pl", path: "heroSubtitlePl" },
-          { id: "text-cta-title-en", path: "ctaTitle" },
-          { id: "text-cta-title-pl", path: "ctaTitlePl" },
-          { id: "text-stat-followers", path: "statsFollowers" },
-          { id: "text-stat-views", path: "statsViews" },
-          { id: "text-stat-interviews", path: "statsInterviews" },
-          { id: "text-stat-industries", path: "statsIndustries" },
-        ];
-
-        /**
-         * Fills text inputs and wires live-patch listeners.
-         * @param {Object} texts
-         */
-        function populate(texts) {
-          FIELDS.forEach(({ id, path }) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.value = texts[path] ?? "";
-            el.addEventListener("input", () =>
-              State.patch(`texts.${path}`, el.value),
-            );
-          });
-        }
-
-        /**
-         * Saves all text values to the API.
-         * @returns {Promise<void>}
-         */
-        async function save() {
-          const values = Object.fromEntries(
-            FIELDS.map(({ id, path }) => [
-              path,
-              document.getElementById(id)?.value ?? "",
-            ]),
-          );
-          try {
-            await apiFetch("/api/content", {
-              method: "PUT",
-              body: JSON.stringify({ texts: values }),
-            });
-            State.patchSection("texts", values);
-            State.commit();
-            toast("Texts saved.", "success");
-          } catch (err) {
-            toast(err.message, "error");
-          }
-        }
-
-        return { populate, save };
-      })();
-
-      // ── Settings ───────────────────────────────────────────────────────────────
-
-      const Settings = (() => {
-        function _err(msg) {
-          const el = document.getElementById("settings-error");
-          if (!el) return toast(msg, "error");
-          el.textContent = msg;
-          el.style.display = msg ? "block" : "none";
-        }
-
-        /**
-         * Validates inputs and submits a password change request.
-         * @returns {Promise<void>}
-         */
-        async function changePassword() {
-          const next =
-            document.getElementById("settings-new-password")?.value ?? "";
-          const confirm =
-            document.getElementById("settings-confirm-password")?.value ?? "";
-          _err("");
-          if (next.length < 8)
-            return _err("Password must be at least 8 characters.");
-          if (next !== confirm) return _err("Passwords do not match.");
-          try {
-            await apiFetch("/api/auth/change-password", {
-              method: "POST",
-              body: JSON.stringify({ newPassword: next }),
-            });
-            document.getElementById("settings-new-password").value = "";
-            document.getElementById("settings-confirm-password").value = "";
-            toast("Password updated.", "success");
-          } catch (err) {
-            _err(err.message);
-          }
-        }
-
-        return { changePassword };
-      })();
-
-      // ── Preview ────────────────────────────────────────────────────────────────
-
-      const Preview = (() => {
-        let _lang = "en";
-
-        /**
-         * Formats a number into a compact K/M string.
-         * @param {number|string} n
-         * @returns {string}
-         */
-        function _fmt(n) {
-          const v = Number(n);
-          if (isNaN(v)) return String(n ?? "—");
-          if (v >= 1_000_000)
-            return (v / 1_000_000).toFixed(1).replace(".0", "") + "M";
-          if (v >= 1_000) return (v / 1_000).toFixed(1).replace(".0", "") + "K";
-          return String(v);
-        }
-
-        /**
-         * Builds the preview iframe HTML from a draft state object.
-         * @param {Object} draft
-         * @returns {string}
-         */
-        function _html(draft) {
-          const t = draft.theme ?? {},
-            tx = draft.texts ?? {},
-            tks = draft.tiktoks ?? [];
-          const p = t.primaryColor ?? "#7e22ce",
-            pl = t.primaryLight ?? "#a855f7",
-            s = t.secondaryColor ?? "#e11d48";
-          const heroTitle =
-            _lang === "en" ? (tx.heroTitle ?? "") : (tx.heroTitlePl ?? "");
-          const heroSub =
-            _lang === "en"
-              ? (tx.heroSubtitle ?? "")
-              : (tx.heroSubtitlePl ?? "");
-          const ctaTitle =
-            _lang === "en" ? (tx.ctaTitle ?? "") : (tx.ctaTitlePl ?? "");
-
-          const statLabels = ["Followers", "Views", "Interviews", "Industries"];
-          const statLabelsPl = [
-            "Obserwujący",
-            "Wyświetlenia",
-            "Wywiady",
-            "Branże",
-          ];
-          const statKeys = [
-            "statsFollowers",
-            "statsViews",
-            "statsInterviews",
-            "statsIndustries",
-          ];
-
-          const stats = statKeys
-            .map(
-              (k, i) => `
-      <div style="text-align:center">
-        <span style="display:block;font-size:.8rem;font-weight:700;color:${esc(p)}">${_fmt(tx[k])}</span>
-        <span style="display:block;font-size:.58rem;color:#888">${esc(_lang === "en" ? statLabels[i] : statLabelsPl[i])}</span>
-      </div>`,
-            )
-            .join("");
-
-          const cards =
-            tks
-              .slice(0, 4)
-              .map(
-                (tk) => `
-      <div style="border-radius:6px;overflow:hidden;border:1px solid #eee">
-        <div style="height:52px;background:linear-gradient(135deg,${esc(p)},${esc(s)})"></div>
-        <div style="padding:.25rem .35rem;font-size:.62rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
-          ${esc((_lang === "en" ? tk.title : tk.titlePl) || tk.title || "")}
-        </div>
-      </div>`,
-              )
-              .join("") ||
-            `<p style="color:#888;font-size:.7rem;text-align:center;padding:1rem;grid-column:span 2">No videos yet</p>`;
-
-          return `
-      <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:sans-serif;font-size:12px;line-height:1.4;color:#111}</style>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:#fff;border-bottom:1px solid #eee">
-        <span style="font-weight:700;font-size:.75rem;color:${esc(p)}">Create the Future</span>
-        <span style="font-size:.65rem;color:#888">${_lang.toUpperCase()}</span>
-      </div>
-      <div style="padding:1.25rem .75rem 1rem;background:linear-gradient(135deg,${esc(p)} 0%,${esc(pl)} 60%,${esc(s)} 100%);color:#fff">
-        <div style="font-size:.95rem;font-weight:800;margin-bottom:.3rem">${esc(heroTitle) || "Hero title…"}</div>
-        <div style="font-size:.7rem;opacity:.85">${esc(heroSub) || "Hero subtitle…"}</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;padding:.75rem;background:#f8f8fa;border-bottom:1px solid #eee">${stats}</div>
-      <div style="padding:.6rem .75rem .3rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#555">Videos</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .75rem .75rem">${cards}</div>
-      <div style="padding:1rem .75rem;text-align:center;background:linear-gradient(135deg,${esc(s)},${esc(p)});color:#fff">
-        <div style="font-size:.85rem;font-weight:700">${esc(ctaTitle) || "CTA title…"}</div>
-      </div>
-      <div style="padding:.5rem .75rem;background:#111;color:#888;font-size:.6rem;text-align:center">© Create the Future</div>`;
-        }
-
-        /**
-         * Wires the EN/PL language-toggle buttons. Call once after DOM is ready.
-         */
-        function init() {
-          document.querySelectorAll(".btn-lang").forEach((btn) =>
-            btn.addEventListener("click", () => {
-              _lang = btn.dataset.lang ?? "en";
-              document
-                .querySelectorAll(".btn-lang")
-                .forEach((b) => b.classList.toggle("active", b === btn));
-              render(State.get());
-            }),
-          );
-        }
-
-        /**
-         * Renders the draft state into the preview iframe.
-         * @param {Object} draft
-         */
-        function render(draft) {
-          const frame = /** @type {HTMLIFrameElement} */ (
-            document.getElementById("preview-frame")
-          );
-          if (!frame) return;
-          const doc = frame.contentDocument ?? frame.contentWindow?.document;
-          if (!doc) return;
-          doc.open();
-          doc.write(
-            `<!doctype html><html><body style="margin:0">${_html(draft)}</body></html>`,
-          );
-          doc.close();
-        }
-
-        /** Toggles the preview panel open/closed. */
-        function toggle() {
-          const panel = document.getElementById("preview-panel");
-          const shell = document.getElementById("shell");
-          const btn = document.getElementById("btn-preview");
-          panel.classList.toggle("hidden");
-          const nowOpen = !panel.classList.contains("hidden");
-          shell.classList.toggle("preview-open", nowOpen);
-          btn.classList.toggle("active-preview", nowOpen);
-          if (nowOpen) render(State.get());
-        }
-
-        return { init, render, toggle };
-      })();
-
-      // ── Bootstrap ──────────────────────────────────────────────────────────────
-
-      document.addEventListener("DOMContentLoaded", () => {
-        Nav.init();
-        Preview.init();
-
-        const loginPwd = document.getElementById("login-password");
-        document
-          .getElementById("login-btn")
-          ?.addEventListener("click", () => Auth.login(loginPwd?.value ?? ""));
-        loginPwd?.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") Auth.login(loginPwd.value);
-        });
-
-        document
-          .getElementById("logout-btn")
-          ?.addEventListener("click", Auth.logout);
-        document
-          .getElementById("tt-add-btn")
-          ?.addEventListener("click", TikToks.add);
-        document
-          .getElementById("theme-save-btn")
-          ?.addEventListener("click", Theme.save);
-        document
-          .getElementById("texts-save-btn")
-          ?.addEventListener("click", Texts.save);
-        document
-          .getElementById("settings-save-btn")
-          ?.addEventListener("click", Settings.changePassword);
-        document
-          .getElementById("btn-preview")
-          ?.addEventListener("click", Preview.toggle);
-
-        Auth.tryAutoLogin();
-      });
     </script>
   </body>
 </html>
