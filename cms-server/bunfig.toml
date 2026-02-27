@@ -1,0 +1,7 @@
+# Bun config for the CMS server.
+# This file keeps the server's node_modules isolated — bun install
+# won't touch the React project's dependencies.
+
+[install]
+# Install into ./node_modules relative to this file, not the workspace root.
+frozen = false

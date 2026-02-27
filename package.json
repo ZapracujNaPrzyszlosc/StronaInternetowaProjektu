@@ -9,16 +9,13 @@
     "framer-motion": "^10.18.0",
     "i18next": "^25.7.4",
     "i18next-browser-languagedetector": "^8.2.0",
-    "nth-check": "^2.1.1",
-    "postcss": "^8.5.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-i18next": "^16.5.3",
     "react-router-dom": "^6.30.3",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "webpack-dev-server": "^5.2.3"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +43,11 @@
   },
   "devDependencies": {
     "typescript": "^4.9.5"
+  },
+  "overrides": {
+    "nth-check": ">=2.1.1",
+    "postcss": ">=8.4.31",
+    "webpack-dev-server": ">=5.2.3",
+    "jsonpath-plus": ">=10.2.0"
   }
 }

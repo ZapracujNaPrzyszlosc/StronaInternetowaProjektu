@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Create the Future</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="layout.css" />
+    <link rel="stylesheet" href="tiktoks.css" />
+    <link rel="stylesheet" href="password.css" />
+  </head>
+  <body>
+    <!-- ── Login ──────────────────────────────────────────────────────────────── -->
+    <div id="login-screen">
+      <div class="login-card">
+        <div class="login-logo">
+          Create the Future
+          <span>Admin Panel</span>
+        </div>
+        <div id="login-error" role="alert"></div>
+        <div class="form-row">
+          <label for="login-password">Password</label>
+          <input
+            id="login-password"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          />
+        </div>
+        <button id="login-btn" class="btn btn-primary btn-full">Sign in</button>
+      </div>
+    </div>
+
+    <!-- ── App ────────────────────────────────────────────────────────────────── -->
+    <div id="app">
+      <!-- Single topbar: brand | nav tabs | sign-out -->
+      <div class="topbar">
+        <span class="topbar-brand">Create the Future</span>
+
+        <nav class="topbar-tabs" role="tablist">
+          <button class="tab active" data-tab="tiktoks" role="tab">
+            TikToks <span id="tt-badge" class="badge">0</span>
+          </button>
+          <button class="tab" data-tab="texts" role="tab">Website texts</button>
+          <button class="tab" data-tab="password" role="tab">
+            Change password
+          </button>
+        </nav>
+
+        <div class="topbar-right">
+          <button id="logout-btn" class="btn btn-ghost">Sign out</button>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- TikToks panel -->
+        <div class="panel active" data-panel="tiktoks" role="tabpanel">
+          <div class="page-title">TikTok videos</div>
+          <div class="page-subtitle">
+            Manage the videos displayed on the public page. Drag the handle on
+            the left to reorder.
+          </div>
+
+          <div class="card">
+            <div class="card-title">Published videos</div>
+            <div class="tt-list" id="tt-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Add a new video</div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tt-en"
+                  >Title — English <span class="req">*</span></label
+                >
+                <input id="tt-en" type="text" placeholder="Interview with…" />
+              </div>
+              <div class="form-row">
+                <label for="tt-pl">Title — Polish</label>
+                <input id="tt-pl" type="text" placeholder="Wywiad z…" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tt-desc-en">Short description — English</label>
+                <textarea
+                  id="tt-desc-en"
+                  placeholder="Short description…"
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <label for="tt-desc-pl">Short description — Polish</label>
+                <textarea id="tt-desc-pl" placeholder="Krótki opis…"></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="tt-url">TikTok link <span class="req">*</span></label>
+              <input
+                id="tt-url"
+                type="url"
+                class="mono"
+                placeholder="https://www.tiktok.com/@user/video/123456…"
+              />
+              <div class="hint">
+                Paste any TikTok link — a regular video URL, a share link, or an
+                embed URL. The video ID will be extracted automatically.
+              </div>
+            </div>
+            <button id="tt-add-btn" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add video
+            </button>
+          </div>
+        </div>
+
+        <!-- Texts panel -->
+        <div class="panel" data-panel="texts" role="tabpanel">
+          <div class="page-title">Website texts</div>
+          <div class="page-subtitle">
+            Edit all visible text on the public site. Changes take effect after
+            you click Save.
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              Home page — main headline &amp; tagline
+            </div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The first thing visitors read when they open the website.
+            </p>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-hero-title-en">Main headline — English</label>
+                <input
+                  id="tx-hero-title-en"
+                  type="text"
+                  placeholder="e.g. Create the Future"
+                />
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-title-pl">Main headline — Polish</label>
+                <input
+                  id="tx-hero-title-pl"
+                  type="text"
+                  placeholder="np. Twórz Przyszłość"
+                />
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-sub-en"
+                  >Tagline / sub-headline — English</label
+                >
+                <textarea
+                  id="tx-hero-sub-en"
+                  placeholder="A short sentence below the headline…"
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <label for="tx-hero-sub-pl"
+                  >Tagline / sub-headline — Polish</label
+                >
+                <textarea
+                  id="tx-hero-sub-pl"
+                  placeholder="Krótkie zdanie pod nagłówkiem…"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Call to action text</div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The text encouraging visitors to follow us on social media.
+            </p>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-cta-en">Call to action text — English</label>
+                <input
+                  id="tx-cta-en"
+                  type="text"
+                  placeholder="e.g. Follow us on TikTok"
+                />
+              </div>
+              <div class="form-row">
+                <label for="tx-cta-pl">Call to action — Polish</label>
+                <input
+                  id="tx-cta-pl"
+                  type="text"
+                  placeholder="np. Obserwuj nas na TikToku"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              Statistics — numbers shown on the home page
+            </div>
+            <p class="hint" style="margin-bottom: 1rem">
+              The four key numbers displayed in the stats bar.
+            </p>
+            <div class="grid-2">
+              <div class="form-row">
+                <label for="tx-followers">TikTok followers</label>
+                <input id="tx-followers" type="number" placeholder="0" />
+              </div>
+              <div class="form-row">
+                <label for="tx-views">Total video views</label>
+                <input id="tx-views" type="number" placeholder="0" />
+              </div>
+              <div class="form-row">
+                <label for="tx-interviews">Interviews conducted</label>
+                <input id="tx-interviews" type="number" placeholder="0" />
+              </div>
+              <div class="form-row">
+                <label for="tx-industries">Industries covered</label>
+                <input id="tx-industries" type="number" placeholder="0" />
+              </div>
+            </div>
+          </div>
+
+          <button id="texts-save-btn" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+              />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            Save all texts
+          </button>
+        </div>
+
+        <!-- Password panel -->
+        <div class="panel" data-panel="password" role="tabpanel">
+          <div class="page-title">Change password</div>
+          <div class="page-subtitle">
+            Update your admin panel login password. You will stay logged in
+            after the change.
+          </div>
+
+          <div class="card" style="max-width: 420px">
+            <div id="pw-error" class="inline-error" role="alert"></div>
+
+            <div class="form-row">
+              <label for="pw-new">New password</label>
+              <input
+                id="pw-new"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Minimum 8 characters"
+              />
+              <div id="pw-strength" class="pw-strength">
+                <div class="pw-strength-bar">
+                  <div id="pw-strength-fill" class="pw-strength-fill"></div>
+                </div>
+                <div id="pw-strength-label" class="pw-strength-label"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="pw-confirm">Repeat new password</label>
+              <input
+                id="pw-confirm"
+                type="password"
+                autocomplete="new-password"
+                placeholder="Type the password again"
+              />
+              <div id="pw-confirm-hint" class="field-hint"></div>
+            </div>
+
+            <button
+              id="pw-save-btn"
+              class="btn btn-primary"
+              style="margin-top: 0.75rem"
+              disabled
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Update password
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.main -->
+    </div>
+    <!-- /#app -->
+
+    <div id="toast-root" role="status" aria-live="polite"></div>
+
+    <!-- Scripts loaded in dependency order -->
+    <script src="api.js"></script>
+    <script src="utils.js"></script>
+    <script src="tiktoks.js"></script>
+    <script src="texts.js"></script>
+    <script src="password.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "ctf-cms-server",
+  "version": "1.0.0",
+  "description": "CMS backend for Create the Future website",
+  "main": "server.js",
+  "scripts": {
+    "start": "bun server.js",
+    "dev": "bun --hot server.js",
+    "setup": "bun setup.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

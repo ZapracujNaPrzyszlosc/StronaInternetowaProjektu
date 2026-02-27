@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { SITE_INFO, SOCIAL_LINKS, TIKTOK_VIDEOS, YOUTUBE, ROUTES } from "../config/constants";
+import {
+  SITE_INFO,
+  SOCIAL_LINKS,
+  TIKTOK_VIDEOS,
+  YOUTUBE,
+  ROUTES,
+} from "../config/constants";
 
 /**
  * Hero component - landing section.
@@ -232,17 +238,25 @@ const TikTokPreview = () => {
                 <div className="tiktok-phone-button-left"></div>
                 <div className="tiktok-phone-volume"></div>
                 <div className="tiktok-embed-wrapper">
+                  {/* scrolling="no" + CSS pointer-events trick eliminates scroll-in-scroll */}
                   <iframe
                     src={tiktoks[activeTikTok].embedUrl}
                     allowFullScreen
                     allow="encrypted-media;"
                     title={t("tiktokPreview.title")}
+                    scrolling="no"
                   ></iframe>
                 </div>
               </div>
             </div>
           </motion.div>
 
+          {/*
+           * FIX: renamed from "tiktok-description" to "tiktok-preview-card"
+           * to avoid a class name collision with tiktok.css, which applies
+           * `overflow: hidden` and `-webkit-line-clamp` to .tiktok-description,
+           * causing the entire card to be clipped on the home page.
+           */}
           <motion.div
             className="tiktok-description-container"
             initial={{ opacity: 0, x: 30 }}
@@ -250,7 +264,7 @@ const TikTokPreview = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="tiktok-description">
+            <div className="tiktok-preview-card">
               <h3>{tiktoks[activeTikTok].title}</h3>
               <p>{tiktoks[activeTikTok].description}</p>
               <p>{t("tiktokPreview.featured.note")}</p>
@@ -404,11 +418,16 @@ const CallToAction = () => {
           <h2>{t("cta.title")}</h2>
           <p>{t("cta.description")}</p>
           <div className="cta-buttons">
+            {/*
+             * FIX: was "btn btn-outline" (white text/border — designed for dark
+             * backgrounds). This section has a light background, so we use
+             * "btn btn-outline-light" (purple border/text, visible on white).
+             */}
             <a
               href={SOCIAL_LINKS.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-outline"
+              className="btn btn-outline-light"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -523,27 +542,11 @@ function Home() {
         <meta name="description" content={t("meta.description")} />
         <meta name="keywords" content={t("meta.keywords")} />
 
-        {/* Canonical URL */}
         <link rel="canonical" href={SITE_INFO.domain} />
+        <link rel="alternate" hrefLang="pl" href={SITE_INFO.domain} />
+        <link rel="alternate" hrefLang="en" href={SITE_INFO.domain} />
+        <link rel="alternate" hrefLang="x-default" href={SITE_INFO.domain} />
 
-        {/* Hreflang tags */}
-        <link
-          rel="alternate"
-          hrefLang="pl"
-          href={SITE_INFO.domain}
-        />
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href={SITE_INFO.domain}
-        />
-        <link
-          rel="alternate"
-          hrefLang="x-default"
-          href={SITE_INFO.domain}
-        />
-
-        {/* Open Graph */}
         <meta property="og:title" content={t("meta.title")} />
         <meta property="og:description" content={t("meta.description")} />
         <meta property="og:url" content={SITE_INFO.domain} />
@@ -557,21 +560,17 @@ function Home() {
           content={i18n.language === "pl" ? "en_US" : "pl_PL"}
         />
 
-        {/* HTML lang attribute */}
         <html lang={i18n.language} />
       </Helmet>
 
-      {/* Parallax background */}
       <motion.div className="page-background" style={{ y: bgY }}></motion.div>
 
-      {/* Page sections */}
       <Hero />
       <Features />
       <TikTokPreview />
       <CallToAction />
       <YouTubeSection />
 
-      {/* Decorative background shapes */}
       <div className="bg-shape bg-shape-1"></div>
       <div className="bg-shape bg-shape-2"></div>
       <div className="bg-shape bg-shape-3"></div>

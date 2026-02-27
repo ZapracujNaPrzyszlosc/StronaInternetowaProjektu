@@ -10,7 +10,21 @@
 @import "./styles/language-switcher.css";
 
 /* Pages */
-@import "./styles/home.css";
+
+/* Home */
+@import "./styles/home-hero.css";
+@import "./styles/home-features.css";
+@import "./styles/home-tiktok-preview.css";
+@import "./styles/home-cta.css";
+/*
+ * NOTE: home-background.css was removed — it was a byte-for-byte duplicate of
+ * home-youtube.css and was imported directly after it, causing every YouTube
+ * section rule to be parsed twice with no effect other than wasted parse time.
+ * Keep only home-youtube.css.
+ */
+@import "./styles/home-youtube.css";
+
+/* Rest */
 @import "./styles/about.css";
 @import "./styles/tiktok.css";
 @import "./styles/contact.css";
