@@ -62,7 +62,7 @@ async function initAdminHash() {
 // Admin panel static files
 // ---------------------------------------------------------------------------
 
-const ADMIN_DIR = path.join(__dirname, "../admin");
+const ADMIN_DIR = path.join(__dirname, "public/admin");
 console.log("ADMIN_DIR:", ADMIN_DIR);
 console.log("__dirname:", __dirname);
 
